@@ -3,6 +3,11 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Navbar } from '@/components/landing/navbar'
 import { FreeScan } from '@/components/landing/free-scan'
+import { getPublishedIndex } from '@/lib/index-data'
+import type { IndexEntry } from '@/lib/index-scan'
+
+// Keeps the proof band in step with the index without a redeploy.
+export const revalidate = 300
 import {
   ArrowRight, Check, Lock, Search, Target, FileText,
   TrendingUp, ShieldCheck, Sparkles, AlertTriangle, Quote,
@@ -29,7 +34,86 @@ const ENGINES = [
   { name: 'Copilot', live: false },
 ]
 
-export default function LandingPage() {
+/**
+ * Credibility band built from our own published scan data rather than testimonials
+ * we don't have yet. Numbers come straight from the AI Visibility Index, so they
+ * update whenever the index is re-scanned.
+ */
+function IndexProofBand({ entries }: { entries: IndexEntry[] }) {
+  if (entries.length < 3) return null
+
+  const sorted = [...entries].sort((a, b) => a.score - b.score)
+  const worst = sorted[0]
+  const invisible = entries.filter((e) => e.score < 26)
+
+  return (
+    <section className="px-4 py-16 bg-white border-y border-stone-200">
+      <div className="max-w-5xl mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
+          <div className="lg:flex-1">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-stone-300 bg-[#FBF8F4] px-3 py-1 text-xs font-medium text-stone-600 mb-4">
+              <Database className="h-3 w-3 text-violet-700" />
+              Our own public data
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+              We ran this scan on {entries.length} well-known SaaS brands.
+              {invisible.length > 0 && (
+                <span className="block mt-1 text-violet-700">
+                  {invisible.length === 1 ? 'One' : invisible.length} of them barely register.
+                </span>
+              )}
+            </h2>
+            <p className="mt-4 text-stone-600 leading-relaxed max-w-xl">
+              {worst.company} is a product plenty of people in tech love. Ask ChatGPT for the best
+              tools in its category without naming it, and it scores{' '}
+              <span className="font-semibold text-stone-900">{worst.score}/100</span>. Brand
+              recognition and AI visibility are not the same thing, and the gap is measurable.
+            </p>
+            <Link
+              href="/index"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-violet-700 hover:text-violet-800 transition-colors"
+            >
+              See the full index
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="lg:w-[380px] shrink-0">
+            <div className="rounded-xl border border-stone-200 bg-[#FBF8F4] overflow-hidden">
+              {sorted.slice(0, 5).map((e) => (
+                <div
+                  key={e.company}
+                  className="flex items-center justify-between gap-3 px-4 py-3 border-b border-stone-200 last:border-0"
+                >
+                  <span className="text-sm font-medium text-stone-900">{e.company}</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-1.5 w-16 rounded-full bg-stone-200 overflow-hidden">
+                      <div
+                        className={`h-full rounded-full ${
+                          e.score >= 66 ? 'bg-emerald-500' : e.score >= 26 ? 'bg-amber-500' : 'bg-red-500'
+                        }`}
+                        style={{ width: `${Math.max(e.score, 2)}%` }}
+                      />
+                    </div>
+                    <span className="text-sm font-semibold tabular-nums text-stone-700 w-7 text-right">
+                      {e.score}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-stone-400 text-center">
+              Lowest 5 of {entries.length} · scored on ChatGPT
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default async function LandingPage() {
+  const indexEntries = await getPublishedIndex()
   return (
     <div className="min-h-screen bg-[#FBF8F4] text-stone-900 antialiased">
       <Navbar />
@@ -180,6 +264,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* ──────────── Proof: our own public data ──────────── */}
+      <IndexProofBand entries={indexEntries} />
 
       {/* ──────────── Education: how AI decides who to recommend ──────────── */}
       <section id="why" className="px-4 py-20">
@@ -580,6 +667,7 @@ export default function LandingPage() {
                 <li><a href="#engines" className="hover:text-stone-900 transition-colors">Engines</a></li>
                 <li><a href="#features" className="hover:text-stone-900 transition-colors">Features</a></li>
                 <li><a href="#pricing" className="hover:text-stone-900 transition-colors">Pricing</a></li>
+                <li><Link href="/index" className="hover:text-stone-900 transition-colors">AI Visibility Index</Link></li>
               </ul>
             </div>
 
@@ -603,7 +691,7 @@ export default function LandingPage() {
 
           <div className="mt-10 pt-6 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-stone-400">
             <p>&copy; 2026 SEO4AI. All rights reserved.</p>
-            <p>All sales final · <Link href="/refund" className="underline hover:text-stone-600">no refunds</Link>.</p>
+            <p>Cancel anytime · <Link href="/refund" className="underline hover:text-stone-600">Refund Policy</Link></p>
           </div>
         </div>
       </footer>

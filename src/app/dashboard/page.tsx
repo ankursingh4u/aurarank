@@ -50,6 +50,12 @@ interface DashboardData {
   hasNoBrands?: boolean
 }
 
+// The report route and /api/share decode with base64url, so plain btoa() is not
+// safe here: its "+" and "/" characters corrupt the URL path and break the link.
+function shareToken(scanId: string) {
+  return btoa(scanId).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+
 function scoreColor(score: number) {
   if (score >= 66) return 'emerald'
   if (score >= 26) return 'amber'
@@ -1447,7 +1453,7 @@ export default function DashboardPage() {
                   variant="outline"
                   className="border-stone-200 text-stone-500 hover:text-stone-900 hover:bg-stone-100 h-7 text-[10px] px-2.5 gap-1"
                   onClick={() => {
-                    const shareUrl = `${window.location.origin}/report/${btoa(scan.id)}`
+                    const shareUrl = `${window.location.origin}/report/${shareToken(scan.id)}`
                     navigator.clipboard.writeText(shareUrl)
                     toast.success('Link copied!')
                   }}
@@ -1455,14 +1461,14 @@ export default function DashboardPage() {
                   <LinkIcon className="h-3 w-3" /> Copy Link
                 </Button>
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`My brand scored ${scan.visibility_score}/100 on AI visibility! See how often ChatGPT & AI tools recommend you:`)}&url=${encodeURIComponent(`${window.location.origin}/report/${btoa(scan.id)}`)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`My brand scored ${scan.visibility_score}/100 on AI visibility! See how often ChatGPT & AI tools recommend you:`)}&url=${encodeURIComponent(`${window.location.origin}/report/${shareToken(scan.id)}`)}`}
                   target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center justify-center border border-stone-200 text-stone-500 hover:text-stone-900 hover:bg-stone-100 h-7 text-[10px] px-2.5 gap-1 rounded-md transition-colors"
                 >
                   <Twitter className="h-3 w-3" /> Tweet
                 </a>
                 <a
-                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${window.location.origin}/report/${btoa(scan.id)}`)}`}
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${window.location.origin}/report/${shareToken(scan.id)}`)}`}
                   target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center justify-center border border-stone-200 text-stone-500 hover:text-stone-900 hover:bg-stone-100 h-7 text-[10px] px-2.5 gap-1 rounded-md transition-colors"
                 >

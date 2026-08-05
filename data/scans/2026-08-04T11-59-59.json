@@ -1,0 +1,3539 @@
+{
+  "results": [
+    {
+      "company": "Notion",
+      "industry": "note-taking and workspace software",
+      "score": 90,
+      "label": "Dominant",
+      "mentions": 20,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 11,
+      "topCompetitor": "Evernote",
+      "topCompetitorMentions": 11,
+      "competitorBreakdown": [
+        {
+          "name": "Evernote",
+          "mentions": 11
+        },
+        {
+          "name": "Obsidian",
+          "mentions": 8
+        },
+        {
+          "name": "Asana",
+          "mentions": 8
+        },
+        {
+          "name": "Coda",
+          "mentions": 5
+        },
+        {
+          "name": "Confluence",
+          "mentions": 1
+        }
+      ],
+      "missedPrompts": [],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:52:58.628Z"
+    },
+    {
+      "company": "Linear",
+      "industry": "issue tracking software",
+      "score": 30,
+      "label": "Low",
+      "mentions": 5,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 4,
+      "topCompetitor": "Jira",
+      "topCompetitorMentions": 11,
+      "competitorBreakdown": [
+        {
+          "name": "Jira",
+          "mentions": 11
+        },
+        {
+          "name": "Asana",
+          "mentions": 11
+        },
+        {
+          "name": "Trello",
+          "mentions": 11
+        },
+        {
+          "name": "ClickUp",
+          "mentions": 10
+        },
+        {
+          "name": "Shortcut",
+          "mentions": 0
+        }
+      ],
+      "missedPrompts": [
+        "top issue tracking software",
+        "best issue tracking for small business",
+        "issue tracking platform comparison",
+        "free issue tracking tools",
+        "which issue tracking tool should I use"
+      ],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:53:42.698Z"
+    },
+    {
+      "company": "Vercel",
+      "industry": "frontend hosting platform",
+      "score": 90,
+      "label": "Dominant",
+      "mentions": 20,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 11,
+      "topCompetitor": "Netlify",
+      "topCompetitorMentions": 11,
+      "competitorBreakdown": [
+        {
+          "name": "Netlify",
+          "mentions": 11
+        },
+        {
+          "name": "Render",
+          "mentions": 10
+        },
+        {
+          "name": "Cloudflare Pages",
+          "mentions": 9
+        },
+        {
+          "name": "AWS Amplify",
+          "mentions": 9
+        },
+        {
+          "name": "Railway",
+          "mentions": 0
+        }
+      ],
+      "missedPrompts": [],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:54:28.050Z"
+    },
+    {
+      "company": "Superhuman",
+      "industry": "email client software",
+      "score": 0,
+      "label": "Invisible",
+      "mentions": 0,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 0,
+      "topCompetitor": "Outlook",
+      "topCompetitorMentions": 11,
+      "competitorBreakdown": [
+        {
+          "name": "Outlook",
+          "mentions": 11
+        },
+        {
+          "name": "Gmail",
+          "mentions": 9
+        },
+        {
+          "name": "Spark",
+          "mentions": 6
+        },
+        {
+          "name": "Hey",
+          "mentions": 0
+        },
+        {
+          "name": "Missive",
+          "mentions": 0
+        }
+      ],
+      "missedPrompts": [
+        "top email client software",
+        "best email client tools in 2025",
+        "best email client for small business",
+        "best email client tools",
+        "which email client tool should I use"
+      ],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:55:09.688Z"
+    },
+    {
+      "company": "Airtable",
+      "industry": "no-code database software",
+      "score": 83,
+      "label": "Dominant",
+      "mentions": 20,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 11,
+      "topCompetitor": "Notion",
+      "topCompetitorMentions": 10,
+      "competitorBreakdown": [
+        {
+          "name": "Notion",
+          "mentions": 10
+        },
+        {
+          "name": "Coda",
+          "mentions": 2
+        },
+        {
+          "name": "Baserow",
+          "mentions": 1
+        },
+        {
+          "name": "Smartsheet",
+          "mentions": 0
+        },
+        {
+          "name": "Monday.com",
+          "mentions": 0
+        }
+      ],
+      "missedPrompts": [],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:55:50.388Z"
+    },
+    {
+      "company": "Zapier",
+      "industry": "workflow automation software",
+      "score": 90,
+      "label": "Dominant",
+      "mentions": 18,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 11,
+      "topCompetitor": "Make",
+      "topCompetitorMentions": 10,
+      "competitorBreakdown": [
+        {
+          "name": "Make",
+          "mentions": 10
+        },
+        {
+          "name": "n8n",
+          "mentions": 4
+        },
+        {
+          "name": "IFTTT",
+          "mentions": 3
+        },
+        {
+          "name": "Workato",
+          "mentions": 2
+        },
+        {
+          "name": "Tray.io",
+          "mentions": 0
+        }
+      ],
+      "missedPrompts": [],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:56:36.368Z"
+    },
+    {
+      "company": "Figma",
+      "industry": "design and prototyping software",
+      "score": 88,
+      "label": "Dominant",
+      "mentions": 20,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 11,
+      "topCompetitor": "Sketch",
+      "topCompetitorMentions": 10,
+      "competitorBreakdown": [
+        {
+          "name": "Sketch",
+          "mentions": 10
+        },
+        {
+          "name": "Adobe XD",
+          "mentions": 10
+        },
+        {
+          "name": "Framer",
+          "mentions": 8
+        },
+        {
+          "name": "Canva",
+          "mentions": 8
+        },
+        {
+          "name": "Penpot",
+          "mentions": 1
+        }
+      ],
+      "missedPrompts": [],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:57:29.320Z"
+    },
+    {
+      "company": "Slack",
+      "industry": "team communication software",
+      "score": 95,
+      "label": "Dominant",
+      "mentions": 20,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 11,
+      "topCompetitor": "Microsoft Teams",
+      "topCompetitorMentions": 11,
+      "competitorBreakdown": [
+        {
+          "name": "Microsoft Teams",
+          "mentions": 11
+        },
+        {
+          "name": "Discord",
+          "mentions": 10
+        },
+        {
+          "name": "Google Chat",
+          "mentions": 9
+        },
+        {
+          "name": "Mattermost",
+          "mentions": 7
+        },
+        {
+          "name": "Zulip",
+          "mentions": 1
+        }
+      ],
+      "missedPrompts": [],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:58:14.586Z"
+    },
+    {
+      "company": "HubSpot",
+      "industry": "CRM software",
+      "score": 90,
+      "label": "Dominant",
+      "mentions": 20,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 11,
+      "topCompetitor": "Zoho CRM",
+      "topCompetitorMentions": 11,
+      "competitorBreakdown": [
+        {
+          "name": "Zoho CRM",
+          "mentions": 11
+        },
+        {
+          "name": "Freshsales",
+          "mentions": 11
+        },
+        {
+          "name": "Salesforce",
+          "mentions": 10
+        },
+        {
+          "name": "Pipedrive",
+          "mentions": 10
+        },
+        {
+          "name": "ActiveCampaign",
+          "mentions": 0
+        }
+      ],
+      "missedPrompts": [],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:59:10.580Z"
+    },
+    {
+      "company": "Stripe",
+      "industry": "payment processing platform",
+      "score": 86,
+      "label": "Dominant",
+      "mentions": 20,
+      "scoredPrompts": 20,
+      "discoveryPrompts": 11,
+      "discoveryMentions": 11,
+      "topCompetitor": "PayPal",
+      "topCompetitorMentions": 11,
+      "competitorBreakdown": [
+        {
+          "name": "PayPal",
+          "mentions": 11
+        },
+        {
+          "name": "Square",
+          "mentions": 11
+        },
+        {
+          "name": "Braintree",
+          "mentions": 9
+        },
+        {
+          "name": "Adyen",
+          "mentions": 8
+        },
+        {
+          "name": "Paddle",
+          "mentions": 0
+        }
+      ],
+      "missedPrompts": [],
+      "erroredPrompts": 0,
+      "engines": [
+        "openai"
+      ],
+      "scannedAt": "2026-08-04T11:59:59.846Z"
+    }
+  ],
+  "raw": [
+    {
+      "company": "Notion",
+      "rows": [
+        {
+          "prompt": "best note-taking and workspace tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Obsidian",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "best note-taking and workspace for small business",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "best note-taking and workspace tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Obsidian",
+            "Evernote"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "top note-taking and workspace software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Obsidian",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "note-taking and workspace platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Obsidian",
+            "Evernote"
+          ],
+          "sentiment_score": 4,
+          "position": 14,
+          "errored": false
+        },
+        {
+          "prompt": "which note-taking and workspace tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Obsidian",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise note-taking and workspace solutions",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Confluence",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "top note-taking and workspace platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Obsidian",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "free note-taking and workspace tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 5,
+          "position": 4,
+          "errored": false
+        },
+        {
+          "prompt": "note-taking and workspace software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Obsidian",
+            "Evernote"
+          ],
+          "sentiment_score": 4,
+          "position": 11,
+          "errored": false
+        },
+        {
+          "prompt": "what is Notion",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Notion good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Notion reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Notion review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "note-taking and workspace tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Obsidian",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "is Notion good for note-taking and workspace software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Coda",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Obsidian",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Obsidian",
+            "Evernote"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Coda alternatives for note-taking and workspace software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Obsidian",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Coda vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Confluence",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Confluence"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Obsidian alternatives for note-taking and workspace software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Obsidian",
+            "Evernote"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Obsidian vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Obsidian",
+            "Evernote"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "Confluence alternatives for note-taking and workspace software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Coda",
+            "Confluence",
+            "Evernote",
+            "Asana"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Confluence vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Confluence"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "Linear",
+      "rows": [
+        {
+          "prompt": "top issue tracking software",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "best issue tracking tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 4,
+          "position": 8,
+          "errored": false
+        },
+        {
+          "prompt": "best issue tracking for small business",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "best issue tracking tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 4,
+          "position": 9,
+          "errored": false
+        },
+        {
+          "prompt": "issue tracking platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "free issue tracking tools",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "top issue tracking platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 4,
+          "position": 9,
+          "errored": false
+        },
+        {
+          "prompt": "which issue tracking tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise issue tracking solutions",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "issue tracking software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Linear review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Linear reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Linear good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "what is Linear",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "issue tracking tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 4,
+          "position": 11,
+          "errored": false
+        },
+        {
+          "prompt": "is Linear good for issue tracking software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Asana",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Jira alternatives for issue tracking software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 4,
+          "position": 12,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Jira",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "Shortcut",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Jira vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Shortcut",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "Shortcut",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Shortcut alternatives for issue tracking software",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "Shortcut",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Asana alternatives for issue tracking software",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Shortcut vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "Shortcut",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Asana vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Jira",
+            "Asana",
+            "ClickUp",
+            "Trello"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "Vercel",
+      "rows": [
+        {
+          "prompt": "top frontend hosting software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best frontend hosting tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best frontend hosting tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best frontend hosting for small business",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "frontend hosting platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 9,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "free frontend hosting tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "which frontend hosting tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "top frontend hosting platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise frontend hosting solutions",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 4,
+          "position": 16,
+          "errored": false
+        },
+        {
+          "prompt": "frontend hosting software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 5,
+          "position": 21,
+          "errored": false
+        },
+        {
+          "prompt": "Vercel reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "what is Vercel",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Vercel good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "frontend hosting tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "Vercel review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Netlify",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Vercel good for frontend hosting platform",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Netlify alternatives for frontend hosting platform",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Cloudflare Pages",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "Netlify vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Cloudflare Pages alternatives for frontend hosting platform",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "Railway",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "Render alternatives for frontend hosting platform",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "Render",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Render",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Render",
+            "Railway"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "Render vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Render"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Cloudflare Pages vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Netlify",
+            "Cloudflare Pages",
+            "AWS Amplify"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "Superhuman",
+      "rows": [
+        {
+          "prompt": "top email client software",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "best email client tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "best email client for small business",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "email client platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "best email client tools",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "free email client tools",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "which email client tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "top email client platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "email client software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise email client solutions",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "is Superhuman good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "what is Superhuman",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Superhuman review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Gmail"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "email client tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Superhuman reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Gmail",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "is Superhuman good for email client software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Outlook",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Gmail alternatives for email client software",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Gmail vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Outlook alternatives for email client software",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Spark alternatives for email client software",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Outlook",
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Spark",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Spark vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Spark"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "Outlook vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Gmail",
+            "Outlook"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "Airtable",
+      "rows": [
+        {
+          "prompt": "top no-code database software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best no-code database tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best no-code database tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best no-code database for small business",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "no-code database platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "top no-code database platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Coda"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "free no-code database tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Baserow"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise no-code database solutions",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "which no-code database tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "no-code database software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Coda"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "what is Airtable",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Airtable reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Airtable good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Airtable review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "no-code database tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Airtable good for no-code database software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Notion",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Coda"
+          ],
+          "sentiment_score": 4,
+          "position": 8,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Smartsheet",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Smartsheet",
+            "Monday.com"
+          ],
+          "sentiment_score": 5,
+          "position": 5,
+          "errored": false
+        },
+        {
+          "prompt": "Notion alternatives for no-code database software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Smartsheet",
+            "Monday.com",
+            "Coda"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Notion vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Coda"
+          ],
+          "sentiment_score": 4,
+          "position": 23,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Monday.com",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Smartsheet",
+            "Monday.com"
+          ],
+          "sentiment_score": 4,
+          "position": 9,
+          "errored": false
+        },
+        {
+          "prompt": "Monday.com alternatives for no-code database software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Monday.com",
+            "Coda"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Smartsheet alternatives for no-code database software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Smartsheet",
+            "Coda"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Smartsheet vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Smartsheet",
+            "Monday.com"
+          ],
+          "sentiment_score": 4,
+          "position": 23,
+          "errored": false
+        },
+        {
+          "prompt": "Monday.com vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Notion",
+            "Smartsheet",
+            "Monday.com"
+          ],
+          "sentiment_score": 4,
+          "position": 23,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "Zapier",
+      "rows": [
+        {
+          "prompt": "top workflow automation software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "n8n",
+            "Workato"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best workflow automation tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "n8n",
+            "Workato"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best workflow automation tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best workflow automation for small business",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "IFTTT"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "workflow automation platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "top workflow automation platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "free workflow automation tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "n8n",
+            "IFTTT"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "which workflow automation tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "n8n",
+            "IFTTT"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise workflow automation solutions",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "workflow automation software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "what is Zapier",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Zapier good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Zapier reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "workflow automation tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Zapier review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Make vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Make"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Make",
+          "ai_model": "openai",
+          "brand_mentioned": false,
+          "competitors_mentioned": [
+            "Make"
+          ],
+          "sentiment_score": 0,
+          "position": null,
+          "errored": false
+        },
+        {
+          "prompt": "is Zapier good for workflow automation software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to n8n",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "n8n",
+            "IFTTT",
+            "Tray.io"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Make alternatives for workflow automation software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "IFTTT",
+            "Tray.io"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Workato alternatives for workflow automation software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "n8n",
+            "Workato",
+            "IFTTT",
+            "Tray.io"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Workato",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "Workato",
+            "Tray.io"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "n8n alternatives for workflow automation software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "n8n",
+            "Workato",
+            "IFTTT",
+            "Tray.io"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "n8n vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "n8n",
+            "Tray.io"
+          ],
+          "sentiment_score": 4,
+          "position": 10,
+          "errored": false
+        },
+        {
+          "prompt": "Workato vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Make",
+            "Workato",
+            "IFTTT",
+            "Tray.io"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "Figma",
+      "rows": [
+        {
+          "prompt": "top design and prototyping software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "best design and prototyping tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best design and prototyping for small business",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Canva"
+          ],
+          "sentiment_score": 6,
+          "position": 13,
+          "errored": false
+        },
+        {
+          "prompt": "best design and prototyping tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Adobe XD",
+            "Framer"
+          ],
+          "sentiment_score": 6,
+          "position": 4,
+          "errored": false
+        },
+        {
+          "prompt": "design and prototyping platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "free design and prototyping tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Canva",
+            "Penpot"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "which design and prototyping tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Canva"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "design and prototyping software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise design and prototyping solutions",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer"
+          ],
+          "sentiment_score": 4,
+          "position": 19,
+          "errored": false
+        },
+        {
+          "prompt": "top design and prototyping platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "what is Figma",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Figma good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Figma reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Figma review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "design and prototyping tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Sketch",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "is Figma good for design and prototyping software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Adobe XD",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Sketch vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Canva"
+          ],
+          "sentiment_score": 4,
+          "position": 12,
+          "errored": false
+        },
+        {
+          "prompt": "Sketch alternatives for design and prototyping software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 4,
+          "position": 7,
+          "errored": false
+        },
+        {
+          "prompt": "Adobe XD alternatives for design and prototyping software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Framer",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Framer vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "Adobe XD vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Canva"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "Framer alternatives for design and prototyping software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Sketch",
+            "Adobe XD",
+            "Framer",
+            "Canva"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "Slack",
+      "rows": [
+        {
+          "prompt": "top team communication software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best team communication tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best team communication tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "best team communication for small business",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "team communication platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "free team communication tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat",
+            "Zulip"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "top team communication platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "which team communication tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 10,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise team communication solutions",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Google Chat"
+          ],
+          "sentiment_score": 5,
+          "position": 4,
+          "errored": false
+        },
+        {
+          "prompt": "team communication software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Google Chat"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "what is Slack",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Slack reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Slack good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Slack review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "team communication tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord"
+          ],
+          "sentiment_score": 6,
+          "position": 4,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Discord",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Google Chat"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Slack good for team communication software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Microsoft Teams alternatives for team communication software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Microsoft Teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Microsoft Teams vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "Mattermost alternatives for team communication software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat",
+            "Zulip"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Discord alternatives for team communication software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Mattermost",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost",
+            "Google Chat",
+            "Zulip"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Mattermost vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord",
+            "Mattermost"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "Discord vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Microsoft Teams",
+            "Discord"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "HubSpot",
+      "rows": [
+        {
+          "prompt": "best CRM tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "top CRM software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "best CRM tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "CRM platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 4,
+          "position": 10,
+          "errored": false
+        },
+        {
+          "prompt": "best CRM for small business",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 9,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "free CRM tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Zoho CRM",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "which CRM tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "top CRM platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise CRM solutions",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 4,
+          "position": 19,
+          "errored": false
+        },
+        {
+          "prompt": "CRM software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "what is HubSpot",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is HubSpot good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "HubSpot reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "HubSpot review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "CRM tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Salesforce",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Zoho CRM",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "Salesforce alternatives for CRM software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is HubSpot good for CRM software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Salesforce vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Pipedrive",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Pipedrive alternatives for CRM software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Zoho CRM alternatives for CRM software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "Zoho CRM vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 5,
+          "position": 13,
+          "errored": false
+        },
+        {
+          "prompt": "Pipedrive vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "Salesforce",
+            "Zoho CRM",
+            "Pipedrive",
+            "Freshsales"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        }
+      ]
+    },
+    {
+      "company": "Stripe",
+      "rows": [
+        {
+          "prompt": "best payment processing tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "top payment processing software",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 7,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "best payment processing tools in 2025",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "best payment processing for small business",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Square"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "payment processing platform comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 5,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "which payment processing tool should I use",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "free payment processing tools",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Square"
+          ],
+          "sentiment_score": 9,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "top payment processing platforms for startups",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "enterprise payment processing solutions",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 7,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "payment processing software comparison",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 4,
+          "position": 17,
+          "errored": false
+        },
+        {
+          "prompt": "is Stripe good",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "what is Stripe",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Stripe review",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Stripe reviews",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "payment processing tools for teams",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 5,
+          "position": 7,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to PayPal",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Square"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Adyen",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "PayPal alternatives for payment processing platform",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "is Stripe good for payment processing platform",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [],
+          "sentiment_score": 7,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "PayPal vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Square"
+          ],
+          "sentiment_score": 2,
+          "position": 20,
+          "errored": false
+        },
+        {
+          "prompt": "alternatives to Square",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square"
+          ],
+          "sentiment_score": 8,
+          "position": 3,
+          "errored": false
+        },
+        {
+          "prompt": "Square alternatives for payment processing platform",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 8,
+          "position": 2,
+          "errored": false
+        },
+        {
+          "prompt": "Adyen alternatives for payment processing platform",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 8,
+          "position": 1,
+          "errored": false
+        },
+        {
+          "prompt": "Square vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square"
+          ],
+          "sentiment_score": 5,
+          "position": 5,
+          "errored": false
+        },
+        {
+          "prompt": "Adyen vs competitors",
+          "ai_model": "openai",
+          "brand_mentioned": true,
+          "competitors_mentioned": [
+            "PayPal",
+            "Adyen",
+            "Square",
+            "Braintree"
+          ],
+          "sentiment_score": 4,
+          "position": 10,
+          "errored": false
+        }
+      ]
+    }
+  ]
+}

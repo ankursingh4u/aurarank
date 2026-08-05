@@ -83,24 +83,28 @@ function getIndustryPrompts(
         `top ${industry} places to stay${loc}`,
         `recommended ${industry} for families${loc}`,
       ]
-    case 'saas':
+    case 'saas': {
+      // Users type "project management software" or "CRM tools"; the templates below
+      // add their own qualifier, so strip a trailing one to avoid "software software".
+      const base = industry.replace(/\s+(software|tools?|platforms?|apps?|solutions?)$/i, '').trim() || industry
       return [
-        `best ${industry} tools`,
-        `top ${industry} software`,
-        `${industry} platform comparison`,
-        `best ${industry} for small business`,
-        `best ${industry} tools in 2025`,
-        `${industry} software comparison`,
-        `which ${industry} tool should I use`,
-        `top ${industry} platforms for startups`,
-        `enterprise ${industry} solutions`,
-        `free ${industry} tools`,
-        `${industry} tools for teams`,
+        `best ${base} tools`,
+        `top ${base} software`,
+        `${base} platform comparison`,
+        `best ${base} for small business`,
+        `best ${base} tools in 2025`,
+        `${base} software comparison`,
+        `which ${base} tool should I use`,
+        `top ${base} platforms for startups`,
+        `enterprise ${base} solutions`,
+        `free ${base} tools`,
+        `${base} tools for teams`,
         ...(loc ? [
-          `best ${industry} tools${loc}`,
-          `top ${industry} software${loc}`,
+          `best ${base} tools${loc}`,
+          `top ${base} software${loc}`,
         ] : []),
       ]
+    }
     case 'generic':
       return [
         `best ${industry}${loc}`,

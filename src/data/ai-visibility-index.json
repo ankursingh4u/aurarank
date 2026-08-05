@@ -1,0 +1,414 @@
+[
+  {
+    "company": "Slack",
+    "industry": "team communication software",
+    "score": 95,
+    "label": "Dominant",
+    "mentions": 20,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "Microsoft Teams",
+    "topCompetitorMentions": 11,
+    "competitorBreakdown": [
+      {
+        "name": "Microsoft Teams",
+        "mentions": 11
+      },
+      {
+        "name": "Discord",
+        "mentions": 10
+      },
+      {
+        "name": "Google Chat",
+        "mentions": 9
+      },
+      {
+        "name": "Mattermost",
+        "mentions": 7
+      },
+      {
+        "name": "Zulip",
+        "mentions": 1
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:58:14.586Z"
+  },
+  {
+    "company": "Notion",
+    "industry": "note-taking and workspace software",
+    "score": 90,
+    "label": "Dominant",
+    "mentions": 20,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "Evernote",
+    "topCompetitorMentions": 11,
+    "competitorBreakdown": [
+      {
+        "name": "Evernote",
+        "mentions": 11
+      },
+      {
+        "name": "Obsidian",
+        "mentions": 8
+      },
+      {
+        "name": "Asana",
+        "mentions": 8
+      },
+      {
+        "name": "Coda",
+        "mentions": 5
+      },
+      {
+        "name": "Confluence",
+        "mentions": 1
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:52:58.628Z"
+  },
+  {
+    "company": "Vercel",
+    "industry": "frontend hosting platform",
+    "score": 90,
+    "label": "Dominant",
+    "mentions": 20,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "Netlify",
+    "topCompetitorMentions": 11,
+    "competitorBreakdown": [
+      {
+        "name": "Netlify",
+        "mentions": 11
+      },
+      {
+        "name": "Render",
+        "mentions": 10
+      },
+      {
+        "name": "Cloudflare Pages",
+        "mentions": 9
+      },
+      {
+        "name": "AWS Amplify",
+        "mentions": 9
+      },
+      {
+        "name": "Railway",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:54:28.050Z"
+  },
+  {
+    "company": "Zapier",
+    "industry": "workflow automation software",
+    "score": 90,
+    "label": "Dominant",
+    "mentions": 18,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "Make",
+    "topCompetitorMentions": 10,
+    "competitorBreakdown": [
+      {
+        "name": "Make",
+        "mentions": 10
+      },
+      {
+        "name": "n8n",
+        "mentions": 4
+      },
+      {
+        "name": "IFTTT",
+        "mentions": 3
+      },
+      {
+        "name": "Workato",
+        "mentions": 2
+      },
+      {
+        "name": "Tray.io",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:56:36.368Z"
+  },
+  {
+    "company": "HubSpot",
+    "industry": "CRM software",
+    "score": 90,
+    "label": "Dominant",
+    "mentions": 20,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "Zoho CRM",
+    "topCompetitorMentions": 11,
+    "competitorBreakdown": [
+      {
+        "name": "Zoho CRM",
+        "mentions": 11
+      },
+      {
+        "name": "Freshsales",
+        "mentions": 11
+      },
+      {
+        "name": "Salesforce",
+        "mentions": 10
+      },
+      {
+        "name": "Pipedrive",
+        "mentions": 10
+      },
+      {
+        "name": "ActiveCampaign",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:59:10.580Z"
+  },
+  {
+    "company": "Figma",
+    "industry": "design and prototyping software",
+    "score": 88,
+    "label": "Dominant",
+    "mentions": 20,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "Sketch",
+    "topCompetitorMentions": 10,
+    "competitorBreakdown": [
+      {
+        "name": "Sketch",
+        "mentions": 10
+      },
+      {
+        "name": "Adobe XD",
+        "mentions": 10
+      },
+      {
+        "name": "Framer",
+        "mentions": 8
+      },
+      {
+        "name": "Canva",
+        "mentions": 8
+      },
+      {
+        "name": "Penpot",
+        "mentions": 1
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:57:29.320Z"
+  },
+  {
+    "company": "Stripe",
+    "industry": "payment processing platform",
+    "score": 86,
+    "label": "Dominant",
+    "mentions": 20,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "PayPal",
+    "topCompetitorMentions": 11,
+    "competitorBreakdown": [
+      {
+        "name": "PayPal",
+        "mentions": 11
+      },
+      {
+        "name": "Square",
+        "mentions": 11
+      },
+      {
+        "name": "Braintree",
+        "mentions": 9
+      },
+      {
+        "name": "Adyen",
+        "mentions": 8
+      },
+      {
+        "name": "Paddle",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:59:59.846Z"
+  },
+  {
+    "company": "Airtable",
+    "industry": "no-code database software",
+    "score": 83,
+    "label": "Dominant",
+    "mentions": 20,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "Notion",
+    "topCompetitorMentions": 10,
+    "competitorBreakdown": [
+      {
+        "name": "Notion",
+        "mentions": 10
+      },
+      {
+        "name": "Coda",
+        "mentions": 2
+      },
+      {
+        "name": "Baserow",
+        "mentions": 1
+      },
+      {
+        "name": "Smartsheet",
+        "mentions": 0
+      },
+      {
+        "name": "Monday.com",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:55:50.388Z"
+  },
+  {
+    "company": "Linear",
+    "industry": "issue tracking software",
+    "score": 30,
+    "label": "Low",
+    "mentions": 5,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 4,
+    "topCompetitor": "Jira",
+    "topCompetitorMentions": 11,
+    "competitorBreakdown": [
+      {
+        "name": "Jira",
+        "mentions": 11
+      },
+      {
+        "name": "Asana",
+        "mentions": 11
+      },
+      {
+        "name": "Trello",
+        "mentions": 11
+      },
+      {
+        "name": "ClickUp",
+        "mentions": 10
+      },
+      {
+        "name": "Shortcut",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [
+      "top issue tracking software",
+      "best issue tracking for small business",
+      "issue tracking platform comparison",
+      "free issue tracking tools",
+      "which issue tracking tool should I use"
+    ],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:53:42.698Z"
+  },
+  {
+    "company": "Superhuman",
+    "industry": "email client software",
+    "score": 0,
+    "label": "Invisible",
+    "mentions": 0,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 0,
+    "topCompetitor": "Outlook",
+    "topCompetitorMentions": 11,
+    "competitorBreakdown": [
+      {
+        "name": "Outlook",
+        "mentions": 11
+      },
+      {
+        "name": "Gmail",
+        "mentions": 9
+      },
+      {
+        "name": "Spark",
+        "mentions": 6
+      },
+      {
+        "name": "Hey",
+        "mentions": 0
+      },
+      {
+        "name": "Missive",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [
+      "top email client software",
+      "best email client tools in 2025",
+      "best email client for small business",
+      "best email client tools",
+      "which email client tool should I use"
+    ],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai"
+    ],
+    "scannedAt": "2026-08-04T11:55:09.688Z"
+  }
+]

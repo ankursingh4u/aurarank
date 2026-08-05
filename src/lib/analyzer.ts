@@ -31,6 +31,24 @@ const UNFAMILIAR_PHRASES = [
   "i do not recognize",
 ]
 
+function escapeRegex(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+/**
+ * Matches a brand name as a whole word, so "Linear" does not match "linearly",
+ * "Make" does not match "Maker", and "Hey" does not match "they". Trailing
+ * punctuation in names ("Monday.com", "Tray.io") is handled by escaping, and
+ * possessives ("Notion's") still match since "'" is not alphanumeric.
+ */
+function brandRegex(brandName: string): RegExp {
+  return new RegExp(`(?<![a-z0-9])${escapeRegex(brandName.toLowerCase())}(?![a-z0-9])`, 'i')
+}
+
+function mentionsName(text: string, name: string): boolean {
+  return brandRegex(name).test(text.toLowerCase())
+}
+
 function isUnfamiliarResponse(response: string, brandName: string): boolean {
   const lower = response.toLowerCase()
   const lowerBrand = brandName.toLowerCase()
@@ -57,11 +75,8 @@ export function analyzeMentions(
   brandName: string,
   competitors: string[]
 ): AnalysisResult {
-  const lowerResponse = response.toLowerCase()
-  const lowerBrand = brandName.toLowerCase()
-
-  // Brand must appear AND AI must not be saying "I don't know X"
-  const rawMentioned = lowerResponse.includes(lowerBrand)
+  // Brand must appear as a whole word AND AI must not be saying "I don't know X"
+  const rawMentioned = mentionsName(response, brandName)
   const brandMentioned = rawMentioned && !isUnfamiliarResponse(response, brandName)
 
   // Find brand position in numbered lists
@@ -69,7 +84,7 @@ export function analyzeMentions(
   if (brandMentioned) {
     const lines = response.split('\n')
     for (let i = 0; i < lines.length; i++) {
-      if (lines[i].toLowerCase().includes(lowerBrand)) {
+      if (mentionsName(lines[i], brandName)) {
         const match = lines[i].match(/^[\s]*(\d+)[.\):\-]/)
         if (match) {
           brandPosition = parseInt(match[1])
@@ -82,9 +97,7 @@ export function analyzeMentions(
   }
 
   // Check competitor mentions
-  const competitorsMentioned = competitors.filter(comp =>
-    lowerResponse.includes(comp.toLowerCase())
-  )
+  const competitorsMentioned = competitors.filter(comp => mentionsName(response, comp))
 
   // Sentiment only applies when brand is genuinely mentioned
   let sentimentScore = 0
@@ -124,7 +137,7 @@ export function analyzeMentions(
 }
 
 function extractBrandContext(response: string, brandName: string): string {
-  const index = response.toLowerCase().indexOf(brandName.toLowerCase())
+  const index = response.toLowerCase().search(brandRegex(brandName))
   if (index === -1) return ''
   const start = Math.max(0, index - 100)
   const end = Math.min(response.length, index + brandName.length + 100)

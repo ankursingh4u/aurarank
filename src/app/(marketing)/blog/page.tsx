@@ -9,6 +9,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: 'chatgpt-saas-recommendations-study',
+    title: 'We Asked ChatGPT for Software Recommendations 250 Times. Here Is Who It Named.',
+    date: 'August 4, 2026',
+    readingTime: '6 min read',
+    excerpt:
+      'We scanned 10 well-known SaaS brands to see how often ChatGPT names them without being prompted. Most were named every time. Two of the most loved products in tech barely registered.',
+  },
+  {
     slug: 'how-to-rank-on-chatgpt',
     title: 'How to Rank on ChatGPT: The Complete Guide to AI Visibility',
     date: 'January 15, 2025',

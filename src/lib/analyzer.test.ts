@@ -58,6 +58,34 @@ describe('analyzeMentions — unfamiliar brand detection', () => {
   })
 })
 
+describe('analyzeMentions — whole-word matching', () => {
+  it('does not count a brand name embedded in a longer word', () => {
+    const r = analyzeMentions('Costs scale linearly with usage.', 'Linear', [])
+    expect(r.brandMentioned).toBe(false)
+  })
+
+  it('does not count common-word brands inside other words', () => {
+    expect(analyzeMentions('They said the maker is fine.', 'Make', []).brandMentioned).toBe(false)
+    expect(analyzeMentions('They also offer this.', 'Hey', []).brandMentioned).toBe(false)
+    expect(analyzeMentions('Use Squarespace for sites.', 'Square', []).brandMentioned).toBe(false)
+  })
+
+  it('still counts the brand as a standalone word', () => {
+    expect(analyzeMentions('1. Linear is a great tracker.', 'Linear', []).brandMentioned).toBe(true)
+  })
+
+  it('counts possessive and punctuated forms', () => {
+    expect(analyzeMentions("Notion's database is flexible.", 'Notion', []).brandMentioned).toBe(true)
+    expect(analyzeMentions('Try Monday.com for teams.', 'Acme', ['Monday.com']).competitorsMentioned)
+      .toContain('Monday.com')
+  })
+
+  it('applies whole-word matching to competitors too', () => {
+    const r = analyzeMentions('Costs grow linearly; use Squarespace.', 'Acme', ['Linear', 'Square'])
+    expect(r.competitorsMentioned).toEqual([])
+  })
+})
+
 describe('calculateVisibilityScore — PRD Test Group 3 (fake brands score 0-10)', () => {
   const fakeBrands = ['dvhfdfdsrs', 'xkqzpwmnvb', 'qqqqqqqqqq', 'testbrand123xyz']
 

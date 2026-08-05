@@ -5,6 +5,12 @@ export const alt = 'AI Visibility Report, SEO4AI'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
+// Shown on the card footer; derived from the configured app URL so the card never
+// advertises a stale domain.
+const displayDomain = (process.env.NEXT_PUBLIC_APP_URL || 'https://seo4ai.app')
+  .replace(/^https?:\/\//, '')
+  .replace(/\/$/, '')
+
 // Dynamic social-share card: every report link renders a branded score card
 // on Twitter/LinkedIn/WhatsApp/Slack, turning shares into free distribution.
 export default async function Image({ params }: { params: { token: string } }) {
@@ -116,7 +122,7 @@ export default async function Image({ params }: { params: { token: string } }) {
           {/* footer */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', fontSize: 28, fontWeight: 600, color }}>{label}</div>
-            <div style={{ display: 'flex', fontSize: 24, color: '#64748b' }}>seo4ai.bolddev.live</div>
+            <div style={{ display: 'flex', fontSize: 24, color: '#64748b' }}>{displayDomain}</div>
           </div>
         </div>
       ),

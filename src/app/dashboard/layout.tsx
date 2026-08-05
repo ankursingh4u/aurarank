@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { createBrowserClient } from '@supabase/ssr'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
-  LayoutDashboard, Settings, LogOut, Menu, Eye, CreditCard, Home
+  LayoutDashboard, Settings, LogOut, Menu, Eye, CreditCard, Home, BarChart3
 } from 'lucide-react'
 
 const navItems = [
@@ -16,11 +16,14 @@ const navItems = [
   { href: '/', label: 'Home page', icon: Home },
 ]
 
+const adminNavItem = { href: '/dashboard/index-admin', label: 'Visibility Index', icon: BarChart3 }
+
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [userEmail, setUserEmail] = useState('')
+  const [isAdmin, setIsAdmin] = useState(false)
 
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -31,6 +34,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user) setUserEmail(user.email || '')
     })
+    fetch('/api/admin/me')
+      .then((r) => r.json())
+      .then((d) => setIsAdmin(!!d.isAdmin))
+      .catch(() => setIsAdmin(false))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -52,7 +59,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </div>
 
       <nav className="flex-1 px-3 space-y-1">
-        {navItems.map((item) => {
+        {(isAdmin ? [...navItems.slice(0, 1), adminNavItem, ...navItems.slice(1)] : navItems).map((item) => {
           const isActive = pathname === item.href
           return (
             <Link

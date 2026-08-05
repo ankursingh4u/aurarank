@@ -50,13 +50,15 @@ export default function TermsPage() {
           features may change with notice.
         </p>
 
-        <h2>5. No refunds</h2>
+        <h2>5. Refunds</h2>
         <p>
-          All payments are <strong>final and non-refundable</strong>. We do not provide refunds or
-          credits for any partial subscription period, unused features, or after a plan change or
-          cancellation, except where a refund is strictly required by applicable law. Please see our{' '}
-          <a href="/refund" className="text-violet-700 underline">Refund Policy</a> for details. A
-          free plan is available so you can evaluate the Service before purchasing.
+          Refunds are considered on a case-by-case basis rather than guaranteed. If you have a
+          problem with a charge, contact{' '}
+          <a href="mailto:support@seo4ai.app" className="text-violet-700 underline">support@seo4ai.app</a>{' '}
+          and we will review your request and respond. Refunds required by applicable law are always
+          provided. See our{' '}
+          <a href="/refund" className="text-violet-700 underline">Refund Policy</a> for how we assess
+          requests. A free plan is available so you can evaluate the Service before purchasing.
         </p>
 
         <h2>6. No guarantee of results</h2>
