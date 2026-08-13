@@ -1,5 +1,4 @@
-import { getOpenAI } from '@/lib/openai'
-import { analyzeMentions } from '@/lib/analyzer'
+import { queryEnginesAndAnalyze } from '@/lib/engines'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
@@ -95,33 +94,44 @@ export async function POST(request: NextRequest) {
       `recommended ${industry} for small business`,
     ]
 
+    // Grounded, not parametric. Asking the model with no web access measures
+    // what it absorbed in training, which is not what a visitor sees when they
+    // ask ChatGPT the same question today. Measured 2026-08-13: Linear scored 0
+    // parametrically and 44 grounded, so the parametric number would have told
+    // a real brand it was invisible when it plainly is not.
     const results = await Promise.allSettled(
       prompts.map(async (prompt) => {
-        const completion = await getOpenAI().chat.completions.create({
-          model: 'gpt-4o-mini',
-          messages: [{ role: 'user', content: prompt }],
-          max_tokens: 300, // Reduced from 500
-          temperature: 0.7,
-        })
-        const response = completion.choices[0]?.message?.content || ''
-        const analysis = analyzeMentions(response, brandName, [])
-        return { prompt, brandMentioned: analysis.brandMentioned }
+        const r = await queryEnginesAndAnalyze(prompt, ['openai'], brandName, [], 'grounded')
+        return {
+          prompt,
+          brandMentioned: r.analysis.brandMentioned,
+          citations: r.citations,
+        }
       })
     )
 
     const successful = results
-      .filter((r): r is PromiseFulfilledResult<{ prompt: string; brandMentioned: boolean }> => r.status === 'fulfilled')
+      .filter((r): r is PromiseFulfilledResult<{ prompt: string; brandMentioned: boolean; citations: string[] }> => r.status === 'fulfilled')
       .map(r => r.value)
 
     const mentionCount = successful.filter(r => r.brandMentioned).length
     const totalPrompts = successful.length
     const score = totalPrompts > 0 ? Math.round((mentionCount / totalPrompts) * 100) : 0
 
+    // The pages the AI read to answer, deduped across prompts. This is the part
+    // a visitor cannot get anywhere else, and the part worth screenshotting.
+    const sources = Array.from(new Set(successful.flatMap(r => r.citations)))
+
     return NextResponse.json({
       score,
       mentionCount,
       totalPrompts,
-      prompts: successful.map(r => ({ prompt: r.prompt, mentioned: r.brandMentioned })),
+      sources,
+      prompts: successful.map(r => ({
+        prompt: r.prompt,
+        mentioned: r.brandMentioned,
+        sources: r.citations,
+      })),
       message: mentionCount > 0
         ? `${brandName} was mentioned in ${mentionCount}/${totalPrompts} AI responses. Sign up to get your full visibility report with 20+ prompts.`
         : `${brandName} was NOT mentioned in any AI responses. You're invisible to AI search. Sign up to learn how to fix this.`,
