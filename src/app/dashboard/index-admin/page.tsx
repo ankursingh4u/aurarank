@@ -218,7 +218,7 @@ export default function IndexAdminPage() {
           >
             <RefreshCw className="h-3.5 w-3.5" /> Refresh
           </Button>
-          <Link href="/index" target="_blank">
+          <Link href="/ai-visibility-index" target="_blank">
             <Button variant="outline" className="border-stone-200 text-stone-600 gap-1.5">
               View public page <ExternalLink className="h-3.5 w-3.5" />
             </Button>

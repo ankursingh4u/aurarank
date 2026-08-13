@@ -4,7 +4,64 @@ import { Button } from '@/components/ui/button'
 import { Navbar } from '@/components/landing/navbar'
 import { FreeScan } from '@/components/landing/free-scan'
 import { getPublishedIndex } from '@/lib/index-data'
+import { getEngineLabels } from '@/lib/engines'
 import type { IndexEntry } from '@/lib/index-scan'
+import { JsonLd } from '@/components/seo/json-ld'
+import { faqSchema } from '@/lib/schema'
+
+/**
+ * Rendered on the page *and* emitted as FAQPage structured data from this same
+ * array, so the two can never drift apart. These answers are written to be
+ * quoted verbatim by an AI answer engine, which means they have to be true
+ * standing alone, without the surrounding page as context.
+ */
+function buildFaqs(engines: string[]) {
+  const engineList = engines.length > 1
+    ? `${engines.slice(0, -1).join(', ')} and ${engines[engines.length - 1]}`
+    : engines[0]
+  return [
+  {
+    question: 'What is AI visibility?',
+    answer:
+      'AI visibility is how often an AI assistant names your brand when someone asks it a buying question in your category, such as "best CRM software". It is the AI-era equivalent of a search ranking: if the assistant does not name you, the customer never sees you, and nothing shows up in your analytics because there was no click to miss.',
+  },
+  {
+    question: 'How do I find out whether ChatGPT recommends my brand?',
+    answer:
+      `Ask it the questions your customers actually ask, without using your brand name, and count how often it names you. SEO4AI automates exactly that: it runs a set of neutral category questions through ${engineList}, records whether you were named and which competitors were named instead, and returns a visibility score from 0 to 100. The free scan takes about 60 seconds and does not require a card.`,
+  },
+  {
+    question: 'What is GEO, and how is it different from SEO?',
+    answer:
+      'GEO stands for Generative Engine Optimization, sometimes called AEO or Answer Engine Optimization. Traditional SEO competes for a position in a list of links a user then chooses from. GEO competes to be named inside a single generated answer, where there is usually no list and no second page. The practical difference is that SEO rewards ranking signals on your own site, while GEO is driven mostly by how often and how clearly other sources across the web describe you.',
+  },
+  {
+    question: 'Can you actually change what an AI recommends?',
+    answer:
+      'Partly, and it is worth being precise about which part. AI answers draw on two things: what the model absorbed during training, which you cannot edit and which changes slowly, and what it retrieves from the live web at the moment it answers, which you can influence within weeks. Retrieval responds to being clearly described in sources an assistant trusts: third-party listicles, comparison pages, directories, community threads and well-structured pages of your own. Anyone promising to directly edit a model\'s recommendations is selling something that does not exist.',
+  },
+  {
+    question: 'Which AI engines does SEO4AI check?',
+    answer:
+      `We currently scan ${engineList}. Support for more engines is in progress; we only list an engine as live once scans genuinely run against it, so this list reflects what is actually running right now rather than what is planned.`,
+  },
+  {
+    question: 'How long does it take to improve AI visibility?',
+    answer:
+      'Expect weeks, not days, and treat anyone promising faster with suspicion. Changes that affect live retrieval, such as new third-party mentions and better-structured pages, can show up in a re-scan within two to six weeks. Shifts in what a model knows without searching follow much later, on the schedule of model retraining, which no vendor controls.',
+  },
+  {
+    question: 'How much does SEO4AI cost?',
+    answer:
+      `Starter is free and includes three scans a month for one brand. Pro is $24.99 a month for 15 scans across three brands, adding competitor gap scores and history. Max is $49.99 a month for 60 scans across ten brands, adding every engine we run (${engineList}), the AI fix plan, the content generator and WordPress publishing. You can cancel at any time.`,
+  },
+  {
+    question: 'Why did my brand score zero?',
+    answer:
+      'A zero means the AI never named your brand unprompted in response to neutral category questions, which is common for newer or niche brands and for premium products in categories dominated by household names. It does not mean the AI has never heard of you: questions that contain your brand name are deliberately excluded from the score, because a model repeating a name back to you is not a recommendation.',
+    },
+  ]
+}
 
 // Keeps the proof band in step with the index without a redeploy.
 export const revalidate = 300
@@ -22,17 +79,20 @@ function XIcon({ className }: { className?: string }) {
   )
 }
 
-// The engines we measure against. ChatGPT, Gemini and Claude are live; the rest
-// are the roadmap shown as "soon".
-const ENGINES = [
-  { name: 'ChatGPT', live: true },
-  { name: 'Gemini', live: true },
-  { name: 'Claude', live: true },
-  { name: 'Perplexity', live: false },
-  { name: 'AI Overviews', live: false },
-  { name: 'Grok', live: false },
-  { name: 'Copilot', live: false },
-]
+// Which engines we measure against. The first three are marked live only when
+// their API key is actually configured, so the badge row can never claim an
+// engine that would silently skip at scan time. The rest are the roadmap.
+function buildEngineList(available: string[]) {
+  return [
+    { name: 'ChatGPT', live: available.includes('ChatGPT') },
+    { name: 'Gemini', live: available.includes('Gemini') },
+    { name: 'Claude', live: available.includes('Claude') },
+    { name: 'Perplexity', live: false },
+    { name: 'AI Overviews', live: false },
+    { name: 'Grok', live: false },
+    { name: 'Copilot', live: false },
+  ]
+}
 
 /**
  * Credibility band built from our own published scan data rather than testimonials
@@ -70,7 +130,7 @@ function IndexProofBand({ entries }: { entries: IndexEntry[] }) {
               recognition and AI visibility are not the same thing, and the gap is measurable.
             </p>
             <Link
-              href="/index"
+              href="/ai-visibility-index"
               className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-violet-700 hover:text-violet-800 transition-colors"
             >
               See the full index
@@ -114,6 +174,13 @@ function IndexProofBand({ entries }: { entries: IndexEntry[] }) {
 
 export default async function LandingPage() {
   const indexEntries = await getPublishedIndex()
+  // Engine claims across the whole page come from which keys are configured,
+  // so the pricing table, the badge row and the FAQ can never name an engine
+  // that would silently skip at scan time.
+  const maxEngines = getEngineLabels('max')
+  const proEngines = getEngineLabels('pro')
+  const ENGINES = buildEngineList(maxEngines)
+  const FAQS = buildFaqs(maxEngines)
   return (
     <div className="min-h-screen bg-[#FBF8F4] text-stone-900 antialiased">
       <Navbar />
@@ -137,10 +204,16 @@ export default async function LandingPage() {
             </h1>
 
             <p className="mt-6 text-lg text-stone-600 leading-relaxed max-w-xl">
-              ChatGPT, Gemini and Perplexity now answer &ldquo;what&apos;s the best
-              option?&rdquo; directly, no more ten blue links. We show you whether
-              AI recommends your brand, who it picks instead, and exactly what to
-              change so it picks you.
+              When someone asks ChatGPT for the best option, it reads a handful of
+              pages and names three brands from them. We show you{' '}
+              <span className="font-semibold text-stone-900">exactly which pages it read</span>,
+              which of them name a competitor instead of you, and which ones you can
+              realistically get onto.
+            </p>
+
+            <p className="mt-4 text-sm text-stone-500 leading-relaxed max-w-xl">
+              Every other tool hands you a score. A score tells you that you are losing.
+              The page list tells you what to do on Monday.
             </p>
 
             <div className="mt-8">
@@ -585,14 +658,14 @@ export default async function LandingPage() {
                 features: ['1 brand', '3 scans / month', 'AI Visibility Score', 'Competitor gap (basic)'],
               },
               {
-                name: 'Pro', price: '$24.99', suffix: '/mo', engines: 'ChatGPT + Gemini',
+                name: 'Pro', price: '$24.99', suffix: '/mo', engines: proEngines.join(' + '),
                 highlight: true, badge: 'Most popular',
-                features: ['3 brands', '15 scans / month', 'ChatGPT + Gemini engines', 'Competitor gap analysis', 'Off-site opportunity finder', 'Write 5 AI SEO articles / mo · publish 1 live to WordPress', 'Progress history'],
+                features: ['3 brands', '15 scans / month', `${proEngines.join(' + ')} engines`, 'Competitor gap analysis', 'Off-site opportunity finder', 'Write 5 AI SEO articles / mo · publish 1 live to WordPress', 'Progress history'],
               },
               {
-                name: 'Max', price: '$49.99', suffix: '/mo', engines: 'ChatGPT + Gemini + Claude',
+                name: 'Max', price: '$49.99', suffix: '/mo', engines: maxEngines.join(' + '),
                 highlight: false, badge: 'Full power',
-                features: ['10 brands', '60 scans / month', 'ChatGPT + Gemini + Claude engines', 'Write 20 AI SEO articles / mo · publish 3 live to WordPress', 'Fix plan + outreach drafts', 'Priority support'],
+                features: ['10 brands', '60 scans / month', `${maxEngines.join(' + ')} engines`, 'Write 20 AI SEO articles / mo · publish 3 live to WordPress', 'Fix plan + outreach drafts', 'Priority support'],
               },
             ].map((p) => (
               <div
@@ -648,6 +721,28 @@ export default async function LandingPage() {
         </div>
       </section>
 
+      {/* ───────────────────── FAQ ───────────────────── */}
+      <section id="faq" className="px-4 py-20 bg-[#FBF8F4]">
+        <JsonLd data={{ '@context': 'https://schema.org', ...faqSchema(FAQS) }} />
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
+            Questions people ask before they scan
+          </h2>
+          <p className="mt-4 text-stone-600 leading-relaxed">
+            Straight answers, including the ones that are not flattering to us.
+          </p>
+
+          <dl className="mt-10 divide-y divide-stone-200 border-t border-stone-200">
+            {FAQS.map((f) => (
+              <div key={f.question} className="py-6">
+                <dt className="text-lg font-semibold text-stone-900">{f.question}</dt>
+                <dd className="mt-2 text-stone-600 leading-relaxed">{f.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
       {/* ───────────────────── Footer ───────────────────── */}
       <footer className="border-t border-stone-200 bg-white px-4 py-14">
         <div className="max-w-6xl mx-auto">
@@ -655,7 +750,7 @@ export default async function LandingPage() {
             <div>
               <Image src="/logo.png" alt="SEO4AI, AI Visibility & Brand Intelligence" width={170} height={53} className="h-10 w-auto mb-3" />
               <p className="text-sm text-stone-500 max-w-xs leading-relaxed">
-                The visibility layer for AI search. See whether ChatGPT, Gemini and Perplexity
+                The visibility layer for AI search. See whether ChatGPT, Gemini and Claude
                 recommend your brand, and fix it.
               </p>
             </div>
@@ -667,7 +762,7 @@ export default async function LandingPage() {
                 <li><a href="#engines" className="hover:text-stone-900 transition-colors">Engines</a></li>
                 <li><a href="#features" className="hover:text-stone-900 transition-colors">Features</a></li>
                 <li><a href="#pricing" className="hover:text-stone-900 transition-colors">Pricing</a></li>
-                <li><Link href="/index" className="hover:text-stone-900 transition-colors">AI Visibility Index</Link></li>
+                <li><Link href="/ai-visibility-index" className="hover:text-stone-900 transition-colors">AI Visibility Index</Link></li>
               </ul>
             </div>
 

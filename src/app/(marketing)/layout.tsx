@@ -20,7 +20,7 @@ export default function MarketingLayout({
               SEO4AI
             </Link>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-stone-500">
-              <Link href="/index" className="hover:text-stone-900 transition-colors">AI Visibility Index</Link>
+              <Link href="/ai-visibility-index" className="hover:text-stone-900 transition-colors">AI Visibility Index</Link>
               <Link href="/#pricing" className="hover:text-stone-900 transition-colors">Pricing</Link>
               <Link href="/blog" className="hover:text-stone-900 transition-colors">Blog</Link>
               <Link href="/terms" className="hover:text-stone-900 transition-colors">Terms</Link>

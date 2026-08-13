@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { JsonLd } from '@/components/seo/json-ld'
+import { articleSchema, breadcrumbSchema, graph } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'ChatGPT vs Google: How AI Search is Changing Brand Discovery',
@@ -14,9 +16,24 @@ export const metadata: Metadata = {
   ],
 }
 
+const SCHEMA = graph(
+  articleSchema({
+    headline: 'ChatGPT vs Google: How AI Search is Changing Brand Discovery',
+    description: 'Compare traditional Google SEO with AI search visibility. Understand the key differences in how consumers discover brands through ChatGPT, Perplexity, and other AI tools.',
+    slug: 'chatgpt-vs-google',
+    datePublished: '2025-01-02',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'ChatGPT vs Google: How AI Search is Changing Brand Discovery', path: '/blog/chatgpt-vs-google' },
+  ])
+)
+
 export default function ChatGPTvsGooglePage() {
   return (
     <article className="py-20 px-4">
+      <JsonLd data={SCHEMA} />
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-12">

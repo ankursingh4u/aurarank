@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { JsonLd } from '@/components/seo/json-ld'
+import { articleSchema, breadcrumbSchema, graph } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'AI SEO: Why Your Business Needs to Optimize for AI Search in 2025',
@@ -14,9 +16,24 @@ export const metadata: Metadata = {
   ],
 }
 
+const SCHEMA = graph(
+  articleSchema({
+    headline: 'AI SEO: Why Your Business Needs to Optimize for AI Search in 2025',
+    description: 'The shift from Google to AI search is accelerating. Learn what businesses lose by ignoring AI search and how to adapt your SEO strategy for ChatGPT, Perplexity, and more.',
+    slug: 'ai-seo-guide',
+    datePublished: '2025-01-08',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'AI SEO: Why Your Business Needs to Optimize for AI Search in 2025', path: '/blog/ai-seo-guide' },
+  ])
+)
+
 export default function AISEOGuidePage() {
   return (
     <article className="py-20 px-4">
+      <JsonLd data={SCHEMA} />
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-12">
@@ -131,7 +148,7 @@ export default function AISEOGuidePage() {
           <p className="text-stone-500 leading-relaxed">
             You cannot improve what you do not measure. Systematically query AI models with the
             prompts your customers use and document where your brand appears (or does not). SEO4AI
-            automates this across ChatGPT, Perplexity, Claude, and Gemini, giving you a baseline AI
+            automates this across the assistants we scan, giving you a baseline AI
             Visibility Score and competitor comparison.
           </p>
 

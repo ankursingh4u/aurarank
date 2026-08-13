@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { getPublicSiteUrl } from '@/lib/site'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     // Generate share URL using base64-encoded scanId
     const token = Buffer.from(scanId).toString('base64url')
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://seo4ai.app'
+    const appUrl = getPublicSiteUrl()
     const shareUrl = `${appUrl}/report/${token}`
 
     return NextResponse.json({ shareUrl, token })

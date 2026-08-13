@@ -1,0 +1,755 @@
+{
+  "result": {
+    "company": "Notion",
+    "industry": "note-taking and workspace software",
+    "score": 81,
+    "label": "Dominant",
+    "mentions": 20,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 11,
+    "topCompetitor": "Obsidian",
+    "topCompetitorMentions": 8,
+    "competitorBreakdown": [
+      {
+        "name": "Obsidian",
+        "mentions": 8
+      },
+      {
+        "name": "Evernote",
+        "mentions": 5
+      },
+      {
+        "name": "Coda",
+        "mentions": 1
+      },
+      {
+        "name": "Confluence",
+        "mentions": 0
+      },
+      {
+        "name": "Craft",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai",
+      "gemini"
+    ],
+    "runsPerPrompt": 2,
+    "stability": 100,
+    "channel": "grounded",
+    "winnability": {
+      "winnable": 12,
+      "hard": 13,
+      "locked": 0
+    },
+    "scannedAt": "2026-08-13T09:16:43.611Z"
+  },
+  "rows": [
+    {
+      "prompt": "best note-taking and workspace tools in 2025",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote",
+        "Obsidian"
+      ],
+      "sentiment_score": 5.5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "locark.com",
+        "medium.com",
+        "atlasworkspace.ai",
+        "discussion.evernote.com",
+        "techradar.com",
+        "onenote.en.uptodown.com",
+        "pootenlord.com",
+        "everhour.com",
+        "apex-nexus.io",
+        "tomsguide.com",
+        "a-screenshot.tech",
+        "sheetflash.com",
+        "talkspirit.com",
+        "domaingood.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "top note-taking and workspace software",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Obsidian"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "oboe.com",
+        "appstested.com",
+        "everhour.com",
+        "ai.tenorshare.com",
+        "appsntips.com",
+        "lindy.ai",
+        "thedigitalprojectmanager.com",
+        "storyflow.so",
+        "atlasworkspace.ai",
+        "notability.com",
+        "outmind.ai",
+        "abloomify.com",
+        "deskflex.com",
+        "maptician.com",
+        "techrepublic.com",
+        "tomsguide.com",
+        "igen.fr",
+        "consumertechwire.com",
+        "refero.design"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "best note-taking and workspace tools",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Obsidian"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "appstested.com",
+        "igen.fr",
+        "everhour.com",
+        "refero.design",
+        "appsntips.com",
+        "slack.com",
+        "wrike.com",
+        "project-management.com",
+        "icagile.com",
+        "coursera.org"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "best note-taking and workspace for small business",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote"
+      ],
+      "sentiment_score": 4,
+      "position": 9,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "connectweb.com.au",
+        "techradar.com",
+        "techrepublic.com",
+        "smartstackguide.com",
+        "nicelydone.club",
+        "toolcheckr.com",
+        "cloudwards.net",
+        "community.monday.com",
+        "sheetifycrm.com",
+        "thedigitalprojectmanager.com",
+        "zapier.com",
+        "leadinglearning.com",
+        "mytechcs.com",
+        "google.com",
+        "kumospace.com",
+        "research.com",
+        "learn.g2.com",
+        "thetraininglady.com",
+        "tomsguide.com",
+        "gizmodo.com",
+        "miguelgarciadiaz.com",
+        "businessnewsdaily.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "note-taking and workspace platform comparison",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Obsidian"
+      ],
+      "sentiment_score": 5.5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "toolkit.ctbzai.com",
+        "igen.fr",
+        "appstested.com",
+        "everhour.com",
+        "refero.design",
+        "appsntips.com",
+        "ones.com",
+        "taskrhino.ca",
+        "unito.io",
+        "projectmanagers.net",
+        "hypegig.com",
+        "flozic.ai",
+        "clickup.com",
+        "zintego.com",
+        "proofhub.com",
+        "project-management.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "enterprise note-taking and workspace solutions",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote",
+        "Coda"
+      ],
+      "sentiment_score": 4,
+      "position": 10,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "dariomarkovic.com",
+        "evernote.com",
+        "saaspo.com",
+        "notion.com",
+        "techjockey.com",
+        "coda.io",
+        "miro.com",
+        "lhc-international.com",
+        "numici.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "top note-taking and workspace platforms for startups",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "umatechnology.org",
+        "clickup.com",
+        "saaspedia.io",
+        "taskade.com",
+        "techradar.com",
+        "shop.geckotech.cloud",
+        "journals.sagepub.com",
+        "artisan.co",
+        "litestartup.com",
+        "en.eagle.cool",
+        "workspace.google.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "note-taking and workspace software comparison",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Obsidian"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "tomsguide.com",
+        "igen.fr",
+        "consumertechwire.com",
+        "everhour.com",
+        "appstested.com",
+        "refero.design",
+        "appsntips.com",
+        "toolkit.ctbzai.com",
+        "saaspickr.io",
+        "thetraininglady.com",
+        "techradar.com",
+        "webflow.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "free note-taking and workspace tools",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Obsidian"
+      ],
+      "sentiment_score": 5.5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "toolradar.com",
+        "igen.fr",
+        "actuallyfreeapps.com",
+        "appsntips.com",
+        "myflexnote.com",
+        "thetraininglady.com",
+        "dienmayxanh.com",
+        "techradar.com",
+        "gizmodo.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "which note-taking and workspace tool should I use",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Obsidian"
+      ],
+      "sentiment_score": 4.5,
+      "position": 11,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "oboe.com",
+        "appstested.com",
+        "techrepublic.com",
+        "es.wired.com",
+        "zapier.com",
+        "developer.aliyun.com",
+        "appsntips.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "what is Notion",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "notion.com",
+        "youtube.com",
+        "thegoodtrade.com",
+        "wikipedia.org",
+        "joinsecret.com",
+        "notionrealm.com",
+        "temok.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "is Notion good",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "macworld.com",
+        "forbes.com",
+        "stackvetted.com",
+        "tryorbye.com",
+        "apps.apple.com",
+        "trustpilot.com",
+        "thedigitalprojectmanager.com",
+        "inc.com",
+        "taskade.com",
+        "pcmag.com",
+        "eesel.ai",
+        "g2.com",
+        "fibery.io",
+        "techradar.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Notion review",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "macworld.com",
+        "gsmnation.com",
+        "stackvetted.com",
+        "accelrio.com",
+        "youtube.com",
+        "thegoodtrade.com",
+        "joinsecret.com",
+        "taskade.com",
+        "ahsuite.com",
+        "notion.com",
+        "medium.com",
+        "g2.com",
+        "thebusinessdive.com",
+        "thedigitalprojectmanager.com",
+        "saner.ai",
+        "eesel.ai",
+        "fibery.io",
+        "substack.com",
+        "clickoff.io"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Notion reviews",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7.5,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "macworld.com",
+        "forbes.com",
+        "stackvetted.com",
+        "trustpilot.com",
+        "tryorbye.com",
+        "apps.apple.com",
+        "eesel.ai",
+        "capterra.com",
+        "g2.com",
+        "thebusinessdive.com",
+        "inc.com",
+        "pcmag.com",
+        "tomsguide.com",
+        "techradar.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "note-taking and workspace tools for teams",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote",
+        "Obsidian"
+      ],
+      "sentiment_score": 6.5,
+      "position": 2,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "axis-intelligence.com",
+        "lingfordconsulting.com.au",
+        "positioniseverything.net",
+        "techradar.com",
+        "smartworld.it",
+        "igen.fr",
+        "workspace.google.com",
+        "builtin.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "alternatives to Evernote",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote",
+        "Obsidian"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "storyflow.so",
+        "oboe.com",
+        "thetraininglady.com",
+        "techradar.com",
+        "howaboutthat.site",
+        "alternativeto.net",
+        "macsources.com",
+        "myflexnote.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "is Notion good for note-taking and workspace software",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "softwarecrit.com",
+        "thetechverdict.com",
+        "techverifiers.com",
+        "hackceleration.com",
+        "tryorbye.com",
+        "macworld.com",
+        "2sync.com",
+        "toolsrankr.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "alternatives to Obsidian",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Obsidian"
+      ],
+      "sentiment_score": 4,
+      "position": 11,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "tolodora.com",
+        "techrepublic.com",
+        "pikorafy.com",
+        "sitepoint.com",
+        "opensourcechoice.com",
+        "blog.anytype.io",
+        "refero.design",
+        "notelyn.com",
+        "alternativeto.net",
+        "defkey.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Evernote alternatives for note-taking and workspace software",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote",
+        "Obsidian"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "searchspine.com",
+        "igen.fr",
+        "discourse.joplinapp.org",
+        "thetraininglady.com",
+        "techradar.com",
+        "everhour.com",
+        "alternativeto.net",
+        "onenote.en.uptodown.com",
+        "toolalts.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Evernote vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote"
+      ],
+      "sentiment_score": 6,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "evernote.com",
+        "thetraininglady.com",
+        "techradar.com",
+        "dienmayxanh.com",
+        "igen.fr",
+        "mwm.ai",
+        "guidetechly.com",
+        "citizenside.com",
+        "apex-nexus.io"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Coda alternatives for note-taking and workspace software",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Obsidian",
+        "Coda"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "softr.io",
+        "supademo.com",
+        "faceless.directory",
+        "rankings.io",
+        "appflowy.com",
+        "selfhostyourself.com",
+        "forum.obsidian.md",
+        "alternativeto.net",
+        "appflowy.br.uptodown.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "alternatives to Coda",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Coda"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "techrepublic.com",
+        "storyflow.so",
+        "zapier.com",
+        "clickup.com",
+        "faceless.directory",
+        "creati.ai",
+        "screencloud.com",
+        "rankings.io",
+        "appflowy.br.uptodown.com",
+        "forum.obsidian.md"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Obsidian alternatives for note-taking and workspace software",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote",
+        "Obsidian"
+      ],
+      "sentiment_score": 4,
+      "position": 11,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "alternativeto.net",
+        "techrepublic.com",
+        "pikorafy.com",
+        "sitepoint.com",
+        "opensourcechoice.com",
+        "blog.anytype.io",
+        "edopedia.com",
+        "iclarified.com",
+        "techradar.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Coda vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Coda"
+      ],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "nuclino.com",
+        "zite.com",
+        "apple.coda.io",
+        "stackfyi.com",
+        "saascompared.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Obsidian vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Evernote",
+        "Obsidian"
+      ],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "youtube.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    }
+  ]
+}

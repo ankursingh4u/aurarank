@@ -1,0 +1,751 @@
+{
+  "result": {
+    "company": "SEO4AI",
+    "industry": "AI visibility tracking tool",
+    "score": 0,
+    "label": "Invisible",
+    "mentions": 0,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 0,
+    "topCompetitor": "Profound",
+    "topCompetitorMentions": 7,
+    "competitorBreakdown": [
+      {
+        "name": "Profound",
+        "mentions": 7
+      },
+      {
+        "name": "Otterly",
+        "mentions": 6
+      },
+      {
+        "name": "Scrunch",
+        "mentions": 6
+      },
+      {
+        "name": "Peec",
+        "mentions": 4
+      },
+      {
+        "name": "Athena",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [
+      "best AI visibility tracking tools",
+      "best AI visibility tracking tools in 2025",
+      "AI visibility tracking platform comparison",
+      "top AI visibility tracking software",
+      "which AI visibility tracking tool should I use"
+    ],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai",
+      "gemini"
+    ],
+    "runsPerPrompt": 2,
+    "stability": 100,
+    "channel": "grounded",
+    "winnability": {
+      "winnable": 11,
+      "hard": 14,
+      "locked": 0
+    },
+    "scannedAt": "2026-08-12T11:04:48.406Z"
+  },
+  "rows": [
+    {
+      "prompt": "best AI visibility tracking tools",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Otterly",
+        "Peec",
+        "Scrunch"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "wediacorp.com",
+        "kitlabs.ai",
+        "temso.ai",
+        "ai-visibility-software.com",
+        "techradar.com",
+        "energypr.co.uk",
+        "newaiseo.com",
+        "zapier.com",
+        "frase.io",
+        "tryprofound.com",
+        "nightwatch.io",
+        "reddit.com",
+        "blog.hubspot.com",
+        "marketingforllms.com",
+        "wpengine.com",
+        "position.digital"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "best AI visibility tracking for small business",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Otterly"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "wediacorp.com",
+        "kitlabs.ai",
+        "geneo.app",
+        "conductor.com",
+        "brandradar.ai",
+        "crawlytics.app",
+        "thesocialcat.com",
+        "linkdot.io",
+        "frase.io",
+        "marqops.com",
+        "eesel.ai",
+        "ayzeo.com",
+        "educba.com",
+        "business.com",
+        "usegrowthos.com",
+        "demandlocal.com",
+        "forbes.com",
+        "lcn.com",
+        "cited.so",
+        "onelittleweb.com",
+        "klue.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "best AI visibility tracking tools in 2025",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Otterly",
+        "Peec",
+        "Scrunch"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "promptrush.ai",
+        "techbullion.com",
+        "babylovegrowth.ai",
+        "kitlabs.ai",
+        "temso.ai",
+        "ai-visibility-software.com",
+        "energypr.co.uk",
+        "elmohq.com",
+        "nightwatch.io",
+        "venturemagazine.net",
+        "position.digital",
+        "reddit.com",
+        "seorav.com",
+        "zapier.com",
+        "humanizeai.com",
+        "vaylis.ai",
+        "tryprofoundai.com",
+        "techradar.com",
+        "aitoolnet.com",
+        "seranking.com",
+        "semrush.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "AI visibility tracking platform comparison",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Otterly",
+        "Peec",
+        "Scrunch"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "aivisibilityranking.com",
+        "marketingforllms.com",
+        "wpengine.com",
+        "position.digital",
+        "flint.com",
+        "zapier.com",
+        "tryvizup.com",
+        "frase.io"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "top AI visibility tracking software",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Peec",
+        "Scrunch"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "temso.ai",
+        "ai-visibility-software.com",
+        "scalenut.com",
+        "athenahq.ai",
+        "aitoolnet.com",
+        "getairefs.com",
+        "wpengine.com",
+        "frase.io",
+        "tryprofound.com",
+        "nicklafferty.com",
+        "zapier.com",
+        "orchly.ai",
+        "position.digital",
+        "getmint.ai",
+        "eesel.ai",
+        "studiodizzy.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "free AI visibility tracking tools",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "inspirecyprus.com",
+        "archytasdigital.com",
+        "atyla.io",
+        "zerquon.com",
+        "frase.io",
+        "aeovisor.com",
+        "geogiant.ai",
+        "georion.app"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "AI visibility tracking software comparison",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Scrunch"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "tismo.ai",
+        "ai-visibility-software.com",
+        "prnewswire.com",
+        "seojobs.com",
+        "datadab.com",
+        "airdrops.io",
+        "trysight.ai",
+        "vcnewsdaily.com",
+        "techradar.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "enterprise AI visibility tracking solutions",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "h2oai.github.io",
+        "klio.dev",
+        "devpost.com",
+        "zpu.ai",
+        "zluri.com",
+        "elloe.ai",
+        "dongaigc.com",
+        "openlayer.com",
+        "aitools.inc",
+        "fiddler.ai",
+        "medium.com",
+        "mlscope.app",
+        "aiverify-foundation.github.io",
+        "xpdeep.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "top AI visibility tracking platforms for startups",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Otterly"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "wediacorp.com",
+        "kitlabs.ai",
+        "thesocialcat.com",
+        "linkdot.io",
+        "descript.com",
+        "leapd.ai",
+        "temso.ai",
+        "ai-visibility-software.com",
+        "blog.hubspot.com",
+        "marqops.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "which AI visibility tracking tool should I use",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Otterly",
+        "Scrunch"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "wediacorp.com",
+        "kitlabs.ai",
+        "temso.ai",
+        "ai-visibility-software.com",
+        "blog.hubspot.com",
+        "elmohq.com",
+        "scrunch.com",
+        "techradar.com",
+        "tismo.ai",
+        "aisearchvisibility.com",
+        "marketingforllms.com",
+        "newaiseo.com",
+        "linkedin.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "is SEO4AI good",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "seo4ai.app",
+        "apps.shopify.com",
+        "seo-4ai.com",
+        "trustpilot.com",
+        "chromewebstore.google.com",
+        "ie.trustpilot.com",
+        "pikaseo.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "SEO4AI review",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "seo4ai.app",
+        "seo-4ai.com",
+        "thestacc.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "AI visibility tracking tools for teams",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": false,
+      "competitors_mentioned": [],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "techtudo.com.br",
+        "cinfy.ai",
+        "costelsa.com",
+        "flowtics.org",
+        "treedis.com",
+        "tod360ai.com",
+        "rize.io",
+        "datawars.io",
+        "teamgrid.ai",
+        "aiadvantageagency.com",
+        "brainlabsdigital.com",
+        "position.digital",
+        "semrush.com",
+        "seranking.com",
+        "frase.io",
+        "loopexdigital.com",
+        "trackedby.ai",
+        "arkit.jp",
+        "aisightline.com",
+        "babylovegrowth.ai",
+        "kitlabs.ai",
+        "hunted.space",
+        "popsight.ai",
+        "durable.com",
+        "visibilityatlas.app"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "SEO4AI reviews",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "seo4ai.app",
+        "apps.shopify.com",
+        "ie.trustpilot.com",
+        "seo-4ai.com",
+        "trustpilot.com",
+        "youtube.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "what is SEO4AI",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "seo4ai.app",
+        "framer.com",
+        "llmrefs.com",
+        "squarespace.com",
+        "google.com",
+        "seo-4ai.com",
+        "weeblr.com",
+        "chromewebstore.google.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "alternatives to Profound",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Peec"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "airanklab.com",
+        "viumore.com",
+        "vismore.ai",
+        "solutionshub.epam.com",
+        "alternativeto.net",
+        "tryanalyze.ai",
+        "conbersa.ai",
+        "getresponse.com",
+        "athenahq.ai",
+        "getairefs.com",
+        "promptwatch.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "alternatives to Otterly",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Otterly",
+        "Peec"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "airanklab.com",
+        "nightwatch.io",
+        "scalenut.com",
+        "linkbuilder.com",
+        "rankinai.io",
+        "rankability.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Profound alternatives for AI visibility tracking tool",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Otterly",
+        "Peec"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "tismo.ai",
+        "ai-visibility-software.com",
+        "buriedagency.com",
+        "maxaeo.ai",
+        "scalenut.com",
+        "newaiseo.com",
+        "trakkr.ai",
+        "slatehq.com",
+        "g2.com",
+        "linkedin.com",
+        "techradar.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "is SEO4AI good for AI visibility tracking tool",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "seo4ai.app"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Profound vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "openlens.com",
+        "bourd.dev",
+        "trysill.com",
+        "vismore.ai"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "alternatives to Peec",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Peec"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "nightwatch.io",
+        "pikaseo.com",
+        "athenahq.ai",
+        "hachlyai.com",
+        "asklantern.com",
+        "blogdumoderateur.com",
+        "elmohq.com",
+        "hunted.space",
+        "swiftapplab.com",
+        "blog.hubspot.com",
+        "promptloop.com",
+        "riffanalytics.ai",
+        "brandaxis.ai"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Peec alternatives for AI visibility tracking tool",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Peec"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "omnibound.ai",
+        "searchprism.io",
+        "es.semrush.com",
+        "avrae.ai",
+        "arkit.jp",
+        "aisightline.com",
+        "loopexdigital.com",
+        "trackedby.ai",
+        "rankshift.ai"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Otterly alternatives for AI visibility tracking tool",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Otterly"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "omnibound.ai",
+        "searchprism.io",
+        "es.semrush.com",
+        "avrae.ai",
+        "arkit.jp",
+        "aisightline.com",
+        "rankshift.ai",
+        "loopexdigital.com",
+        "trackedby.ai"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Otterly vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Otterly"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "en.wikipedia.org",
+        "champsignal.com",
+        "ottercouponcode.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Peec vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Profound",
+        "Peec"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "template.net",
+        "brandaxis.ai",
+        "webcatalog.io",
+        "ai-visibility-software.com",
+        "prnewswire.com",
+        "pikaseo.com",
+        "vcnewsdaily.com",
+        "aijourn.com",
+        "arvow.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    }
+  ]
+}

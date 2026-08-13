@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { JsonLd } from '@/components/seo/json-ld'
+import { articleSchema, breadcrumbSchema, graph } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'How to Rank on ChatGPT: The Complete Guide to AI Visibility',
@@ -14,9 +16,24 @@ export const metadata: Metadata = {
   ],
 }
 
+const SCHEMA = graph(
+  articleSchema({
+    headline: 'How to Rank on ChatGPT: The Complete Guide to AI Visibility',
+    description: 'Learn 7 actionable steps to get your brand recommended by ChatGPT and other AI models. Understand what influences AI search recommendations and how to improve your visibility.',
+    slug: 'how-to-rank-on-chatgpt',
+    datePublished: '2025-01-15',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'How to Rank on ChatGPT: The Complete Guide to AI Visibility', path: '/blog/how-to-rank-on-chatgpt' },
+  ])
+)
+
 export default function HowToRankOnChatGPTPage() {
   return (
     <article className="py-20 px-4">
+      <JsonLd data={SCHEMA} />
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-12">
@@ -163,11 +180,12 @@ export default function HowToRankOnChatGPTPage() {
             How SEO4AI Helps You Rank on ChatGPT
           </h2>
           <p className="text-stone-500 leading-relaxed">
-            SEO4AI is purpose-built for the AI search era. It scans ChatGPT, Perplexity, Claude,
-            and Gemini with industry-specific prompts to measure your brand visibility, compare you
-            against competitors, and generate a personalized fix plan with prioritized
+            SEO4AI is purpose-built for the AI search era. It scans the assistants your buyers
+            actually use with industry-specific prompts to measure your brand visibility, compare
+            you against competitors, and generate a personalized fix plan with prioritized
             recommendations. Instead of manually testing prompts one by one, SEO4AI gives you a
-            comprehensive AI Visibility Score and a clear roadmap to improve it.
+            comprehensive AI Visibility Score, the list of pages each assistant read to reach its
+            answer, and a clear roadmap to improve it.
           </p>
 
           {/* CTA */}

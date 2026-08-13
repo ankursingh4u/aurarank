@@ -6,7 +6,8 @@ import {
   findPromptOpportunities,
   isBrandEchoPrompt,
 } from '@/lib/analyzer'
-import { getScanEngines, queryEnginesAndAnalyze } from '@/lib/engines'
+import { getScanEngines, queryEnginesAndAnalyze, type Channel } from '@/lib/engines'
+import { classifyWinnability, type Winnability } from '@/lib/winnability'
 
 export interface ScanRunResult {
   scanId: string
@@ -82,6 +83,13 @@ export async function runScan(supabase: SupabaseClient, scanId: string): Promise
     competitors_mentioned: string[]
     sentiment_score: number
     position: number | null
+    /** Source domains the engines read. Empty on a parametric scan. */
+    citations: string[]
+    /** Same sources split per engine: the engines overlap far less than expected. */
+    citations_by_engine: Record<string, string[]>
+    channel: Channel
+    /** Null when the prompt errored: nothing was retrieved, so there is nothing to grade. */
+    winnability: Winnability | null
   }> = []
 
   // Smaller batch since each prompt now fans out across multiple engines.
@@ -98,6 +106,12 @@ export async function runScan(supabase: SupabaseClient, scanId: string): Promise
         competitors_mentioned: r.analysis.competitorsMentioned,
         sentiment_score: r.analysis.sentimentScore,
         position: r.analysis.brandPosition,
+        // The fix list: the pages the AI actually read, and whether this
+        // question is worth working on at all.
+        citations: r.citations,
+        citations_by_engine: r.citationsByEngine,
+        channel: r.channel,
+        winnability: classifyWinnability(r.citations, brand.competitors).class,
       })
     } catch (err) {
       console.error(`Failed to process prompt: ${prompt}`, err)
@@ -111,12 +125,31 @@ export async function runScan(supabase: SupabaseClient, scanId: string): Promise
         competitors_mentioned: [],
         sentiment_score: 0,
         position: null,
+        // Errored: no answer, so no sources and nothing to grade. Left null
+        // rather than 'locked' so a failed request never reads as a verdict
+        // that this question is not worth working on.
+        citations: [],
+        citations_by_engine: {},
+        channel: 'grounded',
+        winnability: null,
       })
     }
   })
 
   if (promptResultsData.length > 0) {
-    await supabase.from('prompt_results').insert(promptResultsData)
+    const { error } = await supabase.from('prompt_results').insert(promptResultsData)
+    if (error) {
+      // add_grounded_scanning.sql may not have run yet. Losing a whole scan
+      // because of four extra columns is far worse than losing the citations,
+      // so retry with the long-standing columns only.
+      console.warn('prompt_results insert failed, retrying without citation columns:', error.message)
+      const stripped = promptResultsData.map(
+        /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+        ({ citations, citations_by_engine, channel, winnability, ...rest }) => rest
+      )
+      const retry = await supabase.from('prompt_results').insert(stripped)
+      if (retry.error) console.error('prompt_results insert failed:', retry.error.message)
+    }
   }
 
   const visibilityScore = calculateVisibilityScore(promptResultsData, brand.brand_name)

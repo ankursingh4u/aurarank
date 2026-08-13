@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
 import { createClient } from '@supabase/supabase-js'
+import { getPublicSiteUrl } from '@/lib/site'
 
 export const alt = 'AI Visibility Report, SEO4AI'
 export const size = { width: 1200, height: 630 }
@@ -7,9 +8,7 @@ export const contentType = 'image/png'
 
 // Shown on the card footer; derived from the configured app URL so the card never
 // advertises a stale domain.
-const displayDomain = (process.env.NEXT_PUBLIC_APP_URL || 'https://seo4ai.app')
-  .replace(/^https?:\/\//, '')
-  .replace(/\/$/, '')
+const displayDomain = getPublicSiteUrl().replace(/^https?:\/\//, '')
 
 // Dynamic social-share card: every report link renders a branded score card
 // on Twitter/LinkedIn/WhatsApp/Slack, turning shares into free distribution.

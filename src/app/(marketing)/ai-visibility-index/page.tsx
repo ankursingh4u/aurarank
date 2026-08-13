@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPublishedIndex } from '@/lib/index-data'
+import { getPublicSiteUrl } from '@/lib/site'
 
 // Re-rendered at most once every 5 minutes, so a scan run from the admin page
 // reaches the public site without a redeploy.
 export const revalidate = 300
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://seo4ai.app'
+const appUrl = getPublicSiteUrl()
 const title = 'The AI Visibility Index'
 
 function describe(count: number) {
@@ -19,11 +20,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: `${appUrl}/index` },
+    alternates: { canonical: `${appUrl}/ai-visibility-index` },
     openGraph: {
       title: `${title} | SEO4AI`,
       description,
-      url: `${appUrl}/index`,
+      url: `${appUrl}/ai-visibility-index`,
       type: 'article',
     },
     twitter: {
@@ -60,12 +61,26 @@ export default async function AiVisibilityIndexPage() {
     : 0
   const invisible = entries.filter((e) => e.score < 26).length
 
+  // Provenance for the published numbers: which engines answered, how many times
+  // each question was asked, and how often those runs agreed. Reported as the
+  // weakest case across entries rather than the average, so the footnote can
+  // never overstate how repeatable the table is.
+  const sampled = entries.filter((e) => e.runsPerPrompt > 1)
+  const sampling = {
+    runs: entries.length ? Math.min(...entries.map((e) => e.runsPerPrompt || 1)) : 0,
+    stability: sampled.length ? Math.min(...sampled.map((e) => e.stability)) : null,
+    engineLabel:
+      Array.from(new Set(entries.flatMap((e) => e.engines)))
+        .map((k) => ({ openai: 'ChatGPT', gemini: 'Gemini', claude: 'Claude' })[k] || k)
+        .join(' + ') || 'ChatGPT',
+  }
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
     name: title,
     description: describe(entries.length),
-    url: `${appUrl}/index`,
+    url: `${appUrl}/ai-visibility-index`,
     creator: { '@type': 'Organization', name: 'SEO4AI', url: appUrl },
     dateModified: entries[0]?.scannedAt,
     variableMeasured: 'AI visibility score (0-100)',
@@ -211,7 +226,22 @@ export default async function AiVisibilityIndexPage() {
                 &ldquo;linearly&rdquo;, and an answer saying it has never heard of a brand does not
                 count as a mention.
               </li>
+              <li>
+                AI answers vary between runs, so every question is asked{' '}
+                {sampling.runs > 1 ? `${sampling.runs} times` : 'more than once'} and a brand only
+                counts as named when the majority of those runs name it. Re-running a single
+                question will sometimes give a different answer &mdash; that is the point of
+                sampling, and it is why we publish the agreement rate rather than a single shot.
+              </li>
             </ul>
+            <p className="mt-4 border-t border-stone-200 pt-4 text-xs text-stone-500 leading-relaxed">
+              This run: {sampling.engineLabel} &middot;{' '}
+              {sampling.runs > 1
+                ? `${sampling.runs} runs per question`
+                : 'single run per question'}
+              {sampling.stability !== null && ` · ${sampling.stability}% of questions agreed across every run`}
+              {lastUpdated && ` · ${lastUpdated}`}
+            </p>
           </div>
           <div className="rounded-xl bg-white ring-1 ring-stone-200 p-6">
             <h2 className="text-base font-semibold text-stone-900">How to read the score</h2>

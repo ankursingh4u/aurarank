@@ -8,6 +8,8 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { CitationMap, WinnabilityChip, WinnabilitySummary } from '@/components/dashboard/citation-map'
+import type { Winnability } from '@/lib/winnability'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -43,7 +45,18 @@ interface DashboardData {
   totalPrompts: number
   scanHistory: Array<{ scan_date: string; visibility_score: number; mention_count: number; competitor_mention_count: number }>
   competitorAnalysis: Array<{ competitor_name: string; mention_count: number; gap_score: number }>
-  promptOpportunities: Array<{ id: string; prompt: string; competitors_found: string[]; opportunity_score: number; ai_response?: string | null }>
+  promptOpportunities: Array<{
+    id: string
+    prompt: string
+    competitors_found: string[]
+    opportunity_score: number
+    ai_response?: string | null
+    citations?: string[]
+    citations_by_engine?: Record<string, string[]>
+    winnability?: Winnability | null
+    channel?: string
+  }>
+  winnabilitySplit?: { winnable: number; hard: number; locked: number } | null
   recommendations: Array<{ id: string; task_title: string; task_description: string | null; priority: string; impact_score: number; difficulty: string; completed: boolean; category: string }>
   industryBenchmark?: { avg: number; top10: number }
   competitorAlerts?: string[]
@@ -1196,12 +1209,19 @@ export default function DashboardPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 pb-3 space-y-2">
-                <p className="text-xs text-stone-500 mb-3 bg-stone-100 rounded-lg px-3 py-2">
-                  These are real questions customers ask AI. Your competitors appear in the answers, you don&apos;t. Each one is a customer you&apos;re currently losing to AI recommendations.
-                </p>
+                {data?.winnabilitySplit ? (
+                  <WinnabilitySummary split={data.winnabilitySplit} />
+                ) : (
+                  <p className="text-xs text-stone-500 mb-3 bg-stone-100 rounded-lg px-3 py-2">
+                    These are real questions customers ask AI. Your competitors appear in the answers, you don&apos;t. Each one is a customer you&apos;re currently losing to AI recommendations.
+                  </p>
+                )}
                 {data!.promptOpportunities.map(opp => (
                   <div key={opp.id} className="p-3 bg-stone-100/30 rounded-lg border border-stone-200">
-                    <p className="text-xs text-stone-500 mb-1">Customer asks AI:</p>
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <p className="text-xs text-stone-500">Customer asks AI:</p>
+                      {opp.winnability && <WinnabilityChip value={opp.winnability} />}
+                    </div>
                     <p className="text-sm text-stone-900 mb-2 font-medium">&ldquo;{opp.prompt}&rdquo;</p>
                     <div className="flex items-center gap-2 flex-wrap mb-2">
                       <span className="text-[10px] text-stone-500">AI recommends:</span>
@@ -1210,6 +1230,14 @@ export default function DashboardPage() {
                       ))}
                       <span className="text-[10px] text-amber-500">but not {brand?.brand_name}</span>
                     </div>
+                    {/* The pages the AI read: the actual fix list */}
+                    <CitationMap
+                      citations={opp.citations || []}
+                      citationsByEngine={opp.citations_by_engine}
+                      brandName={brand?.brand_name || 'You'}
+                      competitorsFound={opp.competitors_found}
+                    />
+
                     {/* AI Response Viewer */}
                     {opp.ai_response && (
                       <div>

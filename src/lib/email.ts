@@ -1,3 +1,5 @@
+import { getAppUrl } from '@/lib/site'
+
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 
 export async function sendEmail({ to, subject, html }: { to: string; subject: string; html: string }) {
@@ -86,8 +88,8 @@ export function weeklyDigestEmail(d: DigestData) {
         </div>
         ${alertsHtml}
         ${actionsHtml}
-        <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard" style="display:block;background:#6366f1;color:white;text-decoration:none;padding:10px 20px;border-radius:6px;text-align:center;font-size:14px;">View Full Report</a>
-        <p style="font-size:11px;color:#475569;margin-top:20px;text-align:center;">SEO4AI, AI Visibility Intelligence · <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/settings" style="color:#64748b;">Manage email preferences</a></p>
+        <a href="${getAppUrl()}/dashboard" style="display:block;background:#6366f1;color:white;text-decoration:none;padding:10px 20px;border-radius:6px;text-align:center;font-size:14px;">View Full Report</a>
+        <p style="font-size:11px;color:#475569;margin-top:20px;text-align:center;">SEO4AI, AI Visibility Intelligence · <a href="${getAppUrl()}/dashboard/settings" style="color:#64748b;">Manage email preferences</a></p>
       </div>
     `,
   }
@@ -116,7 +118,7 @@ export function scanCompleteEmail(brandName: string, score: number, mentions: nu
             <p style="font-size: 24px; font-weight: bold; color: #10b981;">${opportunities}</p>
           </div>
         </div>
-        <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard" style="display: block; background: #6366f1; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; text-align: center; font-size: 14px;">View Full Report</a>
+        <a href="${getAppUrl()}/dashboard" style="display: block; background: #6366f1; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; text-align: center; font-size: 14px;">View Full Report</a>
         <p style="font-size: 11px; color: #475569; margin-top: 20px; text-align: center;">SEO4AI - AI Visibility Intelligence</p>
       </div>
     `,

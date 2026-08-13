@@ -33,7 +33,7 @@ export function Navbar() {
 
           {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/index" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">Index</Link>
+            <Link href="/ai-visibility-index" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">Index</Link>
             <a href="#why" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">How it works</a>
             <a href="#engines" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">Engines</a>
             <a href="#pricing" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">Pricing</a>
@@ -91,7 +91,7 @@ export function Navbar() {
         {/* Mobile dropdown menu */}
         {mobileOpen && (
           <div className="md:hidden py-4 border-t border-stone-200 space-y-1">
-            <Link href="/index" className="block text-stone-600 hover:text-stone-900 px-2 py-2.5 rounded-lg hover:bg-stone-200/50 transition-colors" onClick={() => setMobileOpen(false)}>Index</Link>
+            <Link href="/ai-visibility-index" className="block text-stone-600 hover:text-stone-900 px-2 py-2.5 rounded-lg hover:bg-stone-200/50 transition-colors" onClick={() => setMobileOpen(false)}>Index</Link>
             <a href="#why" className="block text-stone-600 hover:text-stone-900 px-2 py-2.5 rounded-lg hover:bg-stone-200/50 transition-colors" onClick={() => setMobileOpen(false)}>How it works</a>
             <a href="#engines" className="block text-stone-600 hover:text-stone-900 px-2 py-2.5 rounded-lg hover:bg-stone-200/50 transition-colors" onClick={() => setMobileOpen(false)}>Engines</a>
             <a href="#features" className="block text-stone-600 hover:text-stone-900 px-2 py-2.5 rounded-lg hover:bg-stone-200/50 transition-colors" onClick={() => setMobileOpen(false)}>Features</a>

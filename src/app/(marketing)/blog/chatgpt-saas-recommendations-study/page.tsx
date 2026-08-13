@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { getPublishedIndex } from '@/lib/index-data'
+import { JsonLd } from '@/components/seo/json-ld'
+import { articleSchema, breadcrumbSchema, graph } from '@/lib/schema'
 
 export const revalidate = 300
 
@@ -17,6 +19,24 @@ export const metadata: Metadata = {
   ],
 }
 
+const SCHEMA = graph(
+  articleSchema({
+    headline: 'We Asked ChatGPT for Software Recommendations 250 Times. Here Is Who It Named.',
+    description:
+      'A study of 10 well-known SaaS brands and how often ChatGPT names them when asked for recommendations in their own category. Two of the most loved products in tech barely register.',
+    slug: 'chatgpt-saas-recommendations-study',
+    datePublished: '2026-08-04',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    {
+      name: 'We Asked ChatGPT for Software Recommendations 250 Times',
+      path: '/blog/chatgpt-saas-recommendations-study',
+    },
+  ])
+)
+
 export default async function ChatGptSaasStudyPage() {
   const entries = await getPublishedIndex()
   const totalPrompts = entries.length * 25
@@ -25,6 +45,7 @@ export default async function ChatGptSaasStudyPage() {
 
   return (
     <article className="py-20 px-4">
+      <JsonLd data={SCHEMA} />
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-12">
@@ -178,7 +199,7 @@ export default async function ChatGptSaasStudyPage() {
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                href="/index"
+                href="/ai-visibility-index"
                 className="inline-flex items-center justify-center rounded-lg bg-white hover:bg-stone-100 px-6 py-3 text-stone-900 font-medium transition-colors"
               >
                 View the AI Visibility Index

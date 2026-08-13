@@ -1,0 +1,726 @@
+{
+  "result": {
+    "company": "Linear",
+    "industry": "issue tracking software",
+    "score": 44,
+    "label": "Low",
+    "mentions": 10,
+    "scoredPrompts": 20,
+    "discoveryPrompts": 11,
+    "discoveryMentions": 6,
+    "topCompetitor": "Jira",
+    "topCompetitorMentions": 9,
+    "competitorBreakdown": [
+      {
+        "name": "Jira",
+        "mentions": 9
+      },
+      {
+        "name": "Asana",
+        "mentions": 2
+      },
+      {
+        "name": "Trello",
+        "mentions": 2
+      },
+      {
+        "name": "ClickUp",
+        "mentions": 2
+      },
+      {
+        "name": "Shortcut",
+        "mentions": 0
+      }
+    ],
+    "missedPrompts": [
+      "best issue tracking for small business",
+      "top issue tracking platforms for startups",
+      "issue tracking platform comparison"
+    ],
+    "erroredPrompts": 0,
+    "engines": [
+      "openai",
+      "gemini"
+    ],
+    "runsPerPrompt": 2,
+    "stability": 92,
+    "channel": "grounded",
+    "winnability": {
+      "winnable": 17,
+      "hard": 8,
+      "locked": 0
+    },
+    "scannedAt": "2026-08-13T09:14:52.147Z"
+  },
+  "rows": [
+    {
+      "prompt": "top issue tracking software",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira"
+      ],
+      "sentiment_score": 5,
+      "position": 10,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "soco.no",
+        "wifitalents.com",
+        "saasworthy.com",
+        "imperialcollegelondon.github.io",
+        "breeze.pm",
+        "jetbrains.com",
+        "redmine.org",
+        "worldmetrics.org",
+        "atlassian.com",
+        "serpwizard.com",
+        "happyfox.com",
+        "debugg.ai",
+        "omartechnologies.com",
+        "daily.dev",
+        "usepylon.com",
+        "pieces.app",
+        "wikipedia.org",
+        "toolradar.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "best issue tracking tools",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira"
+      ],
+      "sentiment_score": 5,
+      "position": 10,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "soco.no",
+        "toolradar.com",
+        "lazyweb.com",
+        "breeze.pm",
+        "jetbrains.com",
+        "atlassian.com",
+        "happyfox.com",
+        "usepylon.com",
+        "pieces.app",
+        "wikipedia.org"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "best issue tracking tools in 2025",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira",
+        "ClickUp"
+      ],
+      "sentiment_score": 5,
+      "position": 16,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "soco.no",
+        "devopsschool.com",
+        "storage.googleapis.com",
+        "ones.com",
+        "lazyweb.com",
+        "ideaplan.io",
+        "plugins.jetbrains.com",
+        "en.wikipedia.org",
+        "imperialcollegelondon.github.io"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "issue tracking platform comparison",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Jira"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "soco.no",
+        "devopsschool.com",
+        "shambala-spa.ru",
+        "liblogo.com",
+        "worldmetrics.org",
+        "pavelpohanka.cz",
+        "commons.wikimedia.org",
+        "inabaweb.com",
+        "happyfox.com",
+        "thoropass.partnerpage.io",
+        "numi.tech",
+        "atlassian.com",
+        "officeclip.com",
+        "logicaldoc.com",
+        "jetexe.com",
+        "monday.com",
+        "youtube.com",
+        "inc.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "best issue tracking for small business",
+      "ai_model": "openai,gemini",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Jira",
+        "Asana",
+        "Trello"
+      ],
+      "sentiment_score": 4,
+      "position": 15,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 1,
+      "citations": [
+        "soco.no",
+        "dev.to",
+        "commons.wikimedia.org",
+        "numi.tech",
+        "krowdbase.com",
+        "softwareconnect.com",
+        "slashdot.org",
+        "pavelpohanka.cz",
+        "en.wikipedia.org",
+        "ones.com",
+        "featurebase.app",
+        "monday.com",
+        "zendesk.com",
+        "modelithe.com",
+        "startinfinity.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "free issue tracking tools",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "en.wikipedia.org",
+        "howtoforge.com",
+        "marker.io",
+        "user-docs.zammad.org",
+        "jetbrains.com",
+        "rankings.io",
+        "ones.com",
+        "medium.com",
+        "officeclip.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "which issue tracking tool should I use",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira"
+      ],
+      "sentiment_score": 5,
+      "position": 10,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "soco.no",
+        "toolradar.com",
+        "lazyweb.com",
+        "breeze.pm",
+        "imperialcollegelondon.github.io",
+        "jetbrains.com",
+        "appadvice.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "top issue tracking platforms for startups",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Jira",
+        "Asana",
+        "ClickUp"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "soco.no",
+        "ideaplan.io",
+        "numi.tech",
+        "zendesk.com",
+        "monday.com",
+        "pavelpohanka.cz",
+        "en.wikipedia.org",
+        "sourceforge.net"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "enterprise issue tracking solutions",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "countersoft.com",
+        "sprylab.com",
+        "sprycollab.com",
+        "prep.pfizer.com",
+        "extraview.com",
+        "saasworthy.com",
+        "adminitrac.com",
+        "crmdirectory.org",
+        "gettrakr.eu",
+        "inspect.cdfa.ca.gov",
+        "issuetrak.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "issue tracking software comparison",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira"
+      ],
+      "sentiment_score": 4.5,
+      "position": 10,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "soco.no",
+        "worldmetrics.org",
+        "saasworthy.com",
+        "wifitalents.com",
+        "zendesk.com",
+        "imperialcollegelondon.github.io",
+        "breeze.pm",
+        "jetbrains.com",
+        "happyfox.com",
+        "support.zendesk.com",
+        "getapp.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "what is Linear",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "oflight.co.jp",
+        "youtube.com",
+        "linear.app"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "is Linear good",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "chrome-stats.com",
+        "efficient.app",
+        "apps.apple.com",
+        "siit.io"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Linear reviews",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira"
+      ],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "vact.com",
+        "aiproductivity.ai",
+        "toolradar.com",
+        "g2.com",
+        "stack-pick.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Linear review",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira"
+      ],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "stacktidy.com",
+        "oflight.co.jp",
+        "soulo.io"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "issue tracking tools for teams",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira",
+        "Trello"
+      ],
+      "sentiment_score": 5,
+      "position": 10,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "soco.no",
+        "ideaplan.io",
+        "x.com",
+        "imperialcollegelondon.github.io",
+        "plugins.jetbrains.com",
+        "trello.com",
+        "sparrowdesk.com",
+        "jetbrains.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Jira alternatives for issue tracking software",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira",
+        "ClickUp"
+      ],
+      "sentiment_score": 5,
+      "position": 4,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "saasworthy.com",
+        "virima.com",
+        "wpfixall.com",
+        "agiled.app",
+        "redmine.org",
+        "geekchamp.com",
+        "zenhub.com",
+        "linkedin.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "alternatives to Jira",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira",
+        "ClickUp"
+      ],
+      "sentiment_score": 5,
+      "position": 5,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "spinalcms.com",
+        "stackfyi.com",
+        "wpfixall.com",
+        "tech.co",
+        "3.basecamp-help.com",
+        "agileit.com",
+        "virima.com",
+        "tecmint.com",
+        "openaltfinder.com",
+        "forbes.com",
+        "notion.com",
+        "taskrhino.ca",
+        "simontutorial.de"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "alternatives to Asana",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Asana",
+        "Trello",
+        "ClickUp"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "wpfixall.com",
+        "clickup.com",
+        "taskrhino.ca",
+        "nuclino.com",
+        "airtable.com",
+        "notion.com",
+        "influencer-hero.com",
+        "agiled.app",
+        "forbes.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "is Linear good for issue tracking software",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira"
+      ],
+      "sentiment_score": 7,
+      "position": 1,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "pilotstack.online",
+        "toolstackpm.com",
+        "stacktidy.com",
+        "workstak.co",
+        "toolscout.click"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Jira vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Jira",
+        "Asana",
+        "Trello",
+        "ClickUp"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "medium.com",
+        "atlassian.com",
+        "clickup.com",
+        "forbes.com",
+        "technologyadvice.com",
+        "learn.microsoft.com",
+        "trello.com",
+        "techrepublic.com",
+        "wpfixall.com",
+        "taskrhino.ca",
+        "nuclino.com",
+        "agileit.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Asana alternatives for issue tracking software",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira",
+        "Asana",
+        "ClickUp"
+      ],
+      "sentiment_score": 4.5,
+      "position": 10,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "soco.no",
+        "clickup.com",
+        "linear.app",
+        "saner.ai",
+        "nicelydone.club",
+        "nulab.com",
+        "productiv.tools",
+        "help.wrike.com",
+        "g2.com",
+        "blog.saner.ai",
+        "imperialcollegelondon.github.io",
+        "technologyadvice.com",
+        "techrepublic.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "alternatives to Trello",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Asana",
+        "Trello",
+        "ClickUp"
+      ],
+      "sentiment_score": 4,
+      "position": 29,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 1,
+      "citations": [
+        "wpfixall.com",
+        "clickup.com",
+        "taskrhino.ca",
+        "softstribe.com",
+        "notion.com",
+        "influencer-hero.com",
+        "techrepublic.com",
+        "spinalcms.com"
+      ],
+      "channel": "grounded",
+      "winnability": "hard"
+    },
+    {
+      "prompt": "Trello alternatives for issue tracking software",
+      "ai_model": "openai",
+      "brand_mentioned": true,
+      "competitors_mentioned": [
+        "Jira",
+        "Asana",
+        "Trello",
+        "ClickUp"
+      ],
+      "sentiment_score": 4,
+      "position": 10,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 2,
+      "citations": [
+        "wpfixall.com",
+        "stackfyi.com",
+        "saasworthy.com",
+        "techradar.com",
+        "everhour.com",
+        "logicbomb.medium.com",
+        "joinsecret.com",
+        "cloudwards.net"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Asana vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Jira",
+        "Asana",
+        "Trello",
+        "ClickUp"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "wrike.com",
+        "aiproductivity.ai",
+        "commons.wikimedia.org",
+        "g2.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    },
+    {
+      "prompt": "Trello vs competitors",
+      "ai_model": "openai",
+      "brand_mentioned": false,
+      "competitors_mentioned": [
+        "Jira",
+        "Asana",
+        "Trello",
+        "ClickUp"
+      ],
+      "sentiment_score": 0,
+      "position": null,
+      "errored": false,
+      "runs": 2,
+      "mention_runs": 0,
+      "citations": [
+        "softabase.com",
+        "biztechscout.com",
+        "aicompetence.org",
+        "softwarefinder.com",
+        "hipporello.com",
+        "softwarecompare.net",
+        "youtube.com"
+      ],
+      "channel": "grounded",
+      "winnability": "winnable"
+    }
+  ]
+}

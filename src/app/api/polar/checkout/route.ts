@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { getPolar, getProductId } from '@/lib/payment'
+import { getAppUrl } from '@/lib/site'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
@@ -20,7 +21,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Polar product not configured for the current POLAR_SERVER mode. Set the matching POLAR_SANDBOX_/POLAR_PRODUCTION_ product IDs.' }, { status: 500 })
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const appUrl = getAppUrl()
 
     const checkout = await getPolar().checkouts.create({
       products: [productId],

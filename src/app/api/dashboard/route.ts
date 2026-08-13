@@ -58,6 +58,9 @@ export async function GET(request: NextRequest) {
     let competitorAnalysis = null
     let promptOpportunities = null
     let recommendations = null
+    // Null until a grounded scan has run: a parametric scan retrieves no pages,
+    // so there is nothing to grade and a zeroed split would read as "all locked".
+    let winnabilitySplit: { winnable: number; hard: number; locked: number } | null = null
     let totalPrompts = 0
     const competitorAlerts: string[] = []
 
@@ -122,18 +125,61 @@ export async function GET(request: NextRequest) {
       // Attach AI responses to opportunities for the Response Viewer
       if (promptOpportunities && promptOpportunities.length > 0) {
         const oppPrompts = promptOpportunities.map((o: { prompt: string }) => o.prompt)
-        const { data: promptResultRows } = await supabase
+        // The citation columns arrive with add_grounded_scanning.sql. Until that
+        // migration runs, selecting them errors and would take the whole dashboard
+        // down, so fall back to the columns that have always existed. This keeps
+        // deploy order and migration order independent of each other.
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+        let promptResultRows: any[] | null = (await supabase
           .from('prompt_results')
-          .select('prompt, ai_response')
+          .select('prompt, ai_response, citations, citations_by_engine, winnability, channel')
           .eq('scan_id', latestScan.id)
-          .in('prompt', oppPrompts)
+          .in('prompt', oppPrompts)).data
+
+        if (!promptResultRows) {
+          const fallback = await supabase
+            .from('prompt_results')
+            .select('prompt, ai_response')
+            .eq('scan_id', latestScan.id)
+            .in('prompt', oppPrompts)
+          promptResultRows = fallback.data
+        }
 
         if (promptResultRows) {
-          const responseMap = new Map(promptResultRows.map(r => [r.prompt, r.ai_response]))
-          promptOpportunities = promptOpportunities.map((opp: { prompt: string }) => ({
-            ...opp,
-            ai_response: responseMap.get(opp.prompt) || null,
-          }))
+          const rowMap = new Map(promptResultRows.map((r) => [r.prompt, r]))
+          promptOpportunities = promptOpportunities.map((opp: { prompt: string }) => {
+            const row = rowMap.get(opp.prompt)
+            return {
+              ...opp,
+              ai_response: row?.ai_response || null,
+              // The citation map: the pages the AI actually read to answer this
+              // question. This is the fix list, not decoration.
+              citations: row?.citations || [],
+              citations_by_engine: row?.citations_by_engine || {},
+              winnability: row?.winnability || null,
+              channel: row?.channel || 'parametric',
+            }
+          })
+        }
+      }
+
+      // Headline split across every scored question, not just the ones surfaced
+      // as opportunities, so the number matches what was actually measured.
+      // Same dependency: absent before the migration, so a failure here must
+      // leave the split null rather than surfacing as a broken dashboard.
+      const { data: allGraded } = await supabase
+        .from('prompt_results')
+        .select('winnability')
+        .eq('scan_id', latestScan.id)
+        .not('winnability', 'is', null)
+
+      // Left null on an empty result rather than zeroed: a parametric scan has
+      // nothing to grade, and a {0,0,0} split would render as a real measurement.
+      if (allGraded && allGraded.length > 0) {
+        winnabilitySplit = {
+          winnable: allGraded.filter(r => r.winnability === 'winnable').length,
+          hard: allGraded.filter(r => r.winnability === 'hard').length,
+          locked: allGraded.filter(r => r.winnability === 'locked').length,
         }
       }
     }
@@ -151,6 +197,7 @@ export async function GET(request: NextRequest) {
       recommendations: recommendations || [],
       industryBenchmark,
       competitorAlerts,
+      winnabilitySplit,
     })
   } catch (error) {
     console.error('Dashboard error:', error)
