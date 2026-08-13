@@ -87,11 +87,20 @@ export async function POST(request: NextRequest) {
 
     recordScan(ip)
 
-    // 3 discovery prompts — no brand-echo prompts (they inflate scores unfairly)
+    // Discovery prompts only: no brand-echo questions, which inflate scores.
+    //
+    // Six rather than three. Generic head terms alone are a badly skewed sample:
+    // Linear is genuinely named in half of a twenty-question scan, yet appears
+    // in none of the three broadest ones, so a three-question scan reported it
+    // as invisible. Mixing head terms with buyer-intent and comparison phrasing
+    // gives a result that survives someone checking it.
     const prompts = [
       `best ${industry} tools`,
       `top ${industry} companies`,
       `recommended ${industry} for small business`,
+      `best ${industry} for startups`,
+      `${industry} comparison`,
+      `most popular ${industry}`,
     ]
 
     // Grounded, not parametric. Asking the model with no web access measures
@@ -132,9 +141,12 @@ export async function POST(request: NextRequest) {
         mentioned: r.brandMentioned,
         sources: r.citations,
       })),
+      // Claims are scoped to what was actually measured. "Invisible to AI search"
+      // from a handful of questions is an overclaim, and the first person to ask
+      // ChatGPT a different question can disprove it.
       message: mentionCount > 0
-        ? `${brandName} was mentioned in ${mentionCount}/${totalPrompts} AI responses. Sign up to get your full visibility report with 20+ prompts.`
-        : `${brandName} was NOT mentioned in any AI responses. You're invisible to AI search. Sign up to learn how to fix this.`,
+        ? `${brandName} was named in ${mentionCount} of ${totalPrompts} questions we tested, across ${sources.length} pages the AI read. A full scan runs 20+ questions and shows which pages name your competitors instead of you.`
+        : `${brandName} was not named in any of the ${totalPrompts} questions we tested. The AI read ${sources.length} pages to answer them and none of those pages mentioned you. A full scan runs 20+ questions and shows which of those pages you can realistically get onto.`,
     })
   } catch (error) {
     console.error('Free scan error:', error)
