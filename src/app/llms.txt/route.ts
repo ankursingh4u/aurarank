@@ -1,5 +1,6 @@
 import { getPublishedIndex } from '@/lib/index-data'
 import { getPublicSiteUrl } from '@/lib/site'
+import { getEngineLabels } from '@/lib/engines'
 
 // Re-rendered every 5 minutes, matching the index page, so a fresh scan shows up
 // here without a redeploy.
@@ -33,10 +34,19 @@ export async function GET() {
     ? new Date(entries[0].scannedAt).toISOString().slice(0, 10)
     : 'not yet published'
 
+  // Named from the keys that are actually configured. This file is written to be
+  // quoted verbatim by an AI, so an engine listed here that does not run would be
+  // a false claim republished by every assistant that reads it.
+  const engines = getEngineLabels('max')
+  const engineList =
+    engines.length > 1
+      ? `${engines.slice(0, -1).join(', ')} and ${engines[engines.length - 1]}`
+      : engines[0]
+
   const body = `# SEO4AI
 
 > SEO4AI measures whether AI assistants recommend a brand. It runs the buying
-> questions real customers ask through ChatGPT, Gemini and Claude, counts how
+> questions real customers ask through ${engineList}, counts how
 > often each brand gets named, and reports an AI Visibility Score from 0 to 100
 > alongside the competitors that were named instead.
 
@@ -55,7 +65,7 @@ is not a recommendation.
 ## Key pages
 
 - ${site}/ai-visibility-index — The AI Visibility Index: original public data on
-  how often ChatGPT names well-known SaaS brands in their own category. Last
+  how often AI assistants name well-known SaaS brands in their own category. Last
   updated ${updated}.
 - ${site}/blog/how-to-rank-on-chatgpt — how brands get recommended by ChatGPT.
 - ${site}/blog/ai-seo-guide — guide to AI search optimization / GEO.
