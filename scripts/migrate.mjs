@@ -22,7 +22,9 @@ for (const line of fs.readFileSync(path.join(ROOT, '.env.local'), 'utf8').split(
   if (m) process.env[m[1]] = m[2].trim()
 }
 
-const url = process.env.DATABASE_URL
+// Schema changes and seeding need the owner role; the app's role is
+// deliberately not permitted to do them.
+const url = process.env.DATABASE_URL_ADMIN || process.env.DATABASE_URL
 if (!url) {
   console.error('DATABASE_URL is not set in .env.local')
   process.exit(1)
