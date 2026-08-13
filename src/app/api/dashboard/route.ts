@@ -1,5 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { withUser } from '@/lib/db'
+import { dbFor } from '@/lib/pgq'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,6 +25,9 @@ export async function GET(request: NextRequest) {
 
     const brandId = request.nextUrl.searchParams.get('brandId')
 
+    return await withUser(user.id, async (client) => {
+    const supabase = dbFor(client)
+
     // Get user's brands
     const { data: brands } = await supabase
       .from('brands')
@@ -34,7 +39,7 @@ export async function GET(request: NextRequest) {
     }
 
     const selectedBrandId = brandId || brands[0].id
-    const selectedBrand = brands.find(b => b.id === selectedBrandId) || brands[0]
+    const selectedBrand = brands.find((b: { id: string }) => b.id === selectedBrandId) || brands[0]
 
     // Get latest scan
     const { data: latestScan } = await supabase
@@ -81,7 +86,7 @@ export async function GET(request: NextRequest) {
           supabase.from('competitor_analysis').select('competitor_name, mention_count').eq('scan_id', latestScan.id),
           supabase.from('competitor_analysis').select('competitor_name, mention_count').eq('scan_id', prevScan.id),
         ])
-        const prevMap = new Map((prevComp || []).map((c: { competitor_name: string; mention_count: number }) => [c.competitor_name, c.mention_count]))
+        const prevMap = new Map<string, number>((prevComp || []).map((c: { competitor_name: string; mention_count: number }) => [c.competitor_name, c.mention_count]))
         for (const c of (nowComp || []) as Array<{ competitor_name: string; mention_count: number }>) {
           const before = prevMap.get(c.competitor_name) ?? 0
           const jump = c.mention_count - before
@@ -177,9 +182,9 @@ export async function GET(request: NextRequest) {
       // nothing to grade, and a {0,0,0} split would render as a real measurement.
       if (allGraded && allGraded.length > 0) {
         winnabilitySplit = {
-          winnable: allGraded.filter(r => r.winnability === 'winnable').length,
-          hard: allGraded.filter(r => r.winnability === 'hard').length,
-          locked: allGraded.filter(r => r.winnability === 'locked').length,
+          winnable: allGraded.filter((r: { winnability: string }) => r.winnability === 'winnable').length,
+          hard: allGraded.filter((r: { winnability: string }) => r.winnability === 'hard').length,
+          locked: allGraded.filter((r: { winnability: string }) => r.winnability === 'locked').length,
         }
       }
     }
@@ -198,6 +203,7 @@ export async function GET(request: NextRequest) {
       industryBenchmark,
       competitorAlerts,
       winnabilitySplit,
+    })
     })
   } catch (error) {
     console.error('Dashboard error:', error)
