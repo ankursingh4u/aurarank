@@ -1,15 +1,15 @@
 /**
  * Seed the public AI Visibility Index from the bootstrap scan file.
  *
- * Uses the service-role key directly rather than the admin HTTP route, so it
- * needs no browser session. Safe to re-run: companies already present are left
- * alone so a fresher scan is never clobbered by the seed.
+ * Talks to Postgres directly via DATABASE_URL, so it needs no browser session
+ * and no hosted SQL editor. Safe to re-run: companies already present are left
+ * alone, so a fresher scan is never clobbered by the seed.
  *
  * Usage: npx tsx scripts/seed-index.mjs
  */
 import fs from 'node:fs'
 import path from 'node:path'
-import { createClient } from '@supabase/supabase-js'
+import pg from 'pg'
 
 const ROOT = process.cwd()
 for (const line of fs.readFileSync(path.join(ROOT, '.env.local'), 'utf8').split('\n')) {
@@ -17,58 +17,75 @@ for (const line of fs.readFileSync(path.join(ROOT, '.env.local'), 'utf8').split(
   if (m) process.env[m[1]] = m[2].trim()
 }
 
-const { resultToRow } = await import('../src/lib/index-scan.ts')
-
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-if (!url || !key) {
-  console.error('Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY')
+const url = process.env.DATABASE_URL
+if (!url) {
+  console.error('DATABASE_URL is not set in .env.local')
   process.exit(1)
 }
-const admin = createClient(url, key, { auth: { persistSession: false } })
+
+const { resultToRow } = await import('../src/lib/index-scan.ts')
 
 const seed = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'src/data/ai-visibility-index.json'), 'utf8')
 )
 console.log(`Seed file holds ${seed.length} companies.`)
 
-// Fail with the real reason rather than a wall of PostgREST noise.
-const probe = await admin.from('index_entries').select('company').limit(1)
-if (probe.error) {
-  console.error('\nCannot reach index_entries: ' + probe.error.message)
-  console.error('Run supabase/RUN_ALL_PENDING.sql in the Supabase SQL Editor first.\n')
-  process.exit(1)
-}
+const client = new pg.Client({ connectionString: url, connectionTimeoutMillis: 20000 })
+await client.connect()
 
-const existing = new Set((probe.data ? (await admin.from('index_entries').select('company')).data : []).map((r) => r.company))
-const toInsert = seed
-  .filter((r) => !existing.has(r.company))
-  .map((r) => ({
-    ...resultToRow(r, []),
+const { rows: existingRows } = await client.query('SELECT company FROM public.index_entries')
+const existing = new Set(existingRows.map((r) => r.company))
+
+// Serialization depends on the real column type, not on the shape of the value.
+// competitor_breakdown is a jsonb array of objects while competitors is text[],
+// and both arrive here as JS arrays, so guessing from the value alone sends a
+// Postgres array literal where JSON was expected.
+const { rows: colTypes } = await client.query(
+  `SELECT column_name, data_type FROM information_schema.columns
+   WHERE table_schema = 'public' AND table_name = 'index_entries'`
+)
+const isJson = new Set(
+  colTypes.filter((c) => c.data_type === 'jsonb' || c.data_type === 'json').map((c) => c.column_name)
+)
+
+let inserted = 0
+for (const result of seed) {
+  if (existing.has(result.company)) continue
+
+  const row = {
+    ...resultToRow(result, []),
     // Recoverable from the result itself: the breakdown lists every competitor
-    // that was tested, whether or not it was ever mentioned.
-    competitors: (r.competitorBreakdown || []).map((c) => c.name),
-  }))
+    // tested, whether or not it was ever mentioned.
+    competitors: (result.competitorBreakdown || []).map((c) => c.name),
+  }
 
-if (!toInsert.length) {
-  console.log(`Nothing to do: all ${seed.length} companies are already present.`)
-  process.exit(0)
+  const cols = Object.keys(row)
+  const vals = cols.map((k) => {
+    const v = row[k]
+    if (v === null || v === undefined) return null
+    return isJson.has(k) ? JSON.stringify(v) : v
+  })
+  const placeholders = cols.map((_, i) => `$${i + 1}`).join(', ')
+
+  await client.query(
+    `INSERT INTO public.index_entries (${cols.map((c) => `"${c}"`).join(', ')})
+     VALUES (${placeholders})
+     ON CONFLICT (company) DO NOTHING`,
+    vals
+  )
+  inserted++
 }
 
-const { error } = await admin.from('index_entries').insert(toInsert)
-if (error) {
-  console.error('Insert failed:', error.message)
-  process.exit(1)
+console.log(`Inserted ${inserted}, skipped ${seed.length - inserted} already present.`)
+
+const { rows: live } = await client.query(
+  `SELECT company, score, label FROM public.index_entries
+   WHERE status = 'completed' ORDER BY score DESC`
+)
+console.log(`\nPublished (${live.length} completed rows):`)
+for (const r of live) {
+  console.log(`  ${String(r.score).padStart(3)}  ${r.company}  (${r.label})`)
 }
 
-console.log(`Inserted ${toInsert.length}, skipped ${seed.length - toInsert.length} already present.`)
-
-const { data: live } = await admin
-  .from('index_entries')
-  .select('company, score, label')
-  .eq('status', 'completed')
-  .order('score', { ascending: false })
-
-console.log(`\nPublished (${live?.length ?? 0} completed rows):`)
-for (const r of live || []) console.log(`  ${String(r.score).padStart(3)}  ${r.company}  (${r.label})`)
+await client.end()
 console.log('\nThe public page revalidates every 5 minutes.\n')
