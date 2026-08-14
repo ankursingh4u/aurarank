@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { createAdminClient } from '@/lib/supabase/admin'
+import { dbAdmin } from '@/lib/pgq'
 import { requireAdmin } from '@/lib/admin'
 import { scanIndexCompany, resultToRow } from '@/lib/index-scan'
 import type { EngineKey } from '@/lib/engines'
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
   const { company } = parsed.data
   const engines = (parsed.data.engines || ['openai']) as EngineKey[]
 
-  const admin = createAdminClient()
+  const admin = dbAdmin()
 
   const { data: entry } = await admin
     .from('index_entries')

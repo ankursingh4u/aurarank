@@ -1,9 +1,9 @@
 import { createAdminClient } from '@/lib/supabase/admin'
+import { dbAdmin, type Db } from '@/lib/pgq'
 import { runScan, type ScanRunResult } from '@/lib/scan-runner'
 import { sendEmail, weeklyDigestEmail } from '@/lib/email'
 import { PLANS, type PlanType } from '@/lib/payment'
 import { NextRequest, NextResponse } from 'next/server'
-import type { SupabaseClient } from '@supabase/supabase-js'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 300
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const admin = createAdminClient()
+  const admin = dbAdmin()
   const now = Date.now()
 
   // Brands with auto-scan enabled
@@ -105,7 +105,10 @@ export async function GET(request: NextRequest) {
       scanned++
 
       // Build + send digest
-      await sendDigest(admin, brand, scan.id, prevScan?.id || null, prevScan?.visibility_score ?? null, result)
+      // Supabase still owns identity, so the address comes from there.
+      const { data: userRes } = await createAdminClient().auth.admin.getUserById(brand.user_id)
+      const ownerEmail = userRes?.user?.email
+      if (ownerEmail) await sendDigest(admin, ownerEmail, brand, scan.id, prevScan?.id || null, prevScan?.visibility_score ?? null, result)
       results.push({ brand: brand.brand_name, status: 'scanned' })
     } catch (err) {
       console.error(`Cron: scan failed for brand ${brand.id}`, err)
@@ -117,17 +120,14 @@ export async function GET(request: NextRequest) {
 }
 
 async function sendDigest(
-  admin: SupabaseClient,
+  admin: Db,
+  email: string,
   brand: { id: string; user_id: string; brand_name: string },
   newScanId: string,
   prevScanId: string | null,
   prevScore: number | null,
   result: ScanRunResult
 ) {
-  // Owner email
-  const { data: userRes } = await admin.auth.admin.getUserById(brand.user_id)
-  const email = userRes?.user?.email
-  if (!email) return
 
   // Competitor movement vs previous scan
   const competitorAlerts: string[] = []
@@ -136,8 +136,10 @@ async function sendDigest(
       admin.from('competitor_analysis').select('competitor_name, mention_count').eq('scan_id', newScanId),
       admin.from('competitor_analysis').select('competitor_name, mention_count').eq('scan_id', prevScanId),
     ])
-    const prevMap = new Map((prevComp || []).map((c) => [c.competitor_name, c.mention_count]))
-    for (const c of nowComp || []) {
+    const prevMap = new Map<string, number>(
+      (prevComp || []).map((c: { competitor_name: string; mention_count: number }) => [c.competitor_name, c.mention_count])
+    )
+    for (const c of (nowComp || []) as Array<{ competitor_name: string; mention_count: number }>) {
       const before = prevMap.get(c.competitor_name) ?? 0
       const jump = c.mention_count - before
       if (jump >= 2) {
@@ -156,7 +158,7 @@ async function sendDigest(
     .order('opportunity_score', { ascending: false })
     .limit(3)
   const topActions = (opps || []).map(
-    (o) => `Create content targeting "${o.prompt}" — competitors here: ${(o.competitors_found || []).join(', ') || 'several'}.`
+    (o: { prompt: string; competitors_found: string[] | null }) => `Create content targeting "${o.prompt}" — competitors here: ${(o.competitors_found || []).join(', ') || 'several'}.`
   )
 
   const digest = weeklyDigestEmail({

@@ -1,5 +1,5 @@
 import type { PoolClient } from 'pg'
-import { query as poolQuery, getPoolClient } from '@/lib/db'
+import { query as poolQuery, serviceQuery, getPoolClient } from '@/lib/db'
 
 /**
  * A small Supabase-shaped query builder over plain Postgres.
@@ -142,9 +142,12 @@ class Builder implements PromiseLike<Result> {
     return this
   }
 
-  order(col: string, opts?: { ascending?: boolean }) {
+  order(col: string, opts?: { ascending?: boolean; nullsFirst?: boolean }) {
     const dir = opts?.ascending === false ? 'DESC' : 'ASC'
-    this.orderBy = `"${col}" ${dir}`
+    // Postgres defaults NULLs last on ASC and first on DESC, so state it
+    // explicitly whenever the caller cares rather than relying on that.
+    const nulls = opts?.nullsFirst === undefined ? '' : opts.nullsFirst ? ' NULLS FIRST' : ' NULLS LAST'
+    this.orderBy = `"${col}" ${dir}${nulls}`
     return this
   }
 
@@ -249,6 +252,9 @@ class Builder implements PromiseLike<Result> {
   }
 }
 
+/** The minimal surface a caller needs: enough to accept any of the clients below. */
+export type Db = { from: (table: string) => Builder }
+
 /** Query as a specific user, so row-level security applies. */
 export function dbFor(client: PoolClient) {
   const exec: Exec = async (sql, params) => (await client.query(sql, params)).rows
@@ -283,6 +289,15 @@ export function userDb(userId: string) {
       client.release()
     }
   }
+  return { from: (table: string) => new Builder(table, exec) }
+}
+
+/**
+ * Query across users, for cron, public report pages, webhooks and index admin.
+ * The Postgres equivalent of the Supabase service-role client.
+ */
+export function dbAdmin() {
+  const exec: Exec = (sql, params) => serviceQuery(sql, params)
   return { from: (table: string) => new Builder(table, exec) }
 }
 

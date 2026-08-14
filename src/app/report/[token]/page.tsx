@@ -1,5 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
-import { createClient } from '@supabase/supabase-js'
+import { dbAdmin } from '@/lib/pgq'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -13,10 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ token: st
     const { token } = await params
     const scanId = Buffer.from(token, 'base64url').toString('utf-8')
     if (!scanId) return {}
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    )
+    const supabase = dbAdmin()
     const { data: scan } = await supabase
       .from('scans')
       .select('visibility_score, brand_id')

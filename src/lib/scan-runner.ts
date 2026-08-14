@@ -1,4 +1,4 @@
-import type { SupabaseClient } from '@supabase/supabase-js'
+import type { Db } from '@/lib/pgq'
 import { generatePrompts, type MarketRegion } from '@/lib/prompts'
 import {
   calculateVisibilityScore,
@@ -34,7 +34,7 @@ async function processBatch<T>(items: T[], batchSize: number, processor: (item: 
  * Works with either a user-scoped (RLS) client or a service-role client, so it
  * is shared by the interactive execute route and the scheduled cron job.
  */
-export async function runScan(supabase: SupabaseClient, scanId: string): Promise<ScanRunResult> {
+export async function runScan(supabase: Db, scanId: string): Promise<ScanRunResult> {
   const { data: scan } = await supabase
     .from('scans')
     .select('*, brands!inner(*)')

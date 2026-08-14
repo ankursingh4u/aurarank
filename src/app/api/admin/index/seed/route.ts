@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabase/admin'
+import { dbAdmin } from '@/lib/pgq'
 import { requireAdmin } from '@/lib/admin'
 import { resultToRow, type CompanyResult } from '@/lib/index-scan'
 import seed from '@/data/ai-visibility-index.json'
@@ -22,9 +22,9 @@ export async function POST() {
     return NextResponse.json({ error: 'Seed file is empty' }, { status: 400 })
   }
 
-  const admin = createAdminClient()
+  const admin = dbAdmin()
   const { data: existingRows } = await admin.from('index_entries').select('company')
-  const existing = new Set((existingRows || []).map((r) => r.company))
+  const existing = new Set((existingRows || []).map((r: { company: string }) => r.company))
 
   const toInsert = results
     .filter((r) => !existing.has(r.company))

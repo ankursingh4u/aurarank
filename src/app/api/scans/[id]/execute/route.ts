@@ -19,7 +19,7 @@ export async function POST(
 
     // Ownership is enforced by RLS — runScan will fail to read a scan the user
     // does not own.
-    const result = await runScan(supabase, scanId)
+    const result = await runScan(userDb(user.id), scanId)
 
     // Send scan complete email notification
     try {

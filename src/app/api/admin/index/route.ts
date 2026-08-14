@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { createAdminClient } from '@/lib/supabase/admin'
+import { dbAdmin } from '@/lib/pgq'
 import { requireAdmin } from '@/lib/admin'
 import { rowToEntry } from '@/lib/index-scan'
 
@@ -17,7 +17,7 @@ export async function GET() {
   const user = await requireAdmin()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const admin = createAdminClient()
+  const admin = dbAdmin()
   const { data, error } = await admin
     .from('index_entries')
     .select('*')
@@ -30,7 +30,7 @@ export async function GET() {
   }
 
   return NextResponse.json({
-    entries: (data || []).map((r) => ({
+    entries: (data || []).map((r: Record<string, unknown>) => ({
       ...rowToEntry(r),
       competitors: r.competitors || [],
       errorMessage: r.error_message,
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
   }
   const { company, industry, competitors } = parsed.data
 
-  const admin = createAdminClient()
+  const admin = dbAdmin()
   const { error } = await admin.from('index_entries').insert({
     company,
     industry,
@@ -78,7 +78,7 @@ export async function DELETE(request: NextRequest) {
   const company = request.nextUrl.searchParams.get('company')
   if (!company) return NextResponse.json({ error: 'company is required' }, { status: 400 })
 
-  const admin = createAdminClient()
+  const admin = dbAdmin()
   const { error } = await admin.from('index_entries').delete().eq('company', company)
   if (error) {
     console.error('DELETE /api/admin/index error:', error)

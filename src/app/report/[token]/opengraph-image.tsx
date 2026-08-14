@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { createClient } from '@supabase/supabase-js'
+import { dbAdmin } from '@/lib/pgq'
 import { getPublicSiteUrl } from '@/lib/site'
 
 export const alt = 'AI Visibility Report, SEO4AI'
@@ -31,10 +31,7 @@ export default async function Image({ params }: { params: { token: string } }) {
     const scanId = Buffer.from(params.token, 'base64url').toString('utf-8')
     if (!scanId) return new ImageResponse(fallback, size)
 
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    )
+    const supabase = dbAdmin()
 
     const { data: scan } = await supabase
       .from('scans')

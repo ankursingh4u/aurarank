@@ -11,6 +11,8 @@ import { Pool, type PoolClient, type QueryResultRow } from 'pg'
 declare global {
   // eslint-disable-next-line no-var
   var __seo4aiPool: Pool | undefined
+  // eslint-disable-next-line no-var
+  var __seo4aiSvcPool: Pool | undefined
 }
 
 /**
@@ -83,6 +85,40 @@ export async function withUser<T>(
   } finally {
     client.release()
   }
+}
+
+/**
+ * Pool for service work that legitimately spans users: the scheduled cron, the
+ * public token-addressed report pages, the Polar webhook, and index admin.
+ *
+ * Uses a role with BYPASSRLS but NOT superuser, so these paths can read across
+ * users without also gaining the ability to alter schema. Falls back to the
+ * normal pool when unset, which fails closed: policies then apply and the query
+ * returns nothing rather than everything.
+ */
+function getSvcPool(): Pool {
+  const connectionString = process.env.DATABASE_URL_SERVICE
+  if (!connectionString) return getPool()
+  if (!global.__seo4aiSvcPool) {
+    global.__seo4aiSvcPool = new Pool({
+      connectionString,
+      max: 2,
+      idleTimeoutMillis: 10_000,
+      connectionTimeoutMillis: 10_000,
+    })
+    global.__seo4aiSvcPool.on('error', (err) => {
+      console.error('Postgres service pool error:', err.message)
+    })
+  }
+  return global.__seo4aiSvcPool
+}
+
+export async function serviceQuery<T extends QueryResultRow = QueryResultRow>(
+  text: string,
+  params?: unknown[]
+): Promise<T[]> {
+  const result = await getSvcPool().query<T>(text, params)
+  return result.rows
 }
 
 /** A raw pooled client. Callers must release it. */

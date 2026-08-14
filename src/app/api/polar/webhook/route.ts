@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { dbAdmin } from '@/lib/pgq'
 import { validateEvent, WebhookVerificationError } from '@polar-sh/sdk/webhooks'
 import type { Subscription } from '@polar-sh/sdk/models/components/subscription.js'
 import { getPlanByPolarProductId, getPolarWebhookSecret } from '@/lib/payment'
@@ -7,10 +7,7 @@ import { getPlanByPolarProductId, getPolarWebhookSecret } from '@/lib/payment'
 export const dynamic = 'force-dynamic'
 
 function getServiceClient() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
+  return dbAdmin()
 }
 
 // Resolve our Supabase user id from a subscription: prefer metadata we set at
