@@ -85,6 +85,11 @@ export async function withUser<T>(
   }
 }
 
+/** A raw pooled client. Callers must release it. */
+export async function getPoolClient(): Promise<PoolClient> {
+  return getPool().connect()
+}
+
 /** True when a self-hosted database is configured. Lets callers fall back to Supabase. */
 export function hasDatabaseUrl(): boolean {
   return !!process.env.DATABASE_URL

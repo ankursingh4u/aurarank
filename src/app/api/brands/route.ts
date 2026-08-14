@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 import { z } from 'zod'
 import { PLANS } from '@/lib/payment'
 
@@ -29,8 +30,9 @@ export async function GET() {
       return NextResponse.json({ error: 'Authentication failed: ' + authError.message }, { status: 401 })
     }
     if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+    const db = userDb(user.id)
 
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('brands')
       .select('*')
       .order('created_at', { ascending: false })
@@ -56,9 +58,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Authentication failed: ' + authError.message }, { status: 401 })
     }
     if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+    const db = userDb(user.id)
 
     // Server-side brand limit enforcement
-    const { data: userPlan } = await supabase
+    const { data: userPlan } = await db
       .from('user_plans')
       .select('plan')
       .eq('user_id', user.id)
@@ -67,7 +70,7 @@ export async function POST(request: NextRequest) {
     const plan = (userPlan?.plan as keyof typeof PLANS) || 'starter'
     const planConfig = PLANS[plan] || PLANS.starter
 
-    const { count: brandCount } = await supabase
+    const { count: brandCount } = await db
       .from('brands')
       .select('id', { count: 'exact', head: true })
 
@@ -98,12 +101,12 @@ export async function POST(request: NextRequest) {
       insertData.market_region = marketRegion
     }
 
-    let result = await supabase.from('brands').insert(insertData).select().single()
+    let result = await db.from('brands').insert(insertData).select().single()
 
     // If market_region column doesn't exist, retry without it
     if (result.error && (result.error.code === '42703' || result.error.message?.includes('market_region'))) {
       delete insertData.market_region
-      result = await supabase.from('brands').insert(insertData).select().single()
+      result = await db.from('brands').insert(insertData).select().single()
     }
 
     const { data, error } = result

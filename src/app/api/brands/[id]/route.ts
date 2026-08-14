@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 import { z } from 'zod'
 
 export const dynamic = 'force-dynamic'
@@ -27,8 +28,9 @@ export async function GET(
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('brands')
       .select('*')
       .eq('id', id)
@@ -50,6 +52,7 @@ export async function PUT(
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     const body = await request.json()
     const validation = updateSchema.safeParse(body)
@@ -68,7 +71,7 @@ export async function PUT(
     if (validation.data.autoScan !== undefined) {
       const next = validation.data.autoScan
       if (next !== 'off') {
-        const { data: userPlan } = await supabase
+        const { data: userPlan } = await db
           .from('user_plans')
           .select('plan')
           .eq('user_id', user.id)
@@ -86,7 +89,7 @@ export async function PUT(
       updateData.auto_scan = next
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('brands')
       .update(updateData)
       .eq('id', id)
@@ -109,8 +112,9 @@ export async function DELETE(
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
-    const { error } = await supabase.from('brands').delete().eq('id', id)
+    const { error } = await db.from('brands').delete().eq('id', id)
     if (error) throw error
     return NextResponse.json({ success: true })
   } catch (error) {

@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 import { PLANS } from '@/lib/payment'
 
 export const dynamic = 'force-dynamic'
@@ -9,10 +10,11 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     const brandId = request.nextUrl.searchParams.get('brandId')
 
-    let query = supabase
+    let query = db
       .from('scans')
       .select('*, brands!inner(user_id, brand_name)')
       .order('scan_date', { ascending: false })
@@ -38,12 +40,13 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     const { brandId } = await request.json()
     if (!brandId) return NextResponse.json({ error: 'brandId is required' }, { status: 400 })
 
     // Server-side plan enforcement — UI checks are bypassable
-    const { data: userPlan } = await supabase
+    const { data: userPlan } = await db
       .from('user_plans')
       .select('plan')
       .eq('user_id', user.id)
@@ -57,7 +60,7 @@ export async function POST(request: NextRequest) {
     startOfMonth.setHours(0, 0, 0, 0)
 
     // Count scans by user_id — immune to brand deletion resets
-    const { count: scanCount } = await supabase
+    const { count: scanCount } = await db
       .from('scans')
       .select('id', { count: 'exact', head: true })
       .eq('user_id', user.id)
@@ -69,7 +72,7 @@ export async function POST(request: NextRequest) {
       }, { status: 403 })
     }
 
-    const { data: brand } = await supabase
+    const { data: brand } = await db
       .from('brands')
       .select('id')
       .eq('id', brandId)
@@ -77,7 +80,7 @@ export async function POST(request: NextRequest) {
 
     if (!brand) return NextResponse.json({ error: 'Brand not found' }, { status: 404 })
 
-    const { data: scan, error } = await supabase
+    const { data: scan, error } = await db
       .from('scans')
       .insert({ brand_id: brandId, user_id: user.id, status: 'pending' })
       .select()

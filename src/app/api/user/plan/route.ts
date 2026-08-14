@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 import { PLANS } from '@/lib/payment'
 
 export const dynamic = 'force-dynamic'
@@ -9,9 +10,10 @@ export async function GET() {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     // Try to get user plan, default to starter
-    const { data: userPlan } = await supabase
+    const { data: userPlan } = await db
       .from('user_plans')
       .select('*')
       .eq('user_id', user.id)
@@ -25,14 +27,14 @@ export async function GET() {
     startOfMonth.setDate(1)
     startOfMonth.setHours(0, 0, 0, 0)
 
-    const { data: userBrands } = await supabase
+    const { data: userBrands } = await db
       .from('brands')
       .select('id')
 
-    const brandIds = (userBrands || []).map(b => b.id)
+    const brandIds = (userBrands || []).map((b: { id: string }) => b.id)
 
     // Count by user_id — not affected by brand deletion
-    const { count } = await supabase
+    const { count } = await db
       .from('scans')
       .select('id', { count: 'exact', head: true })
       .eq('user_id', user.id)
@@ -44,7 +46,7 @@ export async function GET() {
       ? new Date((userPlan as { current_period_start: string }).current_period_start)
       : (() => { const d = new Date(); d.setDate(d.getDate() - 30); return d })()
 
-    const { count: publishCount } = await supabase
+    const { count: publishCount } = await db
       .from('wordpress_publishes')
       .select('id', { count: 'exact', head: true })
       .eq('user_id', user.id)
@@ -53,7 +55,7 @@ export async function GET() {
     const publishesUsed = publishCount || 0
     const publishLimit = planConfig.publishLimit ?? 0
 
-    const { count: genCount } = await supabase
+    const { count: genCount } = await db
       .from('article_generations')
       .select('id', { count: 'exact', head: true })
       .eq('user_id', user.id)

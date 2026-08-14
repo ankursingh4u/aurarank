@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 import { getPublicSiteUrl } from '@/lib/site'
 
 export const dynamic = 'force-dynamic'
@@ -9,12 +10,13 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     const { scanId } = await request.json()
     if (!scanId) return NextResponse.json({ error: 'scanId is required' }, { status: 400 })
 
     // Verify the scan belongs to the user
-    const { data: scan } = await supabase
+    const { data: scan } = await db
       .from('scans')
       .select('id, brands!inner(user_id)')
       .eq('id', scanId)

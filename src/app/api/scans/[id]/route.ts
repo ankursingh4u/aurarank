@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,8 +13,9 @@ export async function GET(
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
-    const { data: scan, error: scanError } = await supabase
+    const { data: scan, error: scanError } = await db
       .from('scans')
       .select('*, brands!inner(brand_name, industry, competitors, market_region, user_id)')
       .eq('id', id)
@@ -24,10 +26,10 @@ export async function GET(
     const brand = scan.brands as Record<string, unknown>
 
     const [promptResults, competitorAnalysis, promptOpportunities, recommendations] = await Promise.all([
-      supabase.from('prompt_results').select('*').eq('scan_id', id).order('created_at'),
-      supabase.from('competitor_analysis').select('*').eq('scan_id', id).order('mention_count', { ascending: false }),
-      supabase.from('prompt_opportunities').select('*').eq('scan_id', id).order('opportunity_score', { ascending: false }),
-      supabase.from('recommendations').select('*').eq('scan_id', id).order('impact_score', { ascending: false }),
+      db.from('prompt_results').select('*').eq('scan_id', id).order('created_at'),
+      db.from('competitor_analysis').select('*').eq('scan_id', id).order('mention_count', { ascending: false }),
+      db.from('prompt_opportunities').select('*').eq('scan_id', id).order('opportunity_score', { ascending: false }),
+      db.from('recommendations').select('*').eq('scan_id', id).order('impact_score', { ascending: false }),
     ])
 
     return NextResponse.json({

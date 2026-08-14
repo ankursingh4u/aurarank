@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { getOpenAI } from '@/lib/openai'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -10,11 +11,12 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     // Check plan — boost generation is Max plan only.
     // Plan lives in user_plans (kept in sync by the Polar webhook), same source
     // as /api/user/plan and the other gated routes.
-    const { data: userPlan } = await supabase
+    const { data: userPlan } = await db
       .from('user_plans')
       .select('plan')
       .eq('user_id', user.id)
@@ -28,7 +30,7 @@ export async function POST(request: NextRequest) {
     const { brandId } = await request.json()
     if (!brandId) return NextResponse.json({ error: 'brandId is required' }, { status: 400 })
 
-    const { data: brand } = await supabase
+    const { data: brand } = await db
       .from('brands')
       .select('*')
       .eq('id', brandId)

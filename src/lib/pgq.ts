@@ -1,5 +1,5 @@
 import type { PoolClient } from 'pg'
-import { query as poolQuery } from '@/lib/db'
+import { query as poolQuery, getPoolClient } from '@/lib/db'
 
 /**
  * A small Supabase-shaped query builder over plain Postgres.
@@ -26,8 +26,13 @@ type Exec = (sql: string, params: unknown[]) => Promise<Row[]>
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface Result {
   data: any
-  error: { message: string } | null
-  count?: number
+  // `code` carries the Postgres SQLSTATE, which callers already branch on:
+  // brands retries an insert on 42703 (undefined column) when an optional
+  // column has not been migrated yet.
+  error: { message: string; code?: string } | null
+  // Not optional: callers compare it directly, and an optional number forces a
+  // null check at every site for a value that is always present on a count query.
+  count: number | null
 }
 
 /** Every embedded select in the app is scans joined to its owning brand. */
@@ -157,7 +162,7 @@ class Builder implements PromiseLike<Result> {
 
       if (this.op === 'insert' || this.op === 'upsert') {
         const rows = Array.isArray(this.payload) ? this.payload : [this.payload as Row]
-        if (!rows.length) return { data: [], error: null }
+        if (!rows.length) return { data: [], error: null, count: null }
         const cols = Object.keys(rows[0])
         const tuples: string[] = []
         for (const r of rows) {
@@ -170,7 +175,7 @@ class Builder implements PromiseLike<Result> {
             : ''
         const sql = `INSERT INTO ${t} (${cols.map((c) => `"${c}"`).join(',')}) VALUES ${tuples.join(',')}${conflict} RETURNING *`
         const out = await this.exec(sql, this.params)
-        return { data: this.singleRow ? out[0] ?? null : out, error: null }
+        return { data: this.singleRow ? out[0] ?? null : out, error: null, count: null }
       }
 
       if (this.op === 'update') {
@@ -180,13 +185,13 @@ class Builder implements PromiseLike<Result> {
         // so the wheres are rebuilt after. Simpler: build SET first, then where.
         const sql = `UPDATE ${t} SET ${sets.join(', ')}${this.whereSql()} RETURNING *`
         const out = await this.exec(sql, this.params)
-        return { data: this.singleRow ? out[0] ?? null : out, error: null }
+        return { data: this.singleRow ? out[0] ?? null : out, error: null, count: null }
       }
 
       if (this.op === 'delete') {
         const sql = `DELETE FROM ${t}${this.whereSql()} RETURNING *`
         const out = await this.exec(sql, this.params)
-        return { data: out, error: null }
+        return { data: out, error: null, count: null }
       }
 
       if (this.headOnly && this.wantCount) {
@@ -225,10 +230,14 @@ class Builder implements PromiseLike<Result> {
       return {
         data: this.singleRow ? out[0] ?? null : out,
         error: this.singleRow && !out.length ? { message: 'No rows found' } : null,
-        count: this.wantCount ? out.length : undefined,
+        count: this.wantCount ? out.length : null,
       }
     } catch (e) {
-      return { data: this.singleRow ? null : [], error: { message: (e as Error).message } }
+      return {
+        data: this.singleRow ? null : [],
+        error: { message: (e as Error).message, code: (e as { code?: string }).code },
+        count: null,
+      }
     }
   }
 
@@ -243,6 +252,37 @@ class Builder implements PromiseLike<Result> {
 /** Query as a specific user, so row-level security applies. */
 export function dbFor(client: PoolClient) {
   const exec: Exec = async (sql, params) => (await client.query(sql, params)).rows
+  return { from: (table: string) => new Builder(table, exec) }
+}
+
+/**
+ * Query as a user without restructuring the calling handler.
+ *
+ * Each statement runs in its own short transaction that sets `app.user_id`
+ * first, so row-level security applies exactly as it does inside withUser().
+ * The cost is one transaction per query rather than per request, which is a
+ * fair trade: the alternative is rewriting every route around a callback, and
+ * that restructuring is where a missed `await` or an early return quietly drops
+ * the user context and widens a query.
+ *
+ * Prefer withUser() where several statements must see a consistent snapshot.
+ */
+export function userDb(userId: string) {
+  const exec: Exec = async (sql, params) => {
+    const client = await getPoolClient()
+    try {
+      await client.query('BEGIN')
+      await client.query('SELECT set_config($1, $2, true)', ['app.user_id', userId])
+      const r = await client.query(sql, params)
+      await client.query('COMMIT')
+      return r.rows
+    } catch (e) {
+      await client.query('ROLLBACK')
+      throw e
+    } finally {
+      client.release()
+    }
+  }
   return { from: (table: string) => new Builder(table, exec) }
 }
 

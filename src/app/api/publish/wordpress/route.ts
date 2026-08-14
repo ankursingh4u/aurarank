@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { PLANS } from '@/lib/payment'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 
 // Start of the user's current publish window: the billing period start when we
 // have it, otherwise a rolling 30 days. The quota counts publishes since this.
@@ -27,8 +28,9 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
-    const { data: userPlan } = await supabase
+    const { data: userPlan } = await db
       .from('user_plans')
       .select('*')
       .eq('user_id', user.id)
@@ -52,7 +54,7 @@ export async function POST(request: NextRequest) {
     // site never consumes a credit and stays available even at the limit.
     if (postStatus === 'publish') {
       const periodStart = periodStartFor(userPlan)
-      const { count: usedCount } = await supabase
+      const { count: usedCount } = await db
         .from('wordpress_publishes')
         .select('id', { count: 'exact', head: true })
         .eq('user_id', user.id)
@@ -123,7 +125,7 @@ export async function POST(request: NextRequest) {
     const post = await wpRes.json()
 
     // Record the successful publish so it counts against the quota.
-    await supabase.from('wordpress_publishes').insert({
+    await db.from('wordpress_publishes').insert({
       user_id: user.id,
       brand_id: brandId || null,
       wordpress_post_id: post.id ?? null,

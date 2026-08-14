@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { getOpenAI } from '@/lib/openai'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -22,8 +23,9 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
-    const { data: userPlan } = await supabase
+    const { data: userPlan } = await db
       .from('user_plans')
       .select('plan')
       .eq('user_id', user.id)
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest) {
     const { scanId } = await request.json()
     if (!scanId) return NextResponse.json({ error: 'scanId is required' }, { status: 400 })
 
-    const { data: scan } = await supabase
+    const { data: scan } = await db
       .from('scans')
       .select('*, brands!inner(brand_name, industry, competitors, website, market_region)')
       .eq('id', scanId)
@@ -54,14 +56,14 @@ export async function POST(request: NextRequest) {
     // Pull the prompts where competitors win but the brand is absent — these are
     // the gaps outreach should target.
     const [opportunities, competitorAnalysis] = await Promise.all([
-      supabase.from('prompt_opportunities').select('prompt, competitors_found').eq('scan_id', scanId).limit(8),
-      supabase.from('competitor_analysis').select('competitor_name, mention_count').eq('scan_id', scanId).order('mention_count', { ascending: false }).limit(5),
+      db.from('prompt_opportunities').select('prompt, competitors_found').eq('scan_id', scanId).limit(8),
+      db.from('competitor_analysis').select('competitor_name, mention_count').eq('scan_id', scanId).order('mention_count', { ascending: false }).limit(5),
     ])
 
     const region = brand.market_region?.city || brand.market_region?.state || brand.market_region?.country || 'global'
-    const topCompetitors = (competitorAnalysis.data || []).map(c => c.competitor_name).join(', ') || 'competitors in this space'
+    const topCompetitors = (competitorAnalysis.data || []).map((c: { competitor_name: string; mention_count: number }) => c.competitor_name).join(', ') || 'competitors in this space'
     const missedPrompts = (opportunities.data || [])
-      .map(o => `- "${o.prompt}" (AI named: ${(o.competitors_found || []).join(', ') || 'competitors'})`)
+      .map((o: { prompt: string; competitors_found: string[] }) => `- "${o.prompt}" (AI named: ${(o.competitors_found || []).join(', ') || 'competitors'})`)
       .join('\n') || '- (no specific gaps recorded yet — use general category sources)'
 
     const systemPrompt = `You are an AI-visibility outreach strategist. The most effective way to get a brand recommended by LLMs (ChatGPT, Gemini, Perplexity) is to get it mentioned on the third-party web sources those models read and trust: review platforms, "best of" listicles, niche communities, directories, and well-known publications in the brand's category. You produce a prioritized, realistic hit-list of such sources and a ready-to-send outreach message for each. Be specific to the industry — name real, well-known source types/sites where possible. Never invent fake contacts or fake stats about the brand.`

@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { runScan } from '@/lib/scan-runner'
 import { sendEmail, scanCompleteEmail } from '@/lib/email'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 120
@@ -45,8 +46,11 @@ export async function POST(
     })
   } catch (error) {
     const { id: scanId } = await params
+    // Best effort: mark the scan failed. The user is re-resolved because the
+    // outer scope is not reachable from this catch.
     const supabase = await createClient()
-    await supabase.from('scans').update({ status: 'failed' }).eq('id', scanId)
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) await userDb(user.id).from('scans').update({ status: 'failed' }).eq('id', scanId)
     console.error('Scan execution failed:', error)
     return NextResponse.json({ error: 'Scan execution failed' }, { status: 500 })
   }

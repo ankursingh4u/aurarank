@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { getOpenAI } from '@/lib/openai'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 
 export const dynamic = 'force-dynamic'
 
@@ -9,11 +10,12 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     const scanId = request.nextUrl.searchParams.get('scanId')
     if (!scanId) return NextResponse.json({ error: 'scanId is required' }, { status: 400 })
 
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('recommendations')
       .select('*')
       .eq('scan_id', scanId)
@@ -31,9 +33,10 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     // AI Fix Plan is a Max-only feature — enforce server-side, not just in UI.
-    const { data: userPlan } = await supabase
+    const { data: userPlan } = await db
       .from('user_plans')
       .select('plan')
       .eq('user_id', user.id)
@@ -46,7 +49,7 @@ export async function POST(request: NextRequest) {
     if (!scanId) return NextResponse.json({ error: 'scanId is required' }, { status: 400 })
 
     // Get scan data
-    const { data: scan } = await supabase
+    const { data: scan } = await db
       .from('scans')
       .select('*, brands!inner(brand_name, industry, competitors, website)')
       .eq('id', scanId)
@@ -63,22 +66,22 @@ export async function POST(request: NextRequest) {
 
     // Get analysis data
     const [promptResults, competitorAnalysis, promptOpportunities] = await Promise.all([
-      supabase.from('prompt_results').select('*').eq('scan_id', scanId),
-      supabase.from('competitor_analysis').select('*').eq('scan_id', scanId),
-      supabase.from('prompt_opportunities').select('*').eq('scan_id', scanId),
+      db.from('prompt_results').select('*').eq('scan_id', scanId),
+      db.from('competitor_analysis').select('*').eq('scan_id', scanId),
+      db.from('prompt_opportunities').select('*').eq('scan_id', scanId),
     ])
 
-    const mentionedCount = (promptResults.data || []).filter(r => r.brand_mentioned).length
+    const mentionedCount = (promptResults.data || []).filter((r: { brand_mentioned: boolean }) => r.brand_mentioned).length
     const totalPrompts = (promptResults.data || []).length
     const topCompetitors = (competitorAnalysis.data || [])
-      .sort((a, b) => b.mention_count - a.mention_count)
+      .sort((a: { mention_count: number }, b: { mention_count: number }) => b.mention_count - a.mention_count)
       .slice(0, 3)
-      .map(c => `${c.competitor_name}: ${c.mention_count} mentions`)
+      .map((c: { competitor_name: string; mention_count: number }) => `${c.competitor_name}: ${c.mention_count} mentions`)
       .join('\n')
 
     const missingPrompts = (promptOpportunities.data || [])
       .slice(0, 5)
-      .map(o => `- ${o.prompt} (competitors found: ${o.competitors_found.join(', ')})`)
+      .map((o: { prompt: string; competitors_found: string[] }) => `- ${o.prompt} (competitors found: ${o.competitors_found.join(', ')})`)
       .join('\n')
 
     const aiPrompt = `You are an AI SEO consultant specializing in AI visibility optimization.
@@ -144,16 +147,18 @@ Example format:
 
     // Preserve completion state across regenerations: a user who marked
     // "Add FAQ content" done should not see it reset when recs regenerate.
-    const { data: existingRecs } = await supabase
+    const { data: existingRecs } = await db
       .from('recommendations')
       .select('task_title, completed')
       .eq('scan_id', scanId)
     const completedTitles = new Set(
-      (existingRecs || []).filter(r => r.completed).map(r => (r.task_title || '').toLowerCase().trim())
+      (existingRecs || [])
+        .filter((r: { completed: boolean }) => r.completed)
+        .map((r: { task_title: string | null }) => (r.task_title || '').toLowerCase().trim())
     )
 
     // Delete existing recommendations for this scan
-    await supabase.from('recommendations').delete().eq('scan_id', scanId)
+    await db.from('recommendations').delete().eq('scan_id', scanId)
 
     // Insert new recommendations
     const validCategories = ['content', 'technical', 'authority', 'optimization']
@@ -171,7 +176,7 @@ Example format:
       completed: completedTitles.has(rec.title.substring(0, 200).toLowerCase().trim()),
     }))
 
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('recommendations')
       .insert(recommendationData)
       .select()
@@ -189,11 +194,12 @@ export async function PATCH(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
     const { id, completed } = await request.json()
     if (!id) return NextResponse.json({ error: 'id is required' }, { status: 400 })
 
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from('recommendations')
       .update({ completed })
       .eq('id', id)

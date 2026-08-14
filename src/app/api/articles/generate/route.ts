@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { getOpenAI } from '@/lib/openai'
 import { PLANS } from '@/lib/payment'
 import { NextRequest, NextResponse } from 'next/server'
+import { userDb } from '@/lib/pgq'
 
 function periodStartFor(userPlan: { current_period_start?: string | null } | null): Date {
   if (userPlan?.current_period_start) return new Date(userPlan.current_period_start)
@@ -24,8 +25,9 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const db = userDb(user.id)
 
-    const { data: userPlan } = await supabase
+    const { data: userPlan } = await db
       .from('user_plans')
       .select('*')
       .eq('user_id', user.id)
@@ -41,7 +43,7 @@ export async function POST(request: NextRequest) {
     // of generations per period (Pro 5 / Max 20). Saving drafts is free.
     const generationLimit = PLANS[plan]?.generationLimit ?? 0
     const periodStart = periodStartFor(userPlan)
-    const { count: genUsed } = await supabase
+    const { count: genUsed } = await db
       .from('article_generations')
       .select('id', { count: 'exact', head: true })
       .eq('user_id', user.id)
@@ -60,7 +62,7 @@ export async function POST(request: NextRequest) {
     const { brandId, topic } = await request.json()
     if (!brandId) return NextResponse.json({ error: 'brandId is required' }, { status: 400 })
 
-    const { data: brand } = await supabase
+    const { data: brand } = await db
       .from('brands')
       .select('brand_name, industry, website, competitors, market_region')
       .eq('id', brandId)
@@ -107,7 +109,7 @@ Make it genuinely useful and factual — do not stuff keywords or invent claims 
     const article = JSON.parse(raw)
 
     // Count this successful generation against the period cap.
-    await supabase.from('article_generations').insert({ user_id: user.id, brand_id: brandId || null })
+    await db.from('article_generations').insert({ user_id: user.id, brand_id: brandId || null })
 
     return NextResponse.json({ article })
   } catch (error) {
