@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Toaster } from '@/components/ui/sonner'
 import { getPublicSiteUrl } from '@/lib/site'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -11,7 +11,29 @@ import {
 } from '@/lib/schema'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
+/**
+ * Inter, self-hosted rather than fetched from Google Fonts at build time.
+ *
+ * `next/font/google` downloads the font during `next build`. The Coolify build
+ * container cannot reach fonts.googleapis.com — the request times out — so every
+ * deploy failed at the webpack stage with "Failed to fetch Inter". A build that
+ * needs the network to succeed is a build that fails for reasons unrelated to
+ * the code.
+ *
+ * This is the same file Google was serving: the variable latin subset, weights
+ * 100-900, matching the previous `subsets: ['latin']`. Inter is SIL Open Font
+ * License, so shipping it in the repo is permitted.
+ */
+const inter = localFont({
+  src: './fonts/InterVariable-latin.woff2',
+  weight: '100 900',
+  style: 'normal',
+  display: 'swap',
+  variable: '--font-sans',
+  // Metrics from the same family, so the swap from fallback to Inter does not
+  // shift layout.
+  fallback: ['system-ui', 'arial'],
+})
 
 // Crawler-facing: never resolves to localhost in a production build.
 const appUrl = getPublicSiteUrl()
