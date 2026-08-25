@@ -98,3 +98,16 @@ describe('the launch categories', () => {
     }
   })
 })
+
+describe('aliases seen in the live index', () => {
+  it('groups "issue tracking software" with project management', () => {
+    // The live index had this exact string. Without the alias it produced its
+    // own single-row category instead of joining the leaderboard.
+    expect(categorySlugFor('issue tracking software')).toBe('project-management')
+  })
+
+  it('leaves genuinely distinct industries in their own category', () => {
+    expect(categorySlugFor('team communication software')).toBe('team-communication-software')
+    expect(categorySlugFor('payment processing platform')).toBe('payment-processing-platform')
+  })
+})

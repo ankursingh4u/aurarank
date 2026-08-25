@@ -70,6 +70,7 @@ const CURATED: Omit<CategoryMeta, 'curated'>[] = [
       'project management tools',
       'issue tracking',
       'issue tracking tools',
+      'issue tracking software',
       'task management',
     ],
   },
