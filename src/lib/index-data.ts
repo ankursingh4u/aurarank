@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { rowToEntry, type IndexEntry } from '@/lib/index-scan'
 import { hasDatabaseUrl, query } from '@/lib/db'
+import { categoryMeta, categorySlugFor, type CategoryMeta } from '@/lib/categories'
 
 /**
  * The published AI Visibility Index.
@@ -63,4 +64,72 @@ export async function getPublishedIndex(): Promise<IndexEntry[]> {
     console.error('getPublishedIndex failed:', err)
     return []
   }
+}
+
+/** A category as it appears on the index: its metadata plus the shape of its table. */
+export interface CategorySummary {
+  meta: CategoryMeta
+  entries: number
+  averageScore: number
+  /** Entries scoring under 26 — the "effectively invisible" band. */
+  invisible: number
+  /** Highest scorer, which is the only brand safe to name in a post. */
+  leader: string | null
+  leaderScore: number
+  /** Most recent scan across the category. */
+  scannedAt: string
+}
+
+/**
+ * Group the published index by category.
+ *
+ * Grouping happens here rather than in SQL because the slug rules live in
+ * `categories.ts`, and splitting that logic across a query string is how the
+ * URL and the page stop agreeing about what a category is. The index is tens of
+ * rows, so one query and an in-memory group is cheaper than the alternative.
+ */
+export async function getIndexCategories(): Promise<CategorySummary[]> {
+  const entries = await getPublishedIndex()
+  const groups = new Map<string, IndexEntry[]>()
+
+  for (const entry of entries) {
+    const slug = categorySlugFor(entry.industry)
+    const bucket = groups.get(slug)
+    if (bucket) bucket.push(entry)
+    else groups.set(slug, [entry])
+  }
+
+  const summaries: CategorySummary[] = []
+  // Array.from rather than iterating the Map directly: the tsconfig target
+  // predates downlevel iteration.
+  for (const [slug, rows] of Array.from(groups.entries())) {
+    const sorted = [...rows].sort((a, b) => b.score - a.score)
+    summaries.push({
+      meta: categoryMeta(slug, sorted[0]?.industry),
+      entries: sorted.length,
+      averageScore: Math.round(sorted.reduce((s, e) => s + e.score, 0) / sorted.length),
+      invisible: sorted.filter((e) => e.score < 26).length,
+      leader: sorted[0]?.company ?? null,
+      leaderScore: sorted[0]?.score ?? 0,
+      scannedAt: new Date(
+        Math.max(...sorted.map((e) => new Date(e.scannedAt).getTime()))
+      ).toISOString(),
+    })
+  }
+
+  // Most-populated first: a category with fifteen brands is a leaderboard, one
+  // with two is a placeholder, and the index should not present them as equals.
+  return summaries.sort((a, b) => b.entries - a.entries || a.meta.name.localeCompare(b.meta.name))
+}
+
+/**
+ * One category's leaderboard, ranked. Empty when the slug has no completed
+ * scans, which the page turns into a 404 rather than an empty table — an empty
+ * leaderboard indexed by Google is worse than no page at all.
+ */
+export async function getCategoryEntries(slug: string): Promise<IndexEntry[]> {
+  const entries = await getPublishedIndex()
+  return entries
+    .filter((e) => categorySlugFor(e.industry) === slug)
+    .sort((a, b) => b.score - a.score)
 }

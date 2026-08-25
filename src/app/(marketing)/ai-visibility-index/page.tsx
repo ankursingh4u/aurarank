@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getPublishedIndex } from '@/lib/index-data'
+import { getIndexCategories, getPublishedIndex } from '@/lib/index-data'
 import { getPublicSiteUrl } from '@/lib/site'
 
 // Re-rendered at most once every 5 minutes, so a scan run from the admin page
@@ -49,6 +49,7 @@ function barColor(score: number) {
 
 export default async function AiVisibilityIndexPage() {
   const entries = await getPublishedIndex()
+  const categories = await getIndexCategories()
 
   const lastUpdated = entries.length
     ? new Date(
@@ -135,6 +136,39 @@ export default async function AiVisibilityIndexPage() {
                 </div>
               ))}
             </div>
+
+            {/* Categories. Each one is a standalone leaderboard, and the
+                per-category page is the artifact the weekly rhythm publishes. */}
+            {categories.length > 0 && (
+              <section className="mt-12">
+                <h2 className="text-sm font-semibold uppercase tracking-wide text-stone-500">
+                  Leaderboards by category
+                </h2>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {categories.map((c) => (
+                    <Link
+                      key={c.meta.slug}
+                      href={`/ai-visibility-index/${c.meta.slug}`}
+                      className="rounded-xl bg-white ring-1 ring-stone-200 p-5 hover:ring-stone-300 transition-colors group"
+                    >
+                      <div className="font-semibold text-stone-900 group-hover:text-violet-700 transition-colors">
+                        {c.meta.name}
+                      </div>
+                      <div className="mt-1 text-xs text-stone-500 tabular-nums">
+                        {c.entries} brands &middot; {c.averageScore} average
+                      </div>
+                      {c.leader && (
+                        <div className="mt-3 pt-3 border-t border-stone-100 text-sm text-stone-600">
+                          Most recommended:{' '}
+                          <span className="font-medium text-stone-900">{c.leader}</span>
+                          <span className="text-stone-400 tabular-nums"> · {c.leaderScore}</span>
+                        </div>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Table */}
             <div className="mt-10 overflow-x-auto rounded-xl ring-1 ring-stone-200 bg-white">

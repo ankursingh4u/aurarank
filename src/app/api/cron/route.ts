@@ -9,9 +9,16 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 300
 
 // Scheduled auto-scans + weekly digest.
-// Triggered by Vercel Cron (see vercel.json) once per day. The route decides,
-// per brand, whether a scan is due based on the brand's auto_scan setting and
-// the owner's plan. Protected by CRON_SECRET.
+//
+// Triggered once per day. On Coolify that is a scheduled task running
+// `node scripts/trigger-cron.mjs`; vercel.json still declares the same schedule
+// for the Vercel deployment. Coolify is the live one, so a change to the
+// cadence has to be made in both places or only the dead one moves.
+//
+// The route decides, per brand, whether a scan is due based on the brand's
+// auto_scan setting and the owner's plan. Protected by CRON_SECRET — with the
+// secret unset every request 401s, which is the failure mode that silently
+// disables auto-scans and the weekly digest.
 export async function GET(request: NextRequest) {
   const auth = request.headers.get('authorization')
   const secret = process.env.CRON_SECRET
