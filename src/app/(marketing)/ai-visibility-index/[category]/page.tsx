@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getCategoryEntries, getIndexCategories } from '@/lib/index-data'
-import { categoryMeta, CATEGORIES } from '@/lib/categories'
+import { categoryMeta, sentenceCaseName, CATEGORIES } from '@/lib/categories'
 import { getPublicSiteUrl } from '@/lib/site'
 
 // Matches the parent index: a scan run from the admin page reaches the public
@@ -25,7 +25,7 @@ interface Params {
 
 function describe(name: string, count: number, leader: string | null) {
   const lead = leader ? ` ${leader} ranks first.` : ''
-  return `We asked AI assistants the questions buyers actually ask about ${name.toLowerCase()} and counted how often each of ${count} brands got named.${lead} No brand names in the questions.`
+  return `We asked AI assistants the questions buyers actually ask about ${sentenceCaseName(name)} and counted how often each of ${count} brands got named.${lead} No brand names in the questions.`
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -141,7 +141,7 @@ export default async function CategoryLeaderboardPage({ params }: Params) {
             Public data &middot; updated {lastUpdated}
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-stone-900">
-            Which {meta.name.toLowerCase()} does AI actually recommend?
+            Which {sentenceCaseName(meta.name)} does AI actually recommend?
           </h1>
           <p className="mt-5 text-lg text-stone-600 leading-relaxed">
             We asked {engineLabel} the questions a real buyer asks &mdash; starting with{' '}
@@ -284,7 +284,7 @@ export default async function CategoryLeaderboardPage({ params }: Params) {
           <h2 className="text-base font-semibold text-stone-900">How this was measured</h2>
           <ul className="mt-3 space-y-2 text-sm text-stone-600 leading-relaxed">
             <li>
-              Every brand was asked the same set of neutral {meta.name.toLowerCase()} questions
+              Every brand was asked the same set of neutral {sentenceCaseName(meta.name)} questions
               &mdash; never containing the brand&apos;s own name, and never naming a competitor.
             </li>
             <li>

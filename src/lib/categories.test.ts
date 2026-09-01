@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { categoryMeta, categorySlugFor, normalise, slugify, CATEGORIES } from './categories'
+import { categoryMeta, categorySlugFor, normalise, sentenceCaseName, slugify, CATEGORIES } from './categories'
 
 describe('normalise', () => {
   it('folds case, punctuation and spacing to one key', () => {
@@ -109,5 +109,28 @@ describe('aliases seen in the live index', () => {
   it('leaves genuinely distinct industries in their own category', () => {
     expect(categorySlugFor('team communication software')).toBe('team-communication-software')
     expect(categorySlugFor('payment processing platform')).toBe('payment-processing-platform')
+  })
+})
+
+describe('sentenceCaseName', () => {
+  it('keeps acronyms uppercase', () => {
+    // The page headline read "Which crm software does AI actually recommend?"
+    // before this existed.
+    expect(sentenceCaseName('CRM Software')).toBe('CRM software')
+  })
+
+  it('lowercases ordinary words', () => {
+    expect(sentenceCaseName('Project Management Software')).toBe('project management software')
+    expect(sentenceCaseName('E-commerce Platforms')).toBe('e-commerce platforms')
+  })
+
+  it('leaves an already-lower name alone', () => {
+    expect(sentenceCaseName('helpdesk software')).toBe('helpdesk software')
+  })
+
+  it('is applied to every curated category without mangling it', () => {
+    for (const c of CATEGORIES) {
+      expect(sentenceCaseName(c.name).toLowerCase()).toBe(c.name.toLowerCase())
+    }
   })
 })

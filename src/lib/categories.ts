@@ -158,6 +158,20 @@ export function categorySlugFor(industry: string): string {
   return BY_ALIAS.get(key) ?? slugify(industry)
 }
 
+/**
+ * A display name lowered for use mid-sentence, without flattening acronyms.
+ *
+ * `"CRM Software".toLowerCase()` gives "crm software", which is what the page
+ * headline read before this existed. A word that was already all-caps is a
+ * name, not a capitalised ordinary word, so it is left alone.
+ */
+export function sentenceCaseName(name: string): string {
+  return name
+    .split(' ')
+    .map((w) => (/^[A-Z0-9]{2,}$/.test(w) ? w : w.toLowerCase()))
+    .join(' ')
+}
+
 /** Title Case, used to name categories that have no curated entry. */
 function titleCase(value: string): string {
   return normalise(value)
@@ -179,7 +193,7 @@ export function categoryMeta(slug: string, sampleIndustry?: string): CategoryMet
   return {
     slug,
     name,
-    buyerQuestion: `best ${name.toLowerCase()}`,
+    buyerQuestion: `best ${sentenceCaseName(name)}`,
     angle: '',
     aliases: [],
     curated: false,
