@@ -79,7 +79,11 @@ export const PLANS = {
     brandLimit: 10,
     publishLimit: 3,
     generationLimit: 20,
-    features: ['60 scans/month', '10 brands', 'ChatGPT + Gemini + Claude', 'AI Fix Plan', 'Boost + outreach', '3 WordPress publishes/month', 'Priority support'],
+    // Engines listed here must match what a scan actually runs. Claude is not
+    // listed because ANTHROPIC_API_KEY is not configured, so it would silently
+    // skip at scan time (see getAvailableEngines in lib/engines.ts). Add it back
+    // to this string at the same time as the key, not before.
+    features: ['60 scans/month', '10 brands', 'ChatGPT + Gemini', 'AI Fix Plan', 'Boost + outreach', '3 WordPress publishes/month', 'Priority support'],
     lockedFeatures: [],
   },
 } as const
