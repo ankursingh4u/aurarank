@@ -9,6 +9,7 @@
  * product exists to measure.
  */
 import { absoluteUrl, getPublicSiteUrl, SITE_NAME } from '@/lib/site'
+import { getEngineLabels, joinEngineLabels } from '@/lib/engines'
 
 const LOGO = () => absoluteUrl('/logo.png')
 
@@ -19,8 +20,11 @@ export function organizationSchema() {
     name: SITE_NAME,
     url: getPublicSiteUrl(),
     logo: LOGO(),
-    description:
-      'SEO4AI measures whether AI assistants such as ChatGPT, Gemini and Claude recommend a brand, and shows which competitors they name instead.',
+    // Named engines come from the configured keys, so the structured data
+    // cannot advertise an engine a scan would silently skip.
+    description: `SEO4AI measures whether AI assistants such as ${joinEngineLabels(
+      getEngineLabels('max')
+    )} recommend a brand, and shows which competitors they name instead.`,
     email: 'support@seo4ai.app',
   }
 }

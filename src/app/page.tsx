@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Navbar } from '@/components/landing/navbar'
 import { FreeScan } from '@/components/landing/free-scan'
 import { getPublishedIndex } from '@/lib/index-data'
-import { getEngineLabels } from '@/lib/engines'
+import { getEngineLabels, joinEngineLabels } from '@/lib/engines'
 import type { IndexEntry } from '@/lib/index-scan'
 import { JsonLd } from '@/components/seo/json-ld'
 import { faqSchema } from '@/lib/schema'
@@ -750,7 +750,7 @@ export default async function LandingPage() {
             <div>
               <Image src="/logo.png" alt="SEO4AI, AI Visibility & Brand Intelligence" width={170} height={53} className="h-10 w-auto mb-3" />
               <p className="text-sm text-stone-500 max-w-xs leading-relaxed">
-                The visibility layer for AI search. See whether ChatGPT, Gemini and Claude
+                The visibility layer for AI search. See whether {joinEngineLabels(maxEngines)}{' '}
                 recommend your brand, and fix it.
               </p>
             </div>

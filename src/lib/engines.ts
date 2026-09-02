@@ -73,6 +73,17 @@ export function getEngineLabels(plan: string): string[] {
   return getScanEngines(plan).map((k) => ENGINE_LABEL[k])
 }
 
+/**
+ * Engine labels joined for prose: "ChatGPT", "ChatGPT and Gemini",
+ * "ChatGPT, Gemini and Claude". Use this for any sentence that names the
+ * engines, so marketing copy tracks the configured keys instead of drifting
+ * out of date the next time one is added or removed.
+ */
+export function joinEngineLabels(labels: string[]): string {
+  if (labels.length <= 1) return labels[0] ?? ''
+  return `${labels.slice(0, -1).join(', ')} and ${labels[labels.length - 1]}`
+}
+
 function hostOf(url: string): string | null {
   try {
     return new URL(url).hostname.replace(/^www\./, '')
