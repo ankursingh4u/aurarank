@@ -49,9 +49,12 @@ export async function POST(request: NextRequest) {
 
   switch (event.type) {
     // Subscription started / renewed / changed — sync plan + status.
+    // past_due is included because the Polar endpoint subscribes to it and a
+    // failed renewal must reach user_plans; mapStatus already handles it.
     case 'subscription.created':
     case 'subscription.active':
     case 'subscription.updated':
+    case 'subscription.past_due':
     case 'subscription.uncanceled':
     case 'subscription.canceled': {
       const sub = event.data

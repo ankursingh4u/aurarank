@@ -82,16 +82,40 @@ async function assertToken() {
 /**
  * Env vars to push. Only values that already exist locally are sent, so this
  * never invents a secret or blanks one out by writing an empty string.
+ *
+ * The Polar production credentials are here because they rotate: tokens expire,
+ * products get deleted and recreated, webhook secrets are reissued. A key that
+ * is merely *present* on the server is not necessarily *correct*, so this
+ * updates on mismatch rather than skipping (an earlier version skipped, which
+ * meant a rotated token silently never reached the container).
+ *
+ * NEXT_PUBLIC_APP_URL is deliberately absent: locally it is localhost, and
+ * pushing it would point production at a machine nobody can reach.
  */
-const WANTED = ['CRON_SECRET', 'ANTHROPIC_API_KEY']
+const WANTED = [
+  'CRON_SECRET',
+  'ANTHROPIC_API_KEY',
+  'POLAR_PRODUCTION_ACCESS_TOKEN',
+  'POLAR_PRODUCTION_WEBHOOK_SECRET',
+  'POLAR_PRODUCTION_PRO_PRODUCT_ID',
+  'POLAR_PRODUCTION_MAX_PRODUCT_ID',
+]
 
+/** Keys whose values must never be printed. Product ids are fine to show. */
+const isSecret = (key) => !/_PRODUCT_ID$/.test(key)
+const show = (key, value) => (isSecret(key) ? `${value.slice(0, 10)}… (len ${value.length})` : value)
+
+/**
+ * Coolify stores each key twice, once for production (is_preview false) and once
+ * for preview deploys. Both are updated so a preview build never runs against a
+ * revoked token. PATCH selects the row by key + is_preview; POST creates.
+ */
 async function syncEnv() {
   const current = await call('GET', `/api/v1/applications/${APP_UUID}/envs`)
   if (!current.ok) {
     console.error(`Could not read env vars: HTTP ${current.status}`)
     return
   }
-  const existing = new Map((current.json || []).map((e) => [e.key, e]))
 
   for (const key of WANTED) {
     const value = process.env[key]
@@ -99,16 +123,39 @@ async function syncEnv() {
       console.log(`skip  ${key} — not set locally, nothing to push`)
       continue
     }
-    if (existing.has(key)) {
-      console.log(`ok    ${key} — already present on the server, left alone`)
+
+    const rows = (current.json || []).filter((e) => e.key === key)
+    if (rows.length === 0) {
+      if (!APPLY) {
+        console.log(`WOULD create ${key} = ${show(key, value)}`)
+        continue
+      }
+      const res = await call('POST', `/api/v1/applications/${APP_UUID}/envs`, { key, value })
+      console.log(res.ok ? `added ${key}` : `FAIL  ${key}: HTTP ${res.status} ${res.text.slice(0, 160)}`)
       continue
     }
-    if (!APPLY) {
-      console.log(`WOULD create ${key}`)
-      continue
+
+    for (const row of rows) {
+      const scope = row.is_preview ? 'preview' : 'production'
+      if (row.value === value) {
+        console.log(`ok    ${key} [${scope}] — already correct`)
+        continue
+      }
+      if (!APPLY) {
+        console.log(`WOULD update ${key} [${scope}] → ${show(key, value)}`)
+        continue
+      }
+      const res = await call('PATCH', `/api/v1/applications/${APP_UUID}/envs`, {
+        key,
+        value,
+        is_preview: row.is_preview,
+      })
+      console.log(
+        res.ok
+          ? `updated ${key} [${scope}] → ${show(key, value)}`
+          : `FAIL  ${key} [${scope}]: HTTP ${res.status} ${res.text.slice(0, 160)}`
+      )
     }
-    const res = await call('POST', `/api/v1/applications/${APP_UUID}/envs`, { key, value })
-    console.log(res.ok ? `added ${key}` : `FAIL  ${key}: HTTP ${res.status} ${res.text.slice(0, 160)}`)
   }
 }
 
