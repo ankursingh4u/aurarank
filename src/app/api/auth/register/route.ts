@@ -1,5 +1,6 @@
 import { createAdminClient } from '@/lib/supabase/admin'
 import { sendEmail } from '@/lib/email'
+import { getAppUrl } from '@/lib/site'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
@@ -99,7 +100,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: error.message || 'Sign-up failed.' }, { status: 400 })
     }
 
-    const link = data?.properties?.action_link
+    // Build the confirmation link against our own domain rather than emailing
+    // Supabase's action_link. That link redirects via Supabase, which replaces
+    // the redirect target with the project's Site URL whenever the requested one
+    // is not in the Redirect URL allow-list — a project setting this app cannot
+    // read, and which sent every confirmed user to localhost. /auth/confirm
+    // exchanges the token server-side, so no Supabase setting can misdirect it.
+    const tokenHash = data?.properties?.hashed_token
+    const link = tokenHash
+      ? `${getAppUrl()}/auth/confirm?token_hash=${encodeURIComponent(tokenHash)}&type=signup`
+      : data?.properties?.action_link
+
     if (!link) {
       return NextResponse.json({ error: 'Could not generate a confirmation link. Please try again.' }, { status: 500 })
     }
