@@ -1489,7 +1489,7 @@ export default function DashboardPage() {
                     <Lightbulb className="h-3.5 w-3.5 text-violet-700" />
                     AI Fix Plan {data?.recommendations?.length ? `(${data.recommendations.length} actions)` : ''}
                     {userPlan && !userPlan.canViewFixPlan && (
-                      <Badge className="bg-emerald-500/20 text-emerald-400 text-[9px] ml-1">Max Plan</Badge>
+                      <Badge className="bg-emerald-500/20 text-emerald-400 text-[9px] ml-1">Pro Plan</Badge>
                     )}
                   </span>
                   {showFixPlan ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
@@ -1503,11 +1503,11 @@ export default function DashboardPage() {
                     <Sparkles className="h-10 w-10 text-emerald-500/30 mx-auto mb-3" />
                     <p className="text-base font-semibold text-stone-900 mb-2">Get Your Personalized Fix Plan</p>
                     <p className="text-sm text-stone-500 mb-1 max-w-sm mx-auto">
-                      Our AI analyzes your scan results and tells you exactly what to do to get recommended more often.
+                      You can see which pages the AI read. This tells you how to get onto them.
                     </p>
-                    <p className="text-xs text-stone-500 mb-4">Specific actions, priority order, and expected impact, available on Max plan.</p>
+                    <p className="text-xs text-stone-500 mb-4">Specific actions, priority order, and expected impact, available on Pro. Max does the work for you: boost content, outreach drafts and publishing.</p>
                     <Button className="bg-emerald-600 hover:bg-emerald-700 h-9 text-sm px-6" onClick={() => window.location.href = '/dashboard/billing'}>
-                      Upgrade to Max <ArrowRight className="h-3.5 w-3.5 ml-1" />
+                      Upgrade to Pro <ArrowRight className="h-3.5 w-3.5 ml-1" />
                     </Button>
                   </div>
                 ) : !data?.recommendations?.length ? (

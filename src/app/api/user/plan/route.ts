@@ -73,7 +73,10 @@ export async function GET() {
       canScan: scanCount < planConfig.scanLimit,
       canAddBrand: brandIds.length < planConfig.brandLimit,
       canViewCompetitors: plan !== 'starter',
-      canViewFixPlan: plan === 'max',
+      // Pro answers "why am I not there, and what do I do about it": the
+      // citation map plus the fix plan. Max is the done-for-you layer on top
+      // (boost content, outreach drafts, publishing), gated separately.
+      canViewFixPlan: plan === 'pro' || plan === 'max',
       publishLimit,
       publishesUsed,
       publishesRemaining: Math.max(0, publishLimit - publishesUsed),

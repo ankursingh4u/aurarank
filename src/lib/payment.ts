@@ -71,8 +71,10 @@ export const PLANS = {
     brandLimit: 1,
     publishLimit: 0,
     generationLimit: 0,
+    // The ladder: Starter shows you are losing, Pro shows why and what to do,
+    // Max does the work. Each tier's features must state which rung it is.
     features: ['3 scans/month', 'AI Visibility Score', 'Missed searches', 'Region targeting'],
-    lockedFeatures: ['Competitor scores', 'AI Fix Plan', 'Boost content', 'Publishing'],
+    lockedFeatures: ['The pages AI read', 'Competitor scores', 'AI Fix Plan', 'Boost content', 'Publishing'],
   },
   pro: {
     name: 'Pro',
@@ -81,8 +83,8 @@ export const PLANS = {
     brandLimit: 3,
     publishLimit: 1,
     generationLimit: 5,
-    features: ['15 scans/month', '3 brands', 'ChatGPT + Gemini', 'Competitor gap scores', 'Progress history', '1 WordPress publish/month', 'Region targeting'],
-    lockedFeatures: ['AI Fix Plan', 'Boost content'],
+    features: ['15 scans/month', '3 brands', 'ChatGPT + Gemini', 'Every page the AI read', 'AI Fix Plan: what to do about it', 'Competitor gap scores', 'Progress history', '1 WordPress publish/month'],
+    lockedFeatures: ['Boost content', 'Outreach drafts'],
   },
   max: {
     name: 'Max',
@@ -95,7 +97,7 @@ export const PLANS = {
     // listed because ANTHROPIC_API_KEY is not configured, so it would silently
     // skip at scan time (see getAvailableEngines in lib/engines.ts). Add it back
     // to this string at the same time as the key, not before.
-    features: ['60 scans/month', '10 brands', 'ChatGPT + Gemini', 'AI Fix Plan', 'Boost + outreach', '3 WordPress publishes/month', 'Priority support'],
+    features: ['60 scans/month', '10 brands', 'ChatGPT + Gemini', 'Everything in Pro', 'We write the boost content', 'Outreach drafts to the sites that cite your rivals', '3 WordPress publishes/month', 'Priority support'],
     lockedFeatures: [],
   },
 } as const
