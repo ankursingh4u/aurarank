@@ -17,18 +17,34 @@ import path from 'node:path'
 import pg from 'pg'
 
 const ROOT = process.cwd()
-for (const line of fs.readFileSync(path.join(ROOT, '.env.local'), 'utf8').split('\n')) {
-  const m = line.match(/^([A-Z0-9_]+)=(.*)$/)
-  if (m) process.env[m[1]] = m[2].trim()
+// Local runs read .env.local; when this runs as a Coolify scheduled task the
+// variables are already in the environment and the file does not exist. Reading
+// it unconditionally made this script impossible to run on the server, which is
+// the only place the database is reachable from.
+const envPath = path.join(ROOT, '.env.local')
+if (fs.existsSync(envPath)) {
+  for (const line of fs.readFileSync(envPath, 'utf8').split('\n')) {
+    const m = line.match(/^([A-Z0-9_]+)=(.*)$/)
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim()
+  }
 }
 
 // Schema changes and seeding need the owner role; the app's role is
 // deliberately not permitted to do them.
 const url = process.env.DATABASE_URL_ADMIN || process.env.DATABASE_URL
 if (!url) {
-  console.error('DATABASE_URL is not set in .env.local')
+  console.error('Neither DATABASE_URL_ADMIN nor DATABASE_URL is set')
   process.exit(1)
 }
+if (!process.env.DATABASE_URL_ADMIN) {
+  // Worth saying out loud rather than failing later on a confusing permission
+  // error: the app role can read and write rows but cannot CREATE TABLE.
+  console.warn('WARNING: DATABASE_URL_ADMIN not set, falling back to DATABASE_URL (app role).')
+  console.warn('         Schema changes will fail with a permission error under that role.')
+}
+try {
+  console.log(`Connecting as ${new URL(url).username} to ${new URL(url).pathname.slice(1)}`)
+} catch { /* not worth failing a migration over a log line */ }
 
 // Order matters: later files alter tables the earlier ones create.
 const ORDER = [
