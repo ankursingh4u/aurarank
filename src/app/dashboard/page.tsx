@@ -53,10 +53,18 @@ interface DashboardData {
     ai_response?: string | null
     citations?: string[]
     citations_by_engine?: Record<string, string[]>
+    // Sent instead of the domains when the report is locked, so the hook ("the
+    // AI read 8 pages") survives without leaking the list itself.
+    citation_count?: number
+    citation_engine_counts?: Record<string, number>
     winnability?: Winnability | null
     channel?: string
   }>
   winnabilitySplit?: { winnable: number; hard: number; locked: number } | null
+  /** False only when the citation map is paywalled for this scan. */
+  citationsUnlocked?: boolean
+  /** Price of the one-time unlock, in whole dollars. Sourced from the server. */
+  unlockPrice?: number
   recommendations: Array<{ id: string; task_title: string; task_description: string | null; priority: string; impact_score: number; difficulty: string; completed: boolean; category: string }>
   industryBenchmark?: { avg: number; top10: number }
   competitorAlerts?: string[]
@@ -647,6 +655,7 @@ export default function DashboardPage() {
   const [discoveringComps, setDiscoveringComps] = useState(false)
   const [showScoreInfo, setShowScoreInfo] = useState(false)
   const [showWalkthrough, setShowWalkthrough] = useState(false)
+  const [unlocking, setUnlocking] = useState(false)
 
   useEffect(() => {
     if (typeof window !== 'undefined' && !localStorage.getItem('aurarank_walkthrough_seen')) {
@@ -695,6 +704,66 @@ export default function DashboardPage() {
   }, [])
 
   useEffect(() => { fetchDashboard() }, [fetchDashboard])
+
+  /**
+   * Buy the one-time unlock for the scan on screen. This only opens Polar's
+   * checkout; the unlock itself is granted by the order.paid webhook, so nothing
+   * here can be spoofed into unlocking a report.
+   */
+  const handleUnlock = useCallback(async () => {
+    const scanId = data?.latestScan?.id
+    if (!scanId) return
+    setUnlocking(true)
+    try {
+      const res = await fetch('/api/polar/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ unlockScanId: scanId }),
+      })
+      const json = await res.json()
+      if (res.ok && json.checkoutUrl) {
+        window.location.href = json.checkoutUrl
+        return
+      }
+      if (json.alreadyUnlocked) {
+        toast.success('This report is already unlocked.')
+        fetchDashboard(selectedBrandId || undefined)
+        return
+      }
+      toast.error(json.error || 'Could not start checkout')
+    } catch {
+      toast.error('Could not start checkout')
+    } finally {
+      setUnlocking(false)
+    }
+  }, [data?.latestScan?.id, fetchDashboard, selectedBrandId])
+
+  /**
+   * Returning from a successful checkout. Polar redirects before the webhook has
+   * necessarily landed, so a single immediate refetch often still shows it
+   * locked; retry a few times before giving up rather than telling the user it
+   * failed when they have in fact paid.
+   */
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (!params.get('unlocked')) return
+    window.history.replaceState({}, '', '/dashboard')
+
+    let cancelled = false
+    let attempts = 0
+    const poll = async () => {
+      attempts++
+      await fetchDashboard(selectedBrandId || undefined)
+      if (cancelled) return
+      if (attempts < 5) setTimeout(poll, 2000)
+    }
+    toast.success('Payment received. Unlocking your citation map…')
+    poll()
+    return () => { cancelled = true }
+    // Runs once on return from checkout; deliberately not re-run per brand change.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   function resetBrandForm() {
     setBrandName(''); setWebsite(''); setIndustry(''); setCustomIndustry('')
@@ -1230,12 +1299,17 @@ export default function DashboardPage() {
                       ))}
                       <span className="text-[10px] text-amber-500">but not {brand?.brand_name}</span>
                     </div>
-                    {/* The pages the AI read: the actual fix list */}
+                    {/* The pages the AI read: the actual fix list, and the paid part */}
                     <CitationMap
                       citations={opp.citations || []}
                       citationsByEngine={opp.citations_by_engine}
                       brandName={brand?.brand_name || 'You'}
                       competitorsFound={opp.competitors_found}
+                      locked={data?.citationsUnlocked === false}
+                      citationCount={opp.citation_count ?? 0}
+                      unlockPrice={data?.unlockPrice}
+                      unlocking={unlocking}
+                      onUnlock={handleUnlock}
                     />
 
                     {/* AI Response Viewer */}

@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
 import { withUser } from '@/lib/db'
 import { dbFor } from '@/lib/pgq'
+import { REPORT_UNLOCK_PRICE } from '@/lib/payment'
 
 export const dynamic = 'force-dynamic'
 
@@ -191,6 +192,51 @@ export async function GET(request: NextRequest) {
 
     const industryBenchmark = getIndustryBenchmark(selectedBrand.industry || '')
 
+    // Is this scan's citation map paid for? Subscribers get it with the plan;
+    // everyone else needs the one-time unlock. Wrapped because report_unlocks is
+    // absent until 012 has run, and a missing table must not break the whole
+    // dashboard, only leave the map locked.
+    let citationsUnlocked = false
+    if (latestScan) {
+      const { data: plan } = await supabase
+        .from('user_plans')
+        .select('plan')
+        .eq('user_id', user.id)
+        .single()
+      if (plan?.plan === 'pro' || plan?.plan === 'max') {
+        citationsUnlocked = true
+      } else {
+        const { data: unlock } = await supabase
+          .from('report_unlocks')
+          .select('id')
+          .eq('scan_id', latestScan.id)
+          .single()
+        citationsUnlocked = !!unlock
+      }
+    }
+
+    // Strip the domains server-side when locked. Sending them and hiding them in
+    // CSS would put the paid content one devtools inspection away, which is not
+    // a paywall. Counts still go out: "the AI read 8 pages" is the hook, the
+    // list of which 8 is the product.
+    if (!citationsUnlocked && promptOpportunities) {
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      promptOpportunities = promptOpportunities.map((opp: any) => {
+        const byEngine: Record<string, unknown> = opp.citations_by_engine || {}
+        const engineCounts: Record<string, number> = {}
+        for (const [engine, list] of Object.entries(byEngine)) {
+          engineCounts[engine] = Array.isArray(list) ? list.length : 0
+        }
+        return {
+          ...opp,
+          citations: [],
+          citations_by_engine: {},
+          citation_count: Array.isArray(opp.citations) ? opp.citations.length : 0,
+          citation_engine_counts: engineCounts,
+        }
+      })
+    }
+
     return NextResponse.json({
       brands,
       selectedBrand,
@@ -203,6 +249,10 @@ export async function GET(request: NextRequest) {
       industryBenchmark,
       competitorAlerts,
       winnabilitySplit,
+      citationsUnlocked,
+      // Sent from the server so the dashboard, a client component, never has to
+      // import lib/payment and pull the Polar SDK into the browser bundle.
+      unlockPrice: REPORT_UNLOCK_PRICE,
     })
     })
   } catch (error) {

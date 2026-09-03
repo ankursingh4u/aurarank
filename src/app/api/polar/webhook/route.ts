@@ -90,6 +90,47 @@ export async function POST(request: NextRequest) {
       break
     }
 
+    // One-time purchase settled. This is the only event that grants a report
+    // unlock: subscription events never do, and checkout.updated fires before
+    // money has actually moved.
+    case 'order.paid': {
+      const order = event.data
+      const meta = (order.metadata || {}) as Record<string, unknown>
+      const kind = typeof meta.kind === 'string' ? meta.kind : null
+      const scanId = typeof meta.scan_id === 'string' ? meta.scan_id : null
+      const userId = typeof meta.user_id === 'string' && meta.user_id
+        ? meta.user_id
+        : order.customer?.externalId || null
+
+      // Orders for the subscription products also arrive here. Only act on the
+      // unlock ones, identified by the metadata the checkout route set.
+      if (kind !== 'report_unlock' || !scanId || !userId) break
+
+      // onConflict on scan_id makes a duplicate delivery a no-op rather than a
+      // second row; Polar retries webhooks, so this will happen.
+      const { error: unlockError } = await supabase.from('report_unlocks').upsert({
+        user_id: userId,
+        scan_id: scanId,
+        polar_order_id: order.id,
+        amount_cents: order.totalAmount ?? null,
+        currency: order.currency ?? null,
+        created_at: new Date().toISOString(),
+      }, { onConflict: 'scan_id' })
+
+      // A failure here means somebody paid and did not get what they bought.
+      // Return non-2xx so Polar retries the delivery, and log the order id so the
+      // unlock can be granted by hand if the retries also fail.
+      if (unlockError) {
+        console.error(
+          `report_unlock FAILED to record. order=${order.id} scan=${scanId} user=${userId} ` +
+            `code=${unlockError.code ?? '?'} message=${unlockError.message}`
+        )
+        return NextResponse.json({ error: 'Failed to record unlock' }, { status: 500 })
+      }
+
+      break
+    }
+
     // Access actually revoked (expired or fully canceled) — drop to starter.
     case 'subscription.revoked': {
       const sub = event.data

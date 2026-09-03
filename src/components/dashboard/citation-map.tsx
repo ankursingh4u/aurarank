@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronDown, ChevronUp, ExternalLink } from 'lucide-react'
+import { ChevronDown, ChevronUp, ExternalLink, Lock } from 'lucide-react'
 import type { Winnability } from '@/lib/winnability'
 
 /**
@@ -90,11 +90,23 @@ export function CitationMap({
   citationsByEngine,
   brandName,
   competitorsFound,
+  locked = false,
+  citationCount = 0,
+  unlockPrice,
+  onUnlock,
+  unlocking = false,
 }: {
   citations: string[]
   citationsByEngine?: Record<string, string[]>
   brandName: string
   competitorsFound: string[]
+  /** When true the domains were never sent by the server; only counts are known. */
+  locked?: boolean
+  /** How many pages were read. Used for the locked headline, since citations is empty. */
+  citationCount?: number
+  unlockPrice?: number
+  onUnlock?: () => void
+  unlocking?: boolean
 }) {
   const engines = Object.keys(citationsByEngine || {}).filter(
     (k) => (citationsByEngine?.[k]?.length ?? 0) > 0
@@ -103,6 +115,42 @@ export function CitationMap({
   // far less than people expect, so a brand can win on one and be absent on another.
   const [view, setView] = useState<string>('all')
   const [open, setOpen] = useState(false)
+
+  if (locked) {
+    if (!citationCount) return null
+    return (
+      <div className="mt-2 rounded-lg border border-violet-200 bg-violet-50/60">
+        <div className="px-3 py-2.5">
+          <p className="text-[11px] font-medium text-stone-800">
+            The AI read {citationCount} page{citationCount === 1 ? '' : 's'} to answer this.{' '}
+            <span className="text-stone-500">{brandName} is on none of them.</span>
+          </p>
+          <p className="mt-1 text-[10px] leading-relaxed text-stone-600">
+            {competitorsFound.length > 0 ? (
+              <>
+                Those pages are where {competitorsFound.slice(0, 2).join(' and ')}
+                {competitorsFound.length > 2 && ` and ${competitorsFound.length - 2} more`} got
+                named instead. Getting listed on them is the work.
+              </>
+            ) : (
+              <>Getting listed on those pages is the work.</>
+            )}
+          </p>
+          <button
+            onClick={onUnlock}
+            disabled={unlocking}
+            className="mt-2 inline-flex items-center gap-1 rounded-md bg-stone-900 px-2.5 py-1.5 text-[11px] font-medium text-white transition-colors hover:bg-stone-700 disabled:opacity-60"
+          >
+            <Lock className="h-3 w-3" />
+            {unlocking ? 'Opening checkout…' : `Show me the ${citationCount} pages${unlockPrice ? ` · $${unlockPrice}` : ''}`}
+          </button>
+          <p className="mt-1.5 text-[10px] text-stone-500">
+            One-time, for this report. Not a subscription.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   if (!citations || citations.length === 0) return null
 

@@ -99,6 +99,7 @@ const WANTED = [
   'POLAR_PRODUCTION_WEBHOOK_SECRET',
   'POLAR_PRODUCTION_PRO_PRODUCT_ID',
   'POLAR_PRODUCTION_MAX_PRODUCT_ID',
+  'POLAR_PRODUCTION_UNLOCK_PRODUCT_ID',
 ]
 
 /** Keys whose values must never be printed. Product ids are fine to show. */

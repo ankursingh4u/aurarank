@@ -39,6 +39,18 @@ export function getProductId(plan: 'pro' | 'max'): string {
   return modeEnv(plan === 'pro' ? 'PRO_PRODUCT_ID' : 'MAX_PRODUCT_ID')
 }
 
+/**
+ * The one-time "Report Unlock" product. Not a plan: buying it unlocks the
+ * citation map on a single scan and grants nothing else, so it is deliberately
+ * kept out of PLANS and out of getPlanByPolarProductId.
+ */
+export function getUnlockProductId(): string {
+  return modeEnv('UNLOCK_PRODUCT_ID')
+}
+
+/** Display price of one report unlock, in whole dollars. Must match Polar. */
+export const REPORT_UNLOCK_PRICE = 9
+
 let _polar: Polar | null = null
 
 export function getPolar() {

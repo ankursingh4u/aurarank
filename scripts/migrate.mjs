@@ -45,6 +45,7 @@ const ORDER = [
   'coolify/009_add_wordpress_publishes.sql',
   'coolify/010_add_index_sampling.sql',
   'coolify/011_add_grounded_scanning.sql',
+  'coolify/012_add_report_unlocks.sql',
 ]
 
 const dry = process.argv.includes('--dry')
