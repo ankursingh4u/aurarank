@@ -3,10 +3,11 @@
 import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { createBrowserClient } from '@supabase/ssr'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
-  LayoutDashboard, Settings, LogOut, Menu, Eye, CreditCard, Home, BarChart3
+  LayoutDashboard, Settings, LogOut, Menu, CreditCard, Home, BarChart3
 } from 'lucide-react'
 
 const navItems = [
@@ -50,8 +51,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
       <div className="p-6">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <Eye className="h-6 w-6 text-violet-700" />
+        {/* The brand mark, not a stock icon, and it goes to the public site the
+            way a logo is expected to. Dashboard has its own nav entry. */}
+        <Link
+          href="/"
+          onClick={() => setSidebarOpen(false)}
+          aria-label="SEO4AI home page"
+          className="flex items-center gap-2 rounded-md transition-opacity hover:opacity-80"
+        >
+          <Image src="/logo-mark.png" alt="" width={28} height={28} className="h-7 w-7" priority />
           <span className="text-xl font-bold bg-gradient-to-r from-violet-700 to-violet-400 bg-clip-text text-transparent">
             SEO4AI
           </span>
@@ -107,9 +115,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <SidebarContent />
           </SheetContent>
         </Sheet>
-        <span className="text-lg font-bold bg-gradient-to-r from-violet-700 to-violet-400 bg-clip-text text-transparent">
-          SEO4AI
-        </span>
+        <Link href="/" aria-label="SEO4AI home page" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+          <Image src="/logo-mark.png" alt="" width={24} height={24} className="h-6 w-6" />
+          <span className="text-lg font-bold bg-gradient-to-r from-violet-700 to-violet-400 bg-clip-text text-transparent">
+            SEO4AI
+          </span>
+        </Link>
       </div>
 
       <main className="lg:pl-56">
