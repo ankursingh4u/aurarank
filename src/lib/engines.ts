@@ -158,8 +158,24 @@ async function queryGemini(prompt: string, channel: Channel): Promise<EngineAnsw
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const body: any = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { maxOutputTokens: 1000, temperature: 0.7 },
+    // 2048, not 1000: a "best X" answer is a list of brands, and the earlier
+    // budget cut it off partway through, which reads as the later brands not
+    // being recommended at all.
+    generationConfig: { maxOutputTokens: 2048, temperature: 0.7 },
   }
+
+  // Gemini 2.5 reasons before answering and charges those thoughts to the same
+  // output budget. Measured 2026-09-04 on gemini-2.5-flash: of a 1000 token
+  // budget, 957 went to thoughts and 39 to the answer, which stopped at
+  // "some of the top contenders that consistently r" — finishReason MAX_TOKENS,
+  // not a single brand named. Every brand in that answer scored as unmentioned.
+  // With thinking off the same prompt returns 4434 characters and names them.
+  // The index measures which brands an engine names, so the thinking is pure
+  // cost here.
+  if (/2\.5/.test(model)) {
+    body.generationConfig.thinkingConfig = { thinkingBudget: 0 }
+  }
+
   if (channel === 'grounded') body.tools = [{ google_search: {} }]
 
   const res = await fetch(
@@ -176,6 +192,14 @@ async function queryGemini(prompt: string, channel: Channel): Promise<EngineAnsw
   const text = (cand?.content?.parts || [])
     .map((p: { text?: string }) => p.text || '')
     .join('')
+
+  // A reply that hit the token ceiling before saying anything substantial has
+  // not answered the question. Scoring it would record "brand not mentioned"
+  // for every brand, which is a measurement error published as a fact. Throwing
+  // marks the row errored, and errored rows are excluded from the score.
+  if (cand?.finishReason === 'MAX_TOKENS' && text.length < 200) {
+    throw new Error('Gemini truncated before answering')
+  }
 
   // The real source is in `web.title`. `web.uri` is a vertexaisearch.cloud.google.com
   // redirect and `web.domain` comes back null, so reading either yields a citation
