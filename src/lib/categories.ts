@@ -172,11 +172,29 @@ export function sentenceCaseName(name: string): string {
     .join(' ')
 }
 
+/**
+ * Acronyms that must stay upper-case in a category name. Kept explicit because
+ * the previous rule — upper-case anything two letters or shorter — turned
+ * "no code database software" into "NO Code Database Software" on a public page.
+ */
+const ACRONYMS = new Set([
+  'ai', 'api', 'b2b', 'b2c', 'crm', 'cms', 'cdp', 'crd', 'erp', 'hr', 'it',
+  'saas', 'seo', 'sms', 'ui', 'ux', 'vpn', 'pos', 'rpa', 'bi',
+])
+
+/** Words left lower-case inside a name, never at the start. */
+const MINOR = new Set(['a', 'an', 'and', 'as', 'at', 'by', 'for', 'in', 'of', 'on', 'or', 'the', 'to', 'with'])
+
 /** Title Case, used to name categories that have no curated entry. */
 function titleCase(value: string): string {
   return normalise(value)
     .split(' ')
-    .map((w) => (w.length <= 2 ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1)))
+    .map((w, i) => {
+      const lower = w.toLowerCase()
+      if (ACRONYMS.has(lower)) return lower.toUpperCase()
+      if (i > 0 && MINOR.has(lower)) return lower
+      return lower.charAt(0).toUpperCase() + lower.slice(1)
+    })
     .join(' ')
 }
 

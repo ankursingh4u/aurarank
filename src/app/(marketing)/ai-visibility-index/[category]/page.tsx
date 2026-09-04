@@ -148,7 +148,7 @@ export default async function CategoryLeaderboardPage({ params }: Params) {
             <span className="font-medium text-stone-900">
               &ldquo;{meta.buyerQuestion}&rdquo;
             </span>{' '}
-            &mdash; and counted how often each of {entries.length} brands got named.
+            &mdash; and counted how often {entries.length === 1 ? 'it got named' : `each of ${entries.length} brands got named`}.
           </p>
           <p className="mt-3 text-lg text-stone-600 leading-relaxed">
             {/* The one-line method statement. It preempts the cherry-picking
@@ -161,7 +161,7 @@ export default async function CategoryLeaderboardPage({ params }: Params) {
         {/* Summary stats */}
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           {[
-            { value: entries.length, label: 'brands scanned' },
+            { value: entries.length, label: entries.length === 1 ? 'brand scanned' : 'brands scanned' },
             { value: avg, label: 'average score' },
             { value: invisible, label: 'scored under 26' },
             {

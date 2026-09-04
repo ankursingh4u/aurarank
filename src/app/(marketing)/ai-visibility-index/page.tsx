@@ -126,7 +126,7 @@ export default async function AiVisibilityIndexPage() {
             {/* Summary stats */}
             <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-4 max-w-2xl">
               {[
-                { value: entries.length, label: 'brands scanned' },
+                { value: entries.length, label: entries.length === 1 ? 'brand scanned' : 'brands scanned' },
                 { value: avg, label: 'average score' },
                 { value: invisible, label: 'scored under 26' },
               ].map((s) => (
@@ -155,13 +155,31 @@ export default async function AiVisibilityIndexPage() {
                         {c.meta.name}
                       </div>
                       <div className="mt-1 text-xs text-stone-500 tabular-nums">
-                        {c.entries} brands &middot; {c.averageScore} average
+                        {c.entries} brand{c.entries === 1 ? '' : 's'} &middot; {c.averageScore} average
                       </div>
-                      {c.leader && (
+                      {/* "Most recommended" only makes sense when the leader was
+                          actually recommended and had someone to beat. A single
+                          entry scoring 0 is not a winner, and saying so on a
+                          public page invites exactly the scrutiny this product
+                          applies to everyone else. */}
+                      {c.leader && c.leaderScore > 0 && c.entries > 1 && (
                         <div className="mt-3 pt-3 border-t border-stone-100 text-sm text-stone-600">
                           Most recommended:{' '}
                           <span className="font-medium text-stone-900">{c.leader}</span>
                           <span className="text-stone-400 tabular-nums"> · {c.leaderScore}</span>
+                        </div>
+                      )}
+                      {c.leader && c.leaderScore > 0 && c.entries === 1 && (
+                        <div className="mt-3 pt-3 border-t border-stone-100 text-sm text-stone-600">
+                          Scored so far:{' '}
+                          <span className="font-medium text-stone-900">{c.leader}</span>
+                          <span className="text-stone-400 tabular-nums"> · {c.leaderScore}</span>
+                        </div>
+                      )}
+                      {c.leader && c.leaderScore === 0 && (
+                        <div className="mt-3 pt-3 border-t border-stone-100 text-sm text-stone-600">
+                          <span className="font-medium text-stone-900">{c.leader}</span> was not
+                          named in any answer
                         </div>
                       )}
                     </Link>
