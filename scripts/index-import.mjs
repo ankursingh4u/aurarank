@@ -60,29 +60,48 @@ const JSON_COLS = new Set(['competitor_breakdown', 'missed_prompts', 'winnabilit
 let inserted = 0
 let updated = 0
 
-for (const e of entries) {
-  const cols = Object.keys(e).filter((c) => e[c] !== undefined)
-  const values = cols.map((c) => (JSON_COLS.has(c) ? JSON.stringify(e[c]) : e[c]))
+// Set by this script with now(), so they must not also arrive from the payload
+// or Postgres rejects the statement with "column specified more than once".
+const OWNED = new Set(['scanned_at', 'updated_at'])
 
-  if (DRY) {
-    const prev = known.get(e.company)
-    console.log(`  ${prev === undefined ? 'INSERT' : `UPDATE ${prev} ->`} ${String(e.score).padStart(3)}  ${e.company}`)
-    if (prev === undefined) inserted++
-    else updated++
-    continue
-  }
+for (const e of entries) {
+  const cols = Object.keys(e).filter((c) => e[c] !== undefined && !OWNED.has(c))
+  const values = cols.map((c) => (JSON_COLS.has(c) ? JSON.stringify(e[c]) : e[c]))
 
   const updates = cols
     .filter((c) => c !== 'company')
     .map((c) => `"${c}" = EXCLUDED."${c}"`)
     .join(', ')
 
-  await client.query(
-    `INSERT INTO public.index_entries (${cols.map((c) => `"${c}"`).join(', ')}, scanned_at, updated_at)
+  const sql = `INSERT INTO public.index_entries (${cols.map((c) => `"${c}"`).join(', ')}, scanned_at, updated_at)
      VALUES (${cols.map((_, i) => `$${i + 1}`).join(', ')}, now(), now())
-     ON CONFLICT (company) DO UPDATE SET ${updates}, scanned_at = now(), updated_at = now()`,
-    values
-  )
+     ON CONFLICT (company) DO UPDATE SET ${updates}, scanned_at = now(), updated_at = now()`
+
+  if (DRY) {
+    const prev = known.get(e.company)
+    console.log(`  ${prev === undefined ? 'INSERT' : `UPDATE ${prev} ->`} ${String(e.score).padStart(3)}  ${e.company}`)
+    if (prev === undefined) inserted++
+    else updated++
+    // Run the real statement inside a transaction and roll it back. A dry run
+    // that never builds the SQL cannot catch a malformed statement, which is
+    // exactly how a duplicate column reached the apply run. The rollback is
+    // what keeps this a dry run.
+    if (inserted + updated === 1) {
+      await client.query('BEGIN')
+      try {
+        await client.query(sql, values)
+        console.log('  (statement validated against the real table, rolled back)')
+      } catch (err) {
+        console.error(`  !! statement would fail: ${err.message}`)
+        process.exitCode = 1
+      } finally {
+        await client.query('ROLLBACK')
+      }
+    }
+    continue
+  }
+
+  await client.query(sql, values)
   if (known.has(e.company)) updated++
   else inserted++
 }
