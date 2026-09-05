@@ -21,9 +21,29 @@ function GoogleIcon() {
   )
 }
 
+/**
+ * Google sign-in is only rendered when it is known to work.
+ *
+ * OAuth necessarily returns through Supabase, which sends the user to the
+ * project's Site URL whenever the requested redirect is not in its allow-list.
+ * While that setting points at localhost:3000, clicking this button ends on a
+ * page that cannot load, and the visitor has no way back. Email sign-in and
+ * sign-up do not touch that path and work regardless.
+ *
+ * A broken option is worse than a missing one, so the button hides itself
+ * unless NEXT_PUBLIC_GOOGLE_AUTH_ENABLED is exactly "true". Set that after
+ * Supabase → Authentication → URL Configuration has Site URL
+ * https://seo4ai.app and https://seo4ai.app/** in Redirect URLs; no code
+ * change is needed to bring it back.
+ */
+export const GOOGLE_AUTH_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_AUTH_ENABLED === 'true'
+const GOOGLE_ENABLED = GOOGLE_AUTH_ENABLED
+
 export function GoogleButton({ label = 'Continue with Google' }: { label?: string }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  if (!GOOGLE_ENABLED) return null
 
   async function signInWithGoogle() {
     setLoading(true)

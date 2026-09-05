@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { GoogleButton } from '@/components/auth/google-button'
+import { GoogleButton, GOOGLE_AUTH_ENABLED } from '@/components/auth/google-button'
 import { Mail, Lock, Loader2, Eye, EyeOff, CheckCircle2 } from 'lucide-react'
 
 export default function SignupPage() {
@@ -95,10 +95,13 @@ export default function SignupPage() {
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <GoogleButton label="Sign up with Google" />
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-stone-200" /></div>
-            <div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-stone-400">or</span></div>
-          </div>
+          {/* The divider only separates two things when both are shown. */}
+          {GOOGLE_AUTH_ENABLED && (
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-stone-200" /></div>
+              <div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-stone-400">or</span></div>
+            </div>
+          )}
           {error && (
             <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-lg text-sm">
               {error}
